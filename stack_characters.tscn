@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b22hn4gbm3rnt"]
+
+[ext_resource type="Script" uid="uid://cijqtf3cq1381" path="res://stack_characters.gd" id="1_cqvob"]
+[ext_resource type="Texture2D" uid="uid://y6vorsgamkxj" path="res://assets/character_back.png" id="1_x6sx4"]
+
+[node name="StackCharacters" type="Sprite2D"]
+texture = ExtResource("1_x6sx4")
+script = ExtResource("1_cqvob")
