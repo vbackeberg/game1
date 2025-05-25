@@ -6,6 +6,7 @@ var current_view: String = "middle"  # Can be "middle" or "hand"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	playersHand = $PlayersHand
+	playersHand.visible = false
 	pass
 
 func _input(event):
@@ -15,11 +16,11 @@ func _input(event):
 func toggle_view():
 	if current_view == "middle":
 		$MiddleArea.visible = false
-		$PlayersHand.visible = true
+		playersHand.visible = true
 		current_view = "hand"
 	else:
 		$MiddleArea.visible = true
-		$PlayersHand.visible = false
+		playersHand.visible = false
 		current_view = "middle"
 
 
