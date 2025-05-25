@@ -5,6 +5,9 @@
 		}
 	],
 	"settings": {
-		"godotTools.editorPath.godot4": "c:\\Users\\Valerian\\Programs\\Godot\\Godot_v4.4.1-stable_win64.exe"
+		"godotTools.editorPath.godot4": "c:\\Users\\Valerian\\Programs\\Godot\\Godot_v4.4.1-stable_win64.exe",
+		"cSpell.words": [
+			"tscn"
+		]
 	}
 }
