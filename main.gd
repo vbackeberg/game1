@@ -1,12 +1,12 @@
 extends Node
 
-var playersHand: Node2D
+var playerArea: Node2D
 var current_view: String = "middle"  # Can be "middle" or "hand"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	playersHand = $PlayersHand
-	playersHand.visible = false
+	playerArea = $PlayerArea
+	playerArea.visible = false
 	pass
 
 func _input(event):
@@ -16,11 +16,11 @@ func _input(event):
 func toggle_view():
 	if current_view == "middle":
 		$MiddleArea.visible = false
-		playersHand.visible = true
+		playerArea.visible = true
 		current_view = "hand"
 	else:
 		$MiddleArea.visible = true
-		playersHand.visible = false
+		playerArea.visible = false
 		current_view = "middle"
 
 

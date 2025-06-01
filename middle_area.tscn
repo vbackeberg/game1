@@ -1,19 +1,45 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkfqww1gfq0k"]
+[gd_scene load_steps=5 format=3 uid="uid://dkfqww1gfq0k"]
 
 [ext_resource type="Script" uid="uid://d2ki6rg3gu85i" path="res://middle_area.gd" id="1_fbp2b"]
-[ext_resource type="PackedScene" uid="uid://b22hn4gbm3rnt" path="res://stack_characters.tscn" id="2_b17jf"]
 [ext_resource type="Texture2D" uid="uid://cf85swspxfqhn" path="res://assets/resource_back.png" id="3_b17jf"]
+[ext_resource type="Texture2D" uid="uid://y6vorsgamkxj" path="res://assets/character_back.png" id="3_fv5w4"]
+[ext_resource type="PackedScene" uid="uid://b367lrgb833ww" path="res://card_resource.tscn" id="4_fv5w4"]
 
 [node name="MiddleArea" type="Node2D"]
 script = ExtResource("1_fbp2b")
 
-[node name="StackCharacters" parent="." instance=ExtResource("2_b17jf")]
-position = Vector2(1144, 336)
-scale = Vector2(0.5, 0.5)
-
 [node name="StackResources" type="TextureButton" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 24.0
+offset_top = 208.0
+offset_right = 208.0
+offset_bottom = 493.0
 texture_normal = ExtResource("3_b17jf")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="StackCharacters" type="TextureButton" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1072.0
+offset_top = 208.0
+offset_right = 1256.0
+offset_bottom = 493.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture_normal = ExtResource("3_fv5w4")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="CardResource" parent="." instance=ExtResource("4_fv5w4")]
+offset_left = 240.0
+offset_top = 208.0
+offset_right = 640.0
+offset_bottom = 829.0
+scale = Vector2(0.459974, 0.459974)
+ignore_texture_size = true
+stretch_mode = 4
 
 [connection signal="pressed" from="StackResources" to="." method="_on_stack_resources_pressed"]
+[connection signal="pressed" from="StackCharacters" to="." method="_on_stack_characters_pressed"]

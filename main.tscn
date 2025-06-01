@@ -2,11 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bopt66vu8q8qa" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dkfqww1gfq0k" path="res://middle_area.tscn" id="2_h2yge"]
-[ext_resource type="PackedScene" uid="uid://bov0ixvuurdny" path="res://players_hand.tscn" id="3_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bov0ixvuurdny" path="res://player_area.tscn" id="3_1bvp3"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_ig7tw")
 
 [node name="MiddleArea" parent="." instance=ExtResource("2_h2yge")]
 
-[node name="PlayersHand" parent="." instance=ExtResource("3_1bvp3")]
+[node name="PlayerArea" parent="." instance=ExtResource("3_1bvp3")]
+
+[connection signal="visibility_changed" from="PlayerArea" to="PlayerArea" method="_on_visibility_changed"]
