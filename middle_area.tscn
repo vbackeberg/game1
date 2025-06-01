@@ -33,13 +33,7 @@ ignore_texture_size = true
 stretch_mode = 5
 
 [node name="CardResource" parent="." instance=ExtResource("4_fv5w4")]
-offset_left = 240.0
-offset_top = 208.0
-offset_right = 640.0
-offset_bottom = 829.0
 scale = Vector2(0.459974, 0.459974)
-ignore_texture_size = true
-stretch_mode = 4
 
 [connection signal="pressed" from="StackResources" to="." method="_on_stack_resources_pressed"]
 [connection signal="pressed" from="StackCharacters" to="." method="_on_stack_characters_pressed"]

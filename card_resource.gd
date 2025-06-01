@@ -1,4 +1,4 @@
-extends Sprite2D
+extends TextureButton
 
 @export var value: int
 
