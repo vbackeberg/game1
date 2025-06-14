@@ -1,6 +1,6 @@
 extends Node2D
 
-const CARD_WIDTH = 100.0
+const CARD_WIDTH = 128.0
 
 var resourceCards: Array
 var characterCards: Array[Dictionary]
@@ -32,6 +32,10 @@ func _ready() -> void:
 	graveyardResources = []
 	graveyardCharacters = []
 
+	place_resource(0)
+	place_resource(1)
+	place_resource(2)
+	place_resource(3)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -75,3 +79,17 @@ func _on_stack_characters_pressed() -> void:
 	var card = characterCards.pop_back()
 	print(card)
 	get_parent().playerArea.add_character(card)
+
+func place_resource(slot: int):
+	var card = _draw_resource()
+
+	var card_node = load("res://card_resource.tscn").instantiate() as TextureButton
+	card_node.texture_normal = load("res://assets/resource" + str(card) + ".png")
+	card_node.value = card
+	card_node.visible = visible
+	add_child(card_node)
+
+	card_node.position.x = 24.0 + (1 + slot) * (CARD_WIDTH + 24.0)
+	card_node.position.y = 256
+
+	print(card_node.position)

@@ -1,4 +1,4 @@
-extends Sprite2D
+extends TextureButton
 
 @export var cost: Array
 @export var points: int

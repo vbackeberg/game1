@@ -9,9 +9,9 @@ script = ExtResource("1_fbp2b")
 
 [node name="StackResources" type="TextureButton" parent="."]
 offset_left = 24.0
-offset_top = 208.0
-offset_right = 208.0
-offset_bottom = 493.0
+offset_top = 256.0
+offset_right = 152.0
+offset_bottom = 456.0
 texture_normal = ExtResource("3_b17jf")
 ignore_texture_size = true
 stretch_mode = 4
@@ -20,10 +20,10 @@ stretch_mode = 4
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 1072.0
-offset_top = 208.0
+offset_left = 1128.0
+offset_top = 256.0
 offset_right = 1256.0
-offset_bottom = 493.0
+offset_bottom = 456.0
 grow_horizontal = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
