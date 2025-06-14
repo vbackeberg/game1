@@ -13,7 +13,7 @@ func _ready() -> void:
 func add_resource(value: int):
 	var card_node = load("res://card_resource.tscn").instantiate() as TextureButton
 	card_node.custom_minimum_size = Vector2(CARD_WIDTH, 200.0)
-	card_node.texture_normal = load("res://assets/resource1.png")
+	card_node.texture_normal = load("res://assets/resource" + str(value) + ".png")
 	card_node.value = value
 	card_node.visible = visible # Match parent's visibility
 	resourceCards.append(card_node)

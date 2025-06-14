@@ -80,16 +80,31 @@ func _on_stack_characters_pressed() -> void:
 	print(card)
 	get_parent().playerArea.add_character(card)
 
+func _on_resource_card_pressed(card: TextureButton) -> void:
+	# Move the card to the player's hand
+	get_parent().playerArea.add_resource(card.value)
+	
+	# Remove the card from the middle area
+	card.queue_free()
+	
+	# Place a new resource card in the middle area
+	place_resource(card.slot)
+
 func place_resource(slot: int):
 	var card = _draw_resource()
 
 	var card_node = load("res://card_resource.tscn").instantiate() as TextureButton
 	card_node.texture_normal = load("res://assets/resource" + str(card) + ".png")
+	card_node.custom_minimum_size = Vector2(CARD_WIDTH, 200.0)
 	card_node.value = card
 	card_node.visible = visible
+	card_node.slot = slot
 	add_child(card_node)
 
 	card_node.position.x = 24.0 + (1 + slot) * (CARD_WIDTH + 24.0)
 	card_node.position.y = 256
+	
+	# Connect the pressed signal
+	card_node.pressed.connect(_on_resource_card_pressed.bind(card_node))
 
 	print(card_node.position)
