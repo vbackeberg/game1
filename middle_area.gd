@@ -36,6 +36,9 @@ func _ready() -> void:
 	place_resource(1)
 	place_resource(2)
 	place_resource(3)
+	
+	# place_character(0)
+	# place_character(1)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -108,3 +111,39 @@ func place_resource(slot: int):
 	card_node.pressed.connect(_on_resource_card_pressed.bind(card_node))
 
 	print(card_node.position)
+
+# func _on_character_card_pressed(card: TextureButton) -> void:
+# 	# Move the card to the player's hand
+# 	get_parent().playerArea.add_character(card.cost, card.points)
+	
+# 	# Remove the card from the middle area
+# 	card.queue_free()
+	
+# 	# Place a new character card in the middle area
+# 	place_character(card.slot)
+
+# func place_character(slot: int):
+# 	if characterCards.size() == 0:
+# 		if graveyardCharacters.size() == 0:
+# 			printerr("No more character cards left in stack or graveyard!")
+# 			return
+# 		else:
+# 			_replenish_characters()
+
+# 	var card_data = characterCards.pop_back()
+	
+# 	var card_node = load("res://card_character.tscn").instantiate() as TextureButton
+# 	card_node.texture_normal = load("res://assets/character" + str(card_data.cost) + "-" + str(card_data.points)
+# 	card_node.custom_minimum_size = Vector2(CARD_WIDTH, 200.0)
+# 	card_node.card_data = card_data
+# 	card_node.visible = visible
+# 	card_node.slot = slot
+# 	add_child(card_node)
+
+# 	card_node.position.x = 24.0 + (1 + slot) * (CARD_WIDTH + 24.0)
+# 	card_node.position.y = 512  # Place character cards below resource cards
+	
+# 	# Connect the pressed signal
+# 	card_node.pressed.connect(_on_character_card_pressed.bind(card_node))
+
+# 	print(card_node.position)
