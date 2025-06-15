@@ -1,15 +1,17 @@
 extends Node2D
 
 const CARD_WIDTH = 128.0
-var resourceCards: Array[Node]
-var characterCards: Array[Node]
+var resourcesOnHand: Array[Node]
+var charactersOnPayField: Array[Node]
 var selectedResources: Array[Node]
+var charactersPlayed: Array[Node]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	resourceCards = []
-	characterCards = []
+	resourcesOnHand = []
+	charactersOnPayField = []
 	selectedResources = []
+	charactersPlayed = []
 
 ## Appends and prints card
 func add_resource(value: int):
@@ -18,10 +20,10 @@ func add_resource(value: int):
 	card_node.texture_normal = load("res://assets/resource" + str(value) + ".png")
 	card_node.value = value
 	card_node.visible = visible # Match parent's visibility
-	resourceCards.append(card_node)
+	resourcesOnHand.append(card_node)
 	add_child(card_node)
 	
-	var card_index = resourceCards.size() - 1
+	var card_index = resourcesOnHand.size() - 1
 	card_node.position.x = 24.0 + card_index * (CARD_WIDTH + 24.0)
 	card_node.position.y = get_viewport().size.y / 2
 	
@@ -40,7 +42,7 @@ func _on_resource_card_selected(card: TextureButton) -> void:
 
 ## Adds a character card with given specs and puts it on the right side.
 func add_character(cost, diamondCost, points, diamonds):
-	if characterCards.size() == 2:
+	if charactersOnPayField.size() == 2:
 		print("Player has 2 character cards, already.")
 	
 	else:
@@ -52,10 +54,10 @@ func add_character(cost, diamondCost, points, diamonds):
 		card_node.points = points
 		card_node.diamonds = diamonds
 		card_node.visible = visible
-		characterCards.append(card_node)
+		charactersOnPayField.append(card_node)
 		add_child(card_node)
 
-		var card_index = characterCards.size()
+		var card_index = charactersOnPayField.size()
 		card_node.position.x = get_viewport().size.x - 24.0 - card_index * (CARD_WIDTH + 24.0)
 		card_node.position.y = get_viewport().size.y / 2
 		
@@ -63,8 +65,8 @@ func add_character(cost, diamondCost, points, diamonds):
 
 func _on_character_card_pressed(card: TextureButton) -> void:
 	var selectedValues = []
-	for selectedCard in selectedResources:
-		selectedValues.append(selectedCard.value)
+	for r in selectedResources:
+		selectedValues.append(r.value)
 	
 	var remainingCost = card.cost.duplicate()
 	
@@ -74,15 +76,38 @@ func _on_character_card_pressed(card: TextureButton) -> void:
 			remainingCost.remove_at(index)
 	
 	if remainingCost.size() == 0:
-		print("Character card is playable!")
+		playCharacter(card)
 	else:
 		print("Cannot play character card! Missing resources: ", remainingCost)
 
+
+## Move card to top left and rotate it.
+## Remove character from pay field and add to played characters.
+## Remove used resources.
+## Reposition remaining resources.
+func playCharacter(character: TextureButton):
+	charactersPlayed.append(character)
+	var card_index = charactersPlayed.size()
+	character.position.x = 24.0 + card_index * (CARD_WIDTH + 24.0)
+	character.position.y = 24.0 + 200.0
+	character.rotation_degrees = 180
+	
+	charactersOnPayField.erase(character)
+	
+	for r in selectedResources:
+		resourcesOnHand.erase(r)
+		r.queue_free()
+	
+	selectedResources.clear()
+	
+	for i in range(resourcesOnHand.size()):
+		resourcesOnHand[i].position.x = 24.0 + i * (CARD_WIDTH + 24.0)
+
 func _on_visibility_changed() -> void:
-	for card in resourceCards:
+	for card in resourcesOnHand:
 		card.visible = visible
 	
-	for card in characterCards:
+	for card in charactersOnPayField:
 		card.visible = visible
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -10,7 +10,7 @@ var characterCards: Array[Dictionary]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	resourceCards = [1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8]
+	resourceCards = [6,6,6,6,6,6]
 	resourceCards.shuffle()
 	
 	characterCards = [
@@ -20,24 +20,24 @@ func _ready() -> void:
 			points = 1,
 			diamonds = 0			
 		},
-		{
-			cost = [7,7],
-			diamondCost = 0,
-			points = 1,
-			diamonds = 0			
-		},
-		{
-			cost = [2,2,2],
-			diamondCost = 1,
-			points = 3,
-			diamonds = 0			
-		},
-		{
-			cost = [6,6,8,8],
-			diamondCost = 0,
-			points = 3,
-			diamonds = 0			
-		},
+		# {
+		# 	cost = [7,7],
+		# 	diamondCost = 0,
+		# 	points = 1,
+		# 	diamonds = 0			
+		# },
+		# {
+		# 	cost = [2,2,2],
+		# 	diamondCost = 1,
+		# 	points = 3,
+		# 	diamonds = 0			
+		# },
+		# {
+		# 	cost = [6,6,8,8],
+		# 	diamondCost = 0,
+		# 	points = 3,
+		# 	diamonds = 0			
+		# },
 	]
 	characterCards.shuffle()
 	
@@ -46,7 +46,7 @@ func _ready() -> void:
 
 	place_resource(0)
 	place_resource(1)
-	place_resource(2)
+	place_resource(2)	
 	place_resource(3)
 	
 	place_character(0)
