@@ -25,7 +25,7 @@ func add_resource(value: int):
 	card_node.position.y = get_viewport().size.y / 2
 
 ## Takes character card
-func add_character(card: Dictionary):
+func add_character(cost, diamondCost, points, diamonds):
 	if characterCards.size() == 2:
 		print("Player has 2 character cards, already.")
 	
@@ -33,8 +33,10 @@ func add_character(card: Dictionary):
 		var card_node = load("res://card_character.tscn").instantiate()
 		card_node.size = Vector2(CARD_WIDTH, 200.0)
 		card_node.texture_normal = load("res://assets/character1.png")
-		card_node.cost = card.cost
-		card_node.points = card.points
+		card_node.cost = cost
+		card_node.diamondCost = diamondCost
+		card_node.points = points
+		card_node.diamonds = diamonds
 		card_node.visible = visible
 		characterCards.append(card_node)
 		add_child(card_node)

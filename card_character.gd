@@ -1,7 +1,11 @@
 extends TextureButton
 
+@export var slot: int
+
 @export var cost: Array
+@export var diamondCost: int
 @export var points: int
+@export var diamonds: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
