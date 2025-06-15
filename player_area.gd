@@ -42,10 +42,6 @@ func add_character(cost, diamondCost, points, diamonds):
 
 		var card_index = characterCards.size()
 		card_node.position.x = get_viewport().size.x - 24.0 - card_index * (CARD_WIDTH + 24.0)
-		print(get_viewport().size.x)
-		print(24.0)
-		print(card_index)
-		print(CARD_WIDTH + 24.0)
 		card_node.position.y = get_viewport().size.y / 2
 
 func _on_visibility_changed() -> void:

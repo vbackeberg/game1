@@ -61,12 +61,11 @@ func _process(delta: float) -> void:
 func _draw_resource() -> int:
 	if resourceCards.size() == 0:
 		if graveyardResources.size() == 0:
-			printerr("No more resource cards left in stack or graveyard!")
+			print("No more resource cards left in stack or graveyard!")
 		else:
 			_replenish_resources()
 
 	var card = resourceCards.pop_back()
-	print(card)
 	return card
 
 
@@ -87,12 +86,11 @@ func _replenish_characters():
 func _on_stack_characters_pressed() -> void:
 	if characterCards.size() == 0:
 		if graveyardCharacters.size() == 0:
-			printerr("No more character cards left in stack or graveyard!")
+			print("No more character cards left in stack or graveyard!")
 		else:
 			_replenish_characters()
 
 	var card = characterCards.pop_back()
-	print(card)
 	get_parent().playerArea.add_character(card)
 
 ## Move the card to the player's hand
@@ -118,8 +116,6 @@ func place_resource(slot: int):
 	# Connect the pressed signal
 	card_node.pressed.connect(_on_resource_card_pressed.bind(card_node))
 
-	print(card_node.position)
-
 ## Moves the card to the player's hand
 func _on_character_card_pressed(card: TextureButton) -> void:
 	get_parent().playerArea.add_character(card.cost, card.diamondCost, card.points, card.diamonds)
@@ -129,13 +125,12 @@ func _on_character_card_pressed(card: TextureButton) -> void:
 func place_character(slot: int):
 	if characterCards.size() == 0:
 		if graveyardCharacters.size() == 0:
-			printerr("No more character cards left in stack or graveyard!")
+			print("No more character cards left in stack or graveyard!")
 			return
 		else:
 			_replenish_characters()
 
 	var card = characterCards.pop_back()
-	print(card)
 	
 	var card_node = load("res://card_character.tscn").instantiate() as TextureButton
 	card_node.texture_normal = load("res://assets/character-" + str(concat(card.cost)) + "-" + str(card.diamondCost) + "-" + str(card.points) + "-" + str(card.diamonds) + ".png")
@@ -150,7 +145,6 @@ func place_character(slot: int):
 
 	card_node.position.x = $StackCharacters.position.x - (1 + slot) * (CARD_WIDTH + 24.0)
 	card_node.position.y = 256
-	print(card_node.position)
 	
 	# Connect the pressed signal
 	card_node.pressed.connect(_on_character_card_pressed.bind(card_node))
