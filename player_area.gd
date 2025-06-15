@@ -3,11 +3,13 @@ extends Node2D
 const CARD_WIDTH = 128.0
 var resourceCards: Array[Node]
 var characterCards: Array[Node]
+var selectedResources: Array[Node]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	resourceCards = []
 	characterCards = []
+	selectedResources = []
 
 ## Appends and prints card
 func add_resource(value: int):
@@ -22,8 +24,21 @@ func add_resource(value: int):
 	var card_index = resourceCards.size() - 1
 	card_node.position.x = 24.0 + card_index * (CARD_WIDTH + 24.0)
 	card_node.position.y = get_viewport().size.y / 2
+	
+	card_node.pressed.connect(_on_resource_card_selected.bind(card_node))
 
-## Takes character card
+## Selects or deselects a resource on press
+func _on_resource_card_selected(card: TextureButton) -> void:
+	var index = selectedResources.find(card)
+	
+	if index == -1:
+		selectedResources.append(card)
+		card.modulate = Color(1.2, 1.2, 0.8) # Yellow tint
+	else:
+		selectedResources.remove_at(index)
+		card.modulate = Color(1, 1, 1) # Reset to normal color
+
+## Adds a character card with given specs and puts it on the right side.
 func add_character(cost, diamondCost, points, diamonds):
 	if characterCards.size() == 2:
 		print("Player has 2 character cards, already.")
@@ -43,6 +58,25 @@ func add_character(cost, diamondCost, points, diamonds):
 		var card_index = characterCards.size()
 		card_node.position.x = get_viewport().size.x - 24.0 - card_index * (CARD_WIDTH + 24.0)
 		card_node.position.y = get_viewport().size.y / 2
+		
+		card_node.pressed.connect(_on_character_card_pressed.bind(card_node))
+
+func _on_character_card_pressed(card: TextureButton) -> void:
+	var selectedValues = []
+	for selectedCard in selectedResources:
+		selectedValues.append(selectedCard.value)
+	
+	var remainingCost = card.cost.duplicate()
+	
+	for value in selectedValues:
+		var index = remainingCost.find(value)
+		if index != -1:
+			remainingCost.remove_at(index)
+	
+	if remainingCost.size() == 0:
+		print("Character card is playable!")
+	else:
+		print("Cannot play character card! Missing resources: ", remainingCost)
 
 func _on_visibility_changed() -> void:
 	for card in resourceCards:
