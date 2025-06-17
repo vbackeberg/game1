@@ -6,6 +6,8 @@ var charactersOnPayField: Array[Node]
 var selectedResources: Array[Node]
 var charactersPlayed: Array[Node]
 
+signal action_used()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	resourcesOnHand = []
@@ -95,6 +97,7 @@ func playCharacter(character: TextureButton):
 	charactersOnPayField.erase(character)
 	
 	for r in selectedResources:
+		get_parent().middleArea.graveyardResources.append(r.value)
 		resourcesOnHand.erase(r)
 		r.queue_free()
 	
@@ -102,6 +105,13 @@ func playCharacter(character: TextureButton):
 	
 	for i in range(resourcesOnHand.size()):
 		resourcesOnHand[i].position.x = 24.0 + i * (CARD_WIDTH + 24.0)
+
+	action_used.emit()
+	
+	var totalPoints = charactersPlayed.reduce(func(acc, card): return acc + card.points, 0)
+	if totalPoints > 11:
+		print("Player has " + totalPoints + " points. Last round!")
+	
 
 func _on_visibility_changed() -> void:
 	for card in resourcesOnHand:

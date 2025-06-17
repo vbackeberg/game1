@@ -2,15 +2,16 @@ extends Node2D
 
 const CARD_WIDTH = 128.0
 
-var resourceCards: Array
+var resourceCards: Array[int]
 var characterCards: Array[Dictionary]
+var cardsLaidOut: Array[TextureButton]
 
-@export var graveyardResources: Array
+@export var graveyardResources: Array[int]
 @export var graveyardCharacters: Array[Dictionary]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	resourceCards = [6,6,6,6,6,6]
+	resourceCards = [1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8]
 	resourceCards.shuffle()
 	
 	characterCards = [
@@ -20,29 +21,31 @@ func _ready() -> void:
 			points = 1,
 			diamonds = 0			
 		},
-		# {
-		# 	cost = [7,7],
-		# 	diamondCost = 0,
-		# 	points = 1,
-		# 	diamonds = 0			
-		# },
-		# {
-		# 	cost = [2,2,2],
-		# 	diamondCost = 1,
-		# 	points = 3,
-		# 	diamonds = 0			
-		# },
-		# {
-		# 	cost = [6,6,8,8],
-		# 	diamondCost = 0,
-		# 	points = 3,
-		# 	diamonds = 0			
-		# },
+		{
+			cost = [7,7],
+			diamondCost = 0,
+			points = 1,
+			diamonds = 0			
+		},
+		{
+			cost = [2,2,2],
+			diamondCost = 1,
+			points = 3,
+			diamonds = 0			
+		},
+		{
+			cost = [6,6,8,8],
+			diamondCost = 0,
+			points = 3,
+			diamonds = 0			
+		},
 	]
 	characterCards.shuffle()
 	
 	graveyardResources = []
 	graveyardCharacters = []
+	cardsLaidOut = []
+	cardsLaidOut.resize(4)
 
 	place_resource(0)
 	place_resource(1)
@@ -72,6 +75,7 @@ func _draw_resource() -> int:
 func _on_stack_resources_pressed() -> void:
 	var card = _draw_resource()
 	get_parent().playerArea.add_resource(card)
+	action_used.emit()
 
 func _replenish_resources():
 	resourceCards = graveyardResources.duplicate()
@@ -87,28 +91,32 @@ func _on_stack_characters_pressed() -> void:
 	if characterCards.size() == 0:
 		if graveyardCharacters.size() == 0:
 			print("No more character cards left in stack or graveyard!")
+			# TODO: do not continue
 		else:
 			_replenish_characters()
 
 	var card = characterCards.pop_back()
 	get_parent().playerArea.add_character(card)
+	action_used.emit()
 
 ## Move the card to the player's hand
 func _on_resource_card_pressed(card: TextureButton) -> void:
 	get_parent().playerArea.add_resource(card.value)
-	card.queue_free()
 	place_resource(card.slot)
+	card.queue_free()
+	action_used.emit()
 
 func place_resource(slot: int):
-	var card = _draw_resource()
+	var value = _draw_resource()
 
 	var card_node = load("res://card_resource.tscn").instantiate() as TextureButton
-	card_node.texture_normal = load("res://assets/resource" + str(card) + ".png")
+	card_node.texture_normal = load("res://assets/resource" + str(value) + ".png")
 	card_node.custom_minimum_size = Vector2(CARD_WIDTH, 200.0)
-	card_node.value = card
+	card_node.value = value
 	card_node.visible = visible
 	card_node.slot = slot
 	add_child(card_node)
+	cardsLaidOut[slot] = card_node
 
 	card_node.position.x = 24.0 + (1 + slot) * (CARD_WIDTH + 24.0)
 	card_node.position.y = 256
@@ -121,6 +129,7 @@ func _on_character_card_pressed(card: TextureButton) -> void:
 	get_parent().playerArea.add_character(card.cost, card.diamondCost, card.points, card.diamonds)
 	card.queue_free()
 	place_character(card.slot)
+	action_used.emit()
 
 func place_character(slot: int):
 	if characterCards.size() == 0:
@@ -154,3 +163,14 @@ func concat(arr: Array) -> String:
 	for num in arr:
 		result += str(num)
 	return result
+
+
+signal action_used()
+
+## Places 4 new cards
+func _on_button_pressed() -> void:
+	for i in cardsLaidOut.size():
+		graveyardResources.append(cardsLaidOut[i].value)
+		cardsLaidOut[i].queue_free()
+		place_resource(i)
+	action_used.emit()
