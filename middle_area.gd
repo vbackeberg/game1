@@ -121,7 +121,6 @@ func place_resource(slot: int):
 	card_node.position.x = 24.0 + (1 + slot) * (CARD_WIDTH + 24.0)
 	card_node.position.y = 256
 	
-	# Connect the pressed signal
 	card_node.pressed.connect(_on_resource_card_pressed.bind(card_node))
 
 ## Moves the card to the player's hand
@@ -155,7 +154,6 @@ func place_character(slot: int):
 	card_node.position.x = $StackCharacters.position.x - (1 + slot) * (CARD_WIDTH + 24.0)
 	card_node.position.y = 256
 	
-	# Connect the pressed signal
 	card_node.pressed.connect(_on_character_card_pressed.bind(card_node))
 
 func concat(arr: Array) -> String:
