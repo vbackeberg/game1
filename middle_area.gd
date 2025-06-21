@@ -74,7 +74,8 @@ func _draw_resource() -> int:
 
 func _on_stack_resources_pressed() -> void:
 	var card = _draw_resource()
-	get_parent().playerArea.add_resource(card)
+	# TODO simplify
+	get_parent().players[get_parent().currentPlayer].add_resource(card)
 	action_used.emit()
 
 func _replenish_resources():
@@ -96,12 +97,12 @@ func _on_stack_characters_pressed() -> void:
 			_replenish_characters()
 
 	var card = characterCards.pop_back()
-	get_parent().playerArea.add_character(card)
+	get_parent().players[get_parent().currentPlayer].add_character(card)
 	action_used.emit()
 
 ## Move the card to the player's hand
 func _on_resource_card_pressed(card: TextureButton) -> void:
-	get_parent().playerArea.add_resource(card.value)
+	get_parent().players[get_parent().currentPlayer].add_resource(card.value)
 	place_resource(card.slot)
 	card.queue_free()
 	action_used.emit()
@@ -125,7 +126,7 @@ func place_resource(slot: int):
 
 ## Moves the card to the player's hand
 func _on_character_card_pressed(card: TextureButton) -> void:
-	get_parent().playerArea.add_character(card.cost, card.diamondCost, card.points, card.diamonds)
+	get_parent().players[get_parent().currentPlayer].add_character(card.cost, card.diamondCost, card.points, card.diamonds)
 	card.queue_free()
 	place_character(card.slot)
 	action_used.emit()

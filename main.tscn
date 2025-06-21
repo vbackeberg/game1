@@ -11,4 +11,14 @@ script = ExtResource("1_ig7tw")
 
 [node name="PlayerArea" parent="." instance=ExtResource("3_1bvp3")]
 
+[node name="PlayerArea2" parent="." instance=ExtResource("3_1bvp3")]
+
+[node name="PlayerArea3" parent="." instance=ExtResource("3_1bvp3")]
+
+[node name="PlayerArea4" parent="." instance=ExtResource("3_1bvp3")]
+
+[node name="PlayerArea5" parent="." instance=ExtResource("3_1bvp3")]
+
+[node name="PlayerArea6" parent="." instance=ExtResource("3_1bvp3")]
+
 [connection signal="visibility_changed" from="PlayerArea" to="PlayerArea" method="_on_visibility_changed"]
