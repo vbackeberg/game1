@@ -14,32 +14,7 @@ func _ready() -> void:
 	resourceCards = [1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8]
 	resourceCards.shuffle()
 	
-	characterCards = [
-		{
-			cost = [6,6],
-			diamondCost = 0,
-			points = 1,
-			diamonds = 0			
-		},
-		{
-			cost = [7,7],
-			diamondCost = 0,
-			points = 1,
-			diamonds = 0			
-		},
-		{
-			cost = [2,2,2],
-			diamondCost = 1,
-			points = 3,
-			diamonds = 0			
-		},
-		{
-			cost = [6,6,8,8],
-			diamondCost = 0,
-			points = 3,
-			diamonds = 0			
-		},
-	]
+	characterCards = _load_character_cards()
 	characterCards.shuffle()
 	
 	graveyardResources = []
@@ -172,3 +147,43 @@ func _on_button_pressed() -> void:
 		cardsLaidOut[i].queue_free()
 		place_resource(i)
 	action_used.emit()
+
+
+func _load_character_cards() -> Array[Dictionary]:
+	return [
+		{
+			cost = [6, 6],
+			diamondCost = 0,
+			points = 1,
+			diamonds = 0,
+			effect = func(player): player.additionalResources.add(6)
+		},
+		{
+			cost = [7, 7],
+			diamondCost = 0,
+			points = 1,
+			diamonds = 0,
+			effect = func(_player): pass
+		},
+		{
+			cost = [2, 2, 2],
+			diamondCost = 1,
+			points = 3,
+			diamonds = 0,
+			effect = func(_player): pass
+		},
+		{
+			cost = [6, 6, 8, 8],
+			diamondCost = 0,
+			points = 3,
+			diamonds = 0,
+			effect = func(_player): pass
+		},
+		{
+			cost = [1, 3, 5, 7],
+			diamondCost = 0,
+			points = 2,
+			diamonds = 0,
+			effect = func(player): player.actionsLeft += 3
+		},
+	]
