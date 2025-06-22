@@ -11,7 +11,6 @@ var players: Array[Node2D]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	middleArea = $MiddleArea
-	$MiddleArea.action_used.connect(_on_action_used)
 	middleVisible = true
 
 	players = [$PlayerArea, $PlayerArea2, $PlayerArea3, $PlayerArea4, $PlayerArea5, $PlayerArea6]
