@@ -14,6 +14,7 @@ func _ready() -> void:
 	charactersOnPayField = []
 	selectedResources = []
 	charactersPlayed = []
+	visible = false
 
 ## Appends and prints card
 func add_resource(value: int):

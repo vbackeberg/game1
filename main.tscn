@@ -8,6 +8,8 @@
 script = ExtResource("1_ig7tw")
 
 [node name="MiddleArea" parent="." instance=ExtResource("2_h2yge")]
+graveyardResources = null
+graveyardCharacters = null
 
 [node name="PlayerArea" parent="." instance=ExtResource("3_1bvp3")]
 
@@ -22,3 +24,8 @@ script = ExtResource("1_ig7tw")
 [node name="PlayerArea6" parent="." instance=ExtResource("3_1bvp3")]
 
 [connection signal="visibility_changed" from="PlayerArea" to="PlayerArea" method="_on_visibility_changed"]
+[connection signal="visibility_changed" from="PlayerArea2" to="PlayerArea2" method="_on_visibility_changed"]
+[connection signal="visibility_changed" from="PlayerArea3" to="PlayerArea3" method="_on_visibility_changed"]
+[connection signal="visibility_changed" from="PlayerArea4" to="PlayerArea4" method="_on_visibility_changed"]
+[connection signal="visibility_changed" from="PlayerArea5" to="PlayerArea5" method="_on_visibility_changed"]
+[connection signal="visibility_changed" from="PlayerArea6" to="PlayerArea6" method="_on_visibility_changed"]

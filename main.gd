@@ -16,7 +16,6 @@ func _ready() -> void:
 
 	players = [$PlayerArea, $PlayerArea2, $PlayerArea3, $PlayerArea4, $PlayerArea5, $PlayerArea6]
 	currentPlayer = 0
-	players[currentPlayer].visible = false
 	players[currentPlayer].action_used.connect(_on_action_used)
 	actionsLeft = 3
 
