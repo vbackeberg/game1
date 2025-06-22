@@ -19,6 +19,7 @@ func _ready() -> void:
 	currentPlayer = players[currentPlayerIdx]
 	currentPlayer.actionsLeft = 3
 	currentPlayer.action_used.connect(_on_action_used)
+	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"): # Space bar
@@ -40,9 +41,12 @@ func _process(_delta: float) -> void:
 
 func _on_action_used():
 	currentPlayer.actionsLeft -= 1
+
 	if currentPlayer.actionsLeft == 0:
 		print("All actions used. Next player's turn.")
 		_next_player()
+	
+	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
 
 func _next_player():
 	currentPlayerIdx = (currentPlayerIdx + 1) % players.size()

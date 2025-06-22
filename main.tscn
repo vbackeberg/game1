@@ -8,8 +8,6 @@
 script = ExtResource("1_ig7tw")
 
 [node name="MiddleArea" parent="." instance=ExtResource("2_h2yge")]
-graveyardResources = null
-graveyardCharacters = null
 
 [node name="PlayerArea" parent="." instance=ExtResource("3_1bvp3")]
 
@@ -22,6 +20,16 @@ graveyardCharacters = null
 [node name="PlayerArea5" parent="." instance=ExtResource("3_1bvp3")]
 
 [node name="PlayerArea6" parent="." instance=ExtResource("3_1bvp3")]
+
+[node name="ActionsLeftLabel" type="Label" parent="."]
+offset_left = 1144.0
+offset_top = 600.0
+offset_right = 1248.0
+offset_bottom = 688.0
+theme_override_font_sizes/font_size = 64
+text = "3"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [connection signal="visibility_changed" from="PlayerArea" to="PlayerArea" method="_on_visibility_changed"]
 [connection signal="visibility_changed" from="PlayerArea2" to="PlayerArea2" method="_on_visibility_changed"]

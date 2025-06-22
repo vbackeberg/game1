@@ -16,6 +16,7 @@ func _ready() -> void:
 	selectedResources = []
 	charactersPlayed = []
 	visible = false
+	actionsLeft = 3
 
 ## Appends and prints card
 func add_resource(value: int):
