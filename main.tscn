@@ -41,9 +41,15 @@ text = "Player 1's turn"
 horizontal_alignment = 1
 
 [connection signal="action_used" from="MiddleArea" to="." method="_on_action_used"]
+[connection signal="action_used" from="PlayerArea" to="." method="_on_action_used"]
 [connection signal="visibility_changed" from="PlayerArea" to="PlayerArea" method="_on_visibility_changed"]
+[connection signal="action_used" from="PlayerArea2" to="." method="_on_action_used"]
 [connection signal="visibility_changed" from="PlayerArea2" to="PlayerArea2" method="_on_visibility_changed"]
+[connection signal="action_used" from="PlayerArea3" to="." method="_on_action_used"]
 [connection signal="visibility_changed" from="PlayerArea3" to="PlayerArea3" method="_on_visibility_changed"]
+[connection signal="action_used" from="PlayerArea4" to="." method="_on_action_used"]
 [connection signal="visibility_changed" from="PlayerArea4" to="PlayerArea4" method="_on_visibility_changed"]
+[connection signal="action_used" from="PlayerArea5" to="." method="_on_action_used"]
 [connection signal="visibility_changed" from="PlayerArea5" to="PlayerArea5" method="_on_visibility_changed"]
+[connection signal="action_used" from="PlayerArea6" to="." method="_on_action_used"]
 [connection signal="visibility_changed" from="PlayerArea6" to="PlayerArea6" method="_on_visibility_changed"]

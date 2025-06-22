@@ -17,7 +17,6 @@ func _ready() -> void:
 	currentPlayerIdx = 0
 	currentPlayer = players[currentPlayerIdx]
 	currentPlayer.actionsLeft = 3
-	currentPlayer.action_used.connect(_on_action_used)
 	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
 	$CurrentPlayerLabel.text = "Player " + str(currentPlayerIdx) + "'s turn"
 
