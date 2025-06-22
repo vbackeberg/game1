@@ -20,6 +20,7 @@ func _ready() -> void:
 	currentPlayer.actionsLeft = 3
 	currentPlayer.action_used.connect(_on_action_used)
 	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
+	$CurrentPlayerLabel.text = "Player " + str(currentPlayerIdx) + "'s turn"
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"): # Space bar
@@ -45,6 +46,7 @@ func _on_action_used():
 	if currentPlayer.actionsLeft == 0:
 		print("All actions used. Next player's turn.")
 		_next_player()
+		$CurrentPlayerLabel.text = "Player " + str(currentPlayerIdx) + "'s turn"
 	
 	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
 
