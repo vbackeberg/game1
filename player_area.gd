@@ -5,6 +5,7 @@ var resourcesOnHand: Array[Node]
 var charactersOnPayField: Array[Node]
 var selectedResources: Array[Node]
 var charactersPlayed: Array[Node]
+var actionsLeft: int
 
 signal action_used()
 

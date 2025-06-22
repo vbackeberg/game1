@@ -3,9 +3,9 @@ extends Node
 var playerArea: Node2D
 var middleArea: Node2D
 var middleVisible: bool
-var actionsLeft: int
 
-var currentPlayer: int
+var currentPlayerIdx: int
+var currentPlayer: Node2D
 var players: Array[Node2D]
 
 # Called when the node enters the scene tree for the first time.
@@ -15,9 +15,10 @@ func _ready() -> void:
 	middleVisible = true
 
 	players = [$PlayerArea, $PlayerArea2, $PlayerArea3, $PlayerArea4, $PlayerArea5, $PlayerArea6]
-	currentPlayer = 0
-	players[currentPlayer].action_used.connect(_on_action_used)
-	actionsLeft = 3
+	currentPlayerIdx = 0
+	currentPlayer = players[currentPlayerIdx]
+	currentPlayer.actionsLeft = 3
+	currentPlayer.action_used.connect(_on_action_used)
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"): # Space bar
@@ -26,11 +27,11 @@ func _input(event):
 func toggle_view():
 	if middleVisible == true:
 		$MiddleArea.visible = false
-		players[currentPlayer].visible = true
+		currentPlayer.visible = true
 		middleVisible = false
 	else:
 		$MiddleArea.visible = true
-		players[currentPlayer].visible = false
+		currentPlayer.visible = false
 		middleVisible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,8 +39,12 @@ func _process(_delta: float) -> void:
 	pass
 
 func _on_action_used():
-	actionsLeft -= 1
-	if actionsLeft == 0:
+	currentPlayer.actionsLeft -= 1
+	if currentPlayer.actionsLeft == 0:
 		print("All actions used. Next player's turn.")
-		currentPlayer = (currentPlayer + 1) % players.size()
-		actionsLeft = 3
+		_next_player()
+
+func _next_player():
+	currentPlayerIdx = (currentPlayerIdx + 1) % players.size()
+	currentPlayer = players[currentPlayerIdx]
+	currentPlayer.actionsLeft = 3
