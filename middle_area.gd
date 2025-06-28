@@ -74,6 +74,8 @@ func _on_stack_characters_pressed() -> void:
 	get_parent().currentPlayer.add_character(card)
 	action_used.emit()
 
+#TODO: IN discard mode player should not be able to draw more cards
+
 ## Move the card to the player's hand
 func _on_resource_card_pressed(card: TextureButton) -> void:
 	get_parent().currentPlayer.add_resource(card.value)

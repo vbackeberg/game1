@@ -2,21 +2,29 @@ extends Node2D
 
 const CARD_WIDTH = 128.0
 var resourcesOnHand: Array[Node]
+var resourceCapacity: int
 var charactersOnPayField: Array[Node]
 var selectedResources: Array[Node]
 var charactersPlayed: Array[Node]
 var actionsLeft: int
+var discardMode: bool
+var numToDiscard: int
 
 signal action_used()
+signal discard_finished()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	resourcesOnHand = []
+	resourceCapacity = 5
 	charactersOnPayField = []
 	selectedResources = []
 	charactersPlayed = []
 	visible = false
 	actionsLeft = 3
+	discardMode = false
+	numToDiscard = 0
+	$ConfirmDiscardButton.visible = false
 
 ## Appends and prints card
 func add_resource(value: int):
@@ -37,13 +45,29 @@ func add_resource(value: int):
 ## Selects or deselects a resource on press
 func _on_resource_card_selected(card: TextureButton) -> void:
 	var index = selectedResources.find(card)
-	
-	if index == -1:
+	if discardMode:
+		card.modulate = Color(1.2, 0.8, 0.8) # Red tint for discard
+		$ConfirmDiscardButton.visible = true
 		selectedResources.append(card)
-		card.modulate = Color(1.2, 1.2, 0.8) # Yellow tint
+
 	else:
-		selectedResources.remove_at(index)
-		card.modulate = Color(1, 1, 1) # Reset to normal color
+		if index == -1:
+			selectedResources.append(card)
+			card.modulate = Color(1.2, 1.2, 0.8) # Yellow tint
+		else:
+			selectedResources.remove_at(index)
+			card.modulate = Color(1, 1, 1) # Reset to normal color
+
+func _on_confirm_discard_button_pressed() -> void:
+	for r in selectedResources:
+		get_parent().middleArea.graveyardResources.append(r.value)
+		resourcesOnHand.erase(r)
+		r.queue_free()
+		numToDiscard -= 1
+		if numToDiscard == 0:
+			$ConfirmDiscardButton.visible = false
+			discardMode = false
+			emit_signal("discard_finished")
 
 ## Adds a character card with given specs and puts it on the right side.
 func add_character(cost, diamondCost, points, diamonds):
@@ -122,6 +146,7 @@ func _on_visibility_changed() -> void:
 	
 	for card in charactersOnPayField:
 		card.visible = visible
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -132,3 +157,9 @@ func concat(arr: Array) -> String:
 	for num in arr:
 		result += str(num)
 	return result
+
+func start_discard_mode(num):
+	discardMode = true
+	numToDiscard = num
+	selectedResources.clear()
+	print("You have " + str(num) + " cards to discard.")

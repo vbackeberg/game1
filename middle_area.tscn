@@ -31,7 +31,7 @@ texture_normal = ExtResource("3_fv5w4")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="Button" type="Button" parent="."]
+[node name="NewCardsButton" type="Button" parent="."]
 offset_left = 344.0
 offset_top = 200.0
 offset_right = 496.0
@@ -41,4 +41,4 @@ text = "4 new cards"
 
 [connection signal="pressed" from="StackResources" to="." method="_on_stack_resources_pressed"]
 [connection signal="pressed" from="StackCharacters" to="." method="_on_stack_characters_pressed"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="NewCardsButton" to="." method="_on_button_pressed"]
