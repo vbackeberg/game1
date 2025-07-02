@@ -46,9 +46,20 @@ func add_resource(value: int):
 func _on_resource_card_selected(card: TextureButton) -> void:
 	var index = selectedResources.find(card)
 	if discardMode:
-		card.modulate = Color(1.2, 0.8, 0.8) # Red tint for discard
-		$ConfirmDiscardButton.visible = true
-		selectedResources.append(card)
+		if index == -1:
+			if selectedResources.size() == numToDiscard:
+				return
+
+			card.modulate = Color(1.2, 0.8, 0.8) # Red tint for discard
+			selectedResources.append(card)
+		else:
+			selectedResources.remove_at(index)
+			card.modulate = Color(1, 1, 1) # Reset to normal color
+		
+		if selectedResources.size() == numToDiscard:
+			$ConfirmDiscardButton.visible = true
+		else:
+			$ConfirmDiscardButton.visible = false
 
 	else:
 		if index == -1:

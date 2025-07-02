@@ -5,12 +5,16 @@ const CARD_WIDTH = 128.0
 var resourceCards: Array[int]
 var characterCards: Array[Dictionary]
 var cardsLaidOut: Array[TextureButton]
+var discardMode: bool # TODO export signal discard mode
 
 @export var graveyardResources: Array[int]
 @export var graveyardCharacters: Array[Dictionary]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	discardMode = false
+	$DiscardOverlay.visible = false
+
 	resourceCards = [1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8]
 	resourceCards.shuffle()
 	
@@ -149,7 +153,6 @@ func _on_button_pressed() -> void:
 		cardsLaidOut[i].queue_free()
 		place_resource(i)
 	action_used.emit()
-
 
 func _load_character_cards() -> Array[Dictionary]:
 	return [

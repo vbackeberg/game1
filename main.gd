@@ -59,6 +59,8 @@ func _next_player():
 func _discard_if_too_many_cards():
 	var excess = currentPlayer.resourcesOnHand.size() - currentPlayer.resourceCapacity
 	if excess > 0:
+		$MiddleArea/DiscardOverlay.visible = true
+		$MiddleArea/DiscardOverlay.move_to_front()
 		currentPlayer.start_discard_mode(excess)
 		currentPlayer.discard_finished.connect(_on_discard_finished)
 	else:
@@ -66,6 +68,7 @@ func _discard_if_too_many_cards():
 		$CurrentPlayerLabel.text = "Player " + str(currentPlayerIdx) + "'s turn"
 
 func _on_discard_finished():
+	$MiddleArea/DiscardOverlay.visible = false
 	currentPlayer.discard_finished.disconnect(_on_discard_finished)
 	_next_player()
 	$CurrentPlayerLabel.text = "Player " + str(currentPlayerIdx) + "'s turn"
