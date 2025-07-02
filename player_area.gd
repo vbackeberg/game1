@@ -78,6 +78,7 @@ func _on_confirm_discard_button_pressed() -> void:
 		if numToDiscard == 0:
 			$ConfirmDiscardButton.visible = false
 			discardMode = false
+			# TODO: Realign cards
 			emit_signal("discard_finished")
 
 ## Adds a character card with given specs and puts it on the right side.

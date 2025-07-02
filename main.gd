@@ -52,6 +52,7 @@ func _on_action_used():
 	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
 
 func _next_player():
+	# TODO: visibility does not yet change correctly
 	currentPlayerIdx = (currentPlayerIdx + 1) % players.size()
 	currentPlayer = players[currentPlayerIdx]
 	currentPlayer.actionsLeft = 3
