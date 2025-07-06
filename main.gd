@@ -69,3 +69,6 @@ func _on_discard_finished():
 	currentPlayer.discard_finished.disconnect(_on_discard_finished)
 	_next_player()
 	$CurrentPlayerLabel.text = "Player " + str(currentPlayerIdx) + "'s turn"
+
+func on_resource_spent(value):
+		$MiddleArea.graveyardResources.append(value)

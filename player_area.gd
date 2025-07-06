@@ -71,7 +71,7 @@ func _on_resource_card_selected(card: TextureButton) -> void:
 
 func _on_confirm_discard_button_pressed() -> void:
 	for r in selectedResources:
-		get_parent().middleArea.graveyardResources.append(r.value)
+		get_parent().on_resource_spent(r.value)
 		resourcesOnHand.erase(r)
 		r.queue_free()
 		numToDiscard -= 1
@@ -136,7 +136,7 @@ func _play_character(character: TextureButton):
 	charactersOnPayField.erase(character)
 	
 	for r in selectedResources:
-		get_parent().middleArea.graveyardResources.append(r.value)
+		get_parent().on_resource_spent(r.value)
 		resourcesOnHand.erase(r)
 		r.queue_free()
 	
