@@ -78,7 +78,7 @@ func _on_confirm_discard_button_pressed() -> void:
 		if numToDiscard == 0:
 			$ConfirmDiscardButton.visible = false
 			discardMode = false
-			# TODO: Realign cards
+			_reorder_resource_cards()
 			emit_signal("discard_finished")
 
 ## Adds a character card with given specs and puts it on the right side.
@@ -142,15 +142,18 @@ func _play_character(character: TextureButton):
 	
 	selectedResources.clear()
 	
-	for i in range(resourcesOnHand.size()):
-		resourcesOnHand[i].position.x = 24.0 + i * (CARD_WIDTH + 24.0)
+	_reorder_resource_cards()
 
 	action_used.emit()
 	
 	var totalPoints = charactersPlayed.reduce(func(acc, card): return acc + card.points, 0)
 	if totalPoints > 11:
 		print("Player has " + totalPoints + " points. Last round!")
-	
+
+func _reorder_resource_cards():
+	for i in range(resourcesOnHand.size()):
+		resourcesOnHand[i].position.x = 24.0 + i * (CARD_WIDTH + 24.0)
+
 
 func _on_visibility_changed() -> void:
 	for card in resourcesOnHand:
