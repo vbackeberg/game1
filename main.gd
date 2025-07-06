@@ -2,7 +2,6 @@ extends Node
 
 var playerArea: Node2D
 var middleArea: Node2D
-var middleVisible: bool
 
 var currentPlayerIdx: int
 var currentPlayer: Node2D
@@ -11,7 +10,6 @@ var players: Array[Node2D]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	middleArea = $MiddleArea
-	middleVisible = true
 
 	players = [$PlayerArea, $PlayerArea2]
 	currentPlayerIdx = 0
@@ -28,14 +26,12 @@ func _input(event):
 # When discard mode, deactivate cards drawing, show how many to discard
 
 func toggle_view():
-	if middleVisible == true:
+	if middleArea.visible == true:
 		$MiddleArea.visible = false
 		currentPlayer.visible = true
-		middleVisible = false
 	else:
 		$MiddleArea.visible = true
 		currentPlayer.visible = false
-		middleVisible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
