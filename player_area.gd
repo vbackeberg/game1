@@ -117,7 +117,7 @@ func _on_character_card_pressed(card: TextureButton) -> void:
 			remainingCost.remove_at(index)
 	
 	if remainingCost.size() == 0:
-		playCharacter(card)
+		_play_character(card)
 	else:
 		print("Cannot play character card! Missing resources: ", remainingCost)
 
@@ -126,7 +126,7 @@ func _on_character_card_pressed(card: TextureButton) -> void:
 ## Remove character from pay field and add to played characters.
 ## Remove used resources.
 ## Reposition remaining resources.
-func playCharacter(character: TextureButton):
+func _play_character(character: TextureButton):
 	charactersPlayed.append(character)
 	var card_index = charactersPlayed.size()
 	character.position.x = 24.0 + card_index * (CARD_WIDTH + 24.0)
