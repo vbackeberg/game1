@@ -11,6 +11,7 @@ var discardMode: bool
 var numToDiscard: int
 
 signal action_used()
+signal discard_started()
 signal discard_finished()
 
 # Called when the node enters the scene tree for the first time.
@@ -22,9 +23,12 @@ func _ready() -> void:
 	charactersPlayed = []
 	visible = false
 	actionsLeft = 3
+
 	discardMode = false
 	numToDiscard = 0
 	$ConfirmDiscardButton.visible = false
+	discard_started.connect(get_parent().on_discard_started.bind())
+	discard_finished.connect(get_parent().on_discard_finished.bind())
 
 ## Appends and prints card
 func add_resource(value: int):
@@ -41,6 +45,17 @@ func add_resource(value: int):
 	card_node.position.y = get_viewport().size.y / 2
 	
 	card_node.pressed.connect(_on_resource_card_selected.bind(card_node))
+
+func discard_if_too_many_cards():
+	var excess = resourcesOnHand.size() - resourceCapacity
+	if excess > 0:
+		discard_started.emit()
+		discardMode = true
+		numToDiscard = excess
+		selectedResources.clear()
+		print("You have " + str(numToDiscard) + " cards to discard.")
+	else:
+		discard_finished.emit()
 
 ## Selects or deselects a resource on press
 func _on_resource_card_selected(card: TextureButton) -> void:
@@ -79,7 +94,7 @@ func _on_confirm_discard_button_pressed() -> void:
 			$ConfirmDiscardButton.visible = false
 			discardMode = false
 			_reorder_resource_cards()
-			emit_signal("discard_finished")
+			discard_finished.emit()
 
 ## Adds a character card with given specs and puts it on the right side.
 func add_character(cost, diamondCost, points, diamonds):
@@ -172,9 +187,3 @@ func concat(arr: Array) -> String:
 	for num in arr:
 		result += str(num)
 	return result
-
-func start_discard_mode(num):
-	discardMode = true
-	numToDiscard = num
-	selectedResources.clear()
-	print("You have " + str(num) + " cards to discard.")
