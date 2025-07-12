@@ -11,6 +11,8 @@ var cardsLaidOut: Array[TextureButton]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$DiscardOverlay.visible = false
+
 	resourceCards = [1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8]
 	resourceCards.shuffle()
 	
@@ -73,6 +75,8 @@ func _on_stack_characters_pressed() -> void:
 	var card = characterCards.pop_back()
 	get_parent().currentPlayer.add_character(card)
 	action_used.emit()
+
+#TODO: IN discard mode player should not be able to draw more cards
 
 ## Move the card to the player's hand
 func _on_resource_card_pressed(card: TextureButton) -> void:
@@ -148,7 +152,6 @@ func _on_button_pressed() -> void:
 		place_resource(i)
 	action_used.emit()
 
-
 func _load_character_cards() -> Array[Dictionary]:
 	return [
 		{
@@ -187,3 +190,10 @@ func _load_character_cards() -> Array[Dictionary]:
 			effect = func(player): player.actionsLeft += 3
 		},
 	]
+
+func on_discard_started():
+	$DiscardOverlay.visible = true
+	$DiscardOverlay.move_to_front()
+
+func on_discard_finished():
+	$DiscardOverlay.visible = false

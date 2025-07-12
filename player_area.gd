@@ -1,22 +1,41 @@
 extends Node2D
 
 const CARD_WIDTH = 128.0
+var playerName: String
 var resourcesOnHand: Array[Node]
+var resourceCapacity: int
 var charactersOnPayField: Array[Node]
 var selectedResources: Array[Node]
 var charactersPlayed: Array[Node]
 var actionsLeft: int
+var discardMode: bool
+var numToDiscard: int
+
+var victoryPoints: int
+var diamonds: int
 
 signal action_used()
+signal discard_started()
+signal discard_finished()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	playerName = str(randi() % 100 + 1)
 	resourcesOnHand = []
+	resourceCapacity = 5
 	charactersOnPayField = []
 	selectedResources = []
 	charactersPlayed = []
 	visible = false
 	actionsLeft = 3
+	victoryPoints = 12
+	diamonds = 0
+
+	discardMode = false
+	numToDiscard = 0
+	$ConfirmDiscardButton.visible = false
+	discard_started.connect(get_parent().on_discard_started.bind())
+	discard_finished.connect(get_parent().on_discard_finished.bind())
 
 ## Appends and prints card
 func add_resource(value: int):
@@ -34,16 +53,55 @@ func add_resource(value: int):
 	
 	card_node.pressed.connect(_on_resource_card_selected.bind(card_node))
 
+func discard_if_too_many_cards():
+	var excess = resourcesOnHand.size() - resourceCapacity
+	if excess > 0:
+		discard_started.emit()
+		discardMode = true
+		numToDiscard = excess
+		selectedResources.clear()
+		print("You have " + str(numToDiscard) + " cards to discard.")
+	else:
+		discard_finished.emit()
+
 ## Selects or deselects a resource on press
 func _on_resource_card_selected(card: TextureButton) -> void:
 	var index = selectedResources.find(card)
-	
-	if index == -1:
-		selectedResources.append(card)
-		card.modulate = Color(1.2, 1.2, 0.8) # Yellow tint
+	if discardMode:
+		if index == -1:
+			if selectedResources.size() == numToDiscard:
+				return
+
+			card.modulate = Color(1.2, 0.8, 0.8) # Red tint for discard
+			selectedResources.append(card)
+		else:
+			selectedResources.remove_at(index)
+			card.modulate = Color(1, 1, 1) # Reset to normal color
+		
+		if selectedResources.size() == numToDiscard:
+			$ConfirmDiscardButton.visible = true
+		else:
+			$ConfirmDiscardButton.visible = false
+
 	else:
-		selectedResources.remove_at(index)
-		card.modulate = Color(1, 1, 1) # Reset to normal color
+		if index == -1:
+			selectedResources.append(card)
+			card.modulate = Color(1.2, 1.2, 0.8) # Yellow tint
+		else:
+			selectedResources.remove_at(index)
+			card.modulate = Color(1, 1, 1) # Reset to normal color
+
+func _on_confirm_discard_button_pressed() -> void:
+	for r in selectedResources:
+		get_parent().on_resource_spent(r.value)
+		resourcesOnHand.erase(r)
+		r.queue_free()
+		numToDiscard -= 1
+		if numToDiscard == 0:
+			$ConfirmDiscardButton.visible = false
+			discardMode = false
+			_reorder_resource_cards()
+			discard_finished.emit()
 
 ## Adds a character card with given specs and puts it on the right side.
 func add_character(cost, diamondCost, points, diamonds):
@@ -81,7 +139,7 @@ func _on_character_card_pressed(card: TextureButton) -> void:
 			remainingCost.remove_at(index)
 	
 	if remainingCost.size() == 0:
-		playCharacter(card)
+		_play_character(card)
 	else:
 		print("Cannot play character card! Missing resources: ", remainingCost)
 
@@ -90,7 +148,7 @@ func _on_character_card_pressed(card: TextureButton) -> void:
 ## Remove character from pay field and add to played characters.
 ## Remove used resources.
 ## Reposition remaining resources.
-func playCharacter(character: TextureButton):
+func _play_character(character: TextureButton):
 	charactersPlayed.append(character)
 	var card_index = charactersPlayed.size()
 	character.position.x = 24.0 + card_index * (CARD_WIDTH + 24.0)
@@ -100,21 +158,23 @@ func playCharacter(character: TextureButton):
 	charactersOnPayField.erase(character)
 	
 	for r in selectedResources:
-		get_parent().middleArea.graveyardResources.append(r.value)
+		get_parent().on_resource_spent(r.value)
 		resourcesOnHand.erase(r)
 		r.queue_free()
 	
 	selectedResources.clear()
 	
+	_reorder_resource_cards()
+
+	action_used.emit()
+
+	victoryPoints += character.points
+	diamonds += character.diamonds
+	
+func _reorder_resource_cards():
 	for i in range(resourcesOnHand.size()):
 		resourcesOnHand[i].position.x = 24.0 + i * (CARD_WIDTH + 24.0)
 
-	action_used.emit()
-	
-	var totalPoints = charactersPlayed.reduce(func(acc, card): return acc + card.points, 0)
-	if totalPoints > 11:
-		print("Player has " + totalPoints + " points. Last round!")
-	
 
 func _on_visibility_changed() -> void:
 	for card in resourcesOnHand:
@@ -122,6 +182,7 @@ func _on_visibility_changed() -> void:
 	
 	for card in charactersOnPayField:
 		card.visible = visible
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
