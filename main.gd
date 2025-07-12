@@ -73,7 +73,7 @@ func _next_player():
 		lastTurn = true
 
 	if lastTurn && currentPlayer == startingPlayer:
-		_findWinner()
+		_find_winner()
 		return
 
 	currentPlayer.visible = false
@@ -89,9 +89,9 @@ func on_resource_spent(value):
 
 
 ## Finds player with highest points and displays them as Winner
-func _findWinner():
+func _find_winner():
 	var sortedPlayers = players.duplicate()
-	sortedPlayers.sort_custom(func(a, b): return a.victoryPoints > b.victoryPoints)
+	sortedPlayers.sort_custom(func(a, b): return a.victoryPoints > b.victoryPoints || (a.victoryPoints == b.victoryPoints && a.diamonds > b.diamonds))
 	
 	print("Final Rankings:")
 	for i in range(sortedPlayers.size()):
