@@ -1,6 +1,7 @@
 extends Node2D
 
 const CARD_WIDTH = 128.0
+var playerName: String
 var resourcesOnHand: Array[Node]
 var resourceCapacity: int
 var charactersOnPayField: Array[Node]
@@ -10,12 +11,16 @@ var actionsLeft: int
 var discardMode: bool
 var numToDiscard: int
 
+var victoryPoints: int
+var diamonds: int
+
 signal action_used()
 signal discard_started()
 signal discard_finished()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	playerName = str(randi() % 100 + 1)
 	resourcesOnHand = []
 	resourceCapacity = 5
 	charactersOnPayField = []
@@ -23,6 +28,8 @@ func _ready() -> void:
 	charactersPlayed = []
 	visible = false
 	actionsLeft = 3
+	victoryPoints = 12
+	diamonds = 0
 
 	discardMode = false
 	numToDiscard = 0
@@ -160,11 +167,10 @@ func _play_character(character: TextureButton):
 	_reorder_resource_cards()
 
 	action_used.emit()
-	
-	var totalPoints = charactersPlayed.reduce(func(acc, card): return acc + card.points, 0)
-	if totalPoints > 11:
-		print("Player has " + totalPoints + " points. Last round!")
 
+	victoryPoints += character.points
+	diamonds += character.diamonds
+	
 func _reorder_resource_cards():
 	for i in range(resourcesOnHand.size()):
 		resourcesOnHand[i].position.x = 24.0 + i * (CARD_WIDTH + 24.0)

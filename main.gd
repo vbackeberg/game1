@@ -7,17 +7,27 @@ var middleVisible: bool
 var currentPlayerIdx: int
 var currentPlayer: Node2D
 var players: Array[Node2D]
+var startingPlayer: Node2D
+var twelvePointsReached: bool
+var lastTurn: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	middleArea = $MiddleArea
 
 	players = [$PlayerArea, $PlayerArea2]
+	startingPlayer = players[0]
+
 	currentPlayerIdx = 0
 	currentPlayer = players[currentPlayerIdx]
 	currentPlayer.actionsLeft = 3
+	
 	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
 	$CurrentPlayerLabel.text = "Player " + str(currentPlayerIdx) + "'s turn"
+	$WinOverlay.visible = false
+
+	twelvePointsReached = false
+	lastTurn = false
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"): # Space bar
@@ -55,6 +65,17 @@ func on_discard_finished():
 	_next_player()
 
 func _next_player():
+	if currentPlayer.victoryPoints >= 12:
+		print("Player " + str(currentPlayerIdx) + " has " + str(currentPlayer.victoryPoints) + " points. Last round!")
+		twelvePointsReached = true
+		
+	if twelvePointsReached && currentPlayer == startingPlayer:
+		lastTurn = true
+
+	if lastTurn && currentPlayer == startingPlayer:
+		_findWinner()
+		return
+
 	currentPlayer.visible = false
 	middleArea.visible = true
 
@@ -65,3 +86,20 @@ func _next_player():
 
 func on_resource_spent(value):
 		$MiddleArea.graveyardResources.append(value)
+
+
+## Finds player with highest points and displays them as Winner
+func _findWinner():
+	var sortedPlayers = players.duplicate()
+	sortedPlayers.sort_custom(func(a, b): return a.victoryPoints > b.victoryPoints)
+	
+	print("Final Rankings:")
+	for i in range(sortedPlayers.size()):
+		var player = sortedPlayers[i]
+		print("Player " + str(i) + ": " + str(player.victoryPoints) + " victory points")
+	
+	$ActionsLeftLabel.visible = false
+	$CurrentPlayerLabel.visible = false
+	
+	$WinOverlay.visible = true
+	$WinOverlay/WinnerLabel.text = "Player " + str(sortedPlayers[0].playerName) + " has won!"
