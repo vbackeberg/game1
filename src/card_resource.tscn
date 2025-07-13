@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b367lrgb833ww"]
 
-[ext_resource type="Script" uid="uid://c51d06hyr4cxq" path="res://card_resource.gd" id="1_cedyk"]
+[ext_resource type="Script" uid="uid://c51d06hyr4cxq" path="res://src/card_resource.gd" id="1_cedyk"]
 
 [node name="CardResource" type="TextureButton"]
 ignore_texture_size = true

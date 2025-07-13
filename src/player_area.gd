@@ -41,7 +41,7 @@ func _ready() -> void:
 
 ## Appends and prints card
 func add_resource(value: int):
-	var card_node = load("res://card_resource.tscn").instantiate() as TextureButton
+	var card_node = load("res://src/card_resource.tscn").instantiate() as TextureButton
 	card_node.custom_minimum_size = Vector2(CARD_WIDTH, 200.0)
 	card_node.texture_normal = load("res://assets/resource" + str(value) + ".png")
 	card_node.value = value
@@ -112,7 +112,7 @@ func add_character(specs):
 		print("Player has 2 character cards, already.")
 	
 	else:
-		var card_node = load("res://card_character.tscn").instantiate() as TextureButton
+		var card_node = load("res://src/card_character.tscn").instantiate() as TextureButton
 		card_node.custom_minimum_size = Vector2(CARD_WIDTH, 200.0)
 		card_node.texture_normal = load("res://assets/character-" + str(concat(specs.cost)) + "-" + str(specs.diamondCost) + "-" + str(specs.points) + "-" + str(specs.diamonds) + ".png")
 		card_node.specs = specs
@@ -152,7 +152,7 @@ func _enoughResourcesSelected(card):
 ## Loads and positions diamond card asset. Connects on_pressed callback.
 ## Note: Character values are associated with the diamond to identify the card later in the graveyard.
 func add_diamond(card: Dictionary):
-	var cardDiamond = load("res://card_character.tscn").instantiate() as TextureButton
+	var cardDiamond = load("res://src/ card_character.tscn").instantiate() as TextureButton
 	cardDiamond.custom_minimum_size = Vector2(CARD_WIDTH, 200.0)
 	cardDiamond.texture_normal = load("res://assets/character_back.png")
 	cardDiamond.specs = card

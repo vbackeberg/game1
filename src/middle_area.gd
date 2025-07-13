@@ -89,7 +89,7 @@ func _on_resource_card_pressed(card: TextureButton) -> void:
 func place_resource(slot: int):
 	var value = _draw_resource()
 
-	var card_node = load("res://card_resource.tscn").instantiate() as TextureButton
+	var card_node = load("res://src/card_resource.tscn").instantiate() as TextureButton
 	card_node.texture_normal = load("res://assets/resource" + str(value) + ".png")
 	card_node.custom_minimum_size = Vector2(CARD_WIDTH, 200.0)
 	card_node.value = value
@@ -120,7 +120,7 @@ func place_character(slot: int):
 
 	var specs = characterCards.pop_back()
 	
-	var card_node = load("res://card_character.tscn").instantiate() as TextureButton
+	var card_node = load("res://src/card_character.tscn").instantiate() as TextureButton
 	card_node.texture_normal = load("res://assets/character-" + str(concat(specs.cost)) + "-" + str(specs.diamondCost) + "-" + str(specs.points) + "-" + str(specs.diamonds) + ".png")
 	card_node.custom_minimum_size = Vector2(CARD_WIDTH, 200.0)
 	card_node.specs = specs
