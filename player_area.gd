@@ -28,7 +28,7 @@ func _ready() -> void:
 	charactersPlayed = []
 	visible = false
 	actionsLeft = 3
-	victoryPoints = 12
+	victoryPoints = 0
 	diamonds = 0
 
 	discardMode = false
