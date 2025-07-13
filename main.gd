@@ -87,11 +87,14 @@ func _next_player():
 func on_resource_spent(value):
 	$MiddleArea.graveyardResources.append(value)
 
+func on_diamond_spent(d):
+	$MiddleArea.graveyardCharacters.append(d)
+
 
 ## Finds player with highest points and displays them as Winner
 func _find_winner():
 	var sortedPlayers = players.duplicate()
-	sortedPlayers.sort_custom(func(a, b): return a.victoryPoints > b.victoryPoints || (a.victoryPoints == b.victoryPoints && a.diamonds > b.diamonds))
+	sortedPlayers.sort_custom(func(a, b): return a.victoryPoints > b.victoryPoints || (a.victoryPoints == b.victoryPoints && a.diamonds.size() > b.diamonds.size()))
 	
 	print("Final Rankings:")
 	for i in range(sortedPlayers.size()):

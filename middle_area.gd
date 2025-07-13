@@ -65,6 +65,11 @@ func _replenish_characters():
 	graveyardCharacters = []
 	
 func _on_stack_characters_pressed() -> void:
+	var card = _draw_character()
+	get_parent().currentPlayer.add_character(card)
+	action_used.emit()
+
+func _draw_character():
 	if characterCards.size() == 0:
 		if graveyardCharacters.size() == 0:
 			print("No more character cards left in stack or graveyard!")
@@ -72,11 +77,7 @@ func _on_stack_characters_pressed() -> void:
 		else:
 			_replenish_characters()
 
-	var card = characterCards.pop_back()
-	get_parent().currentPlayer.add_character(card)
-	action_used.emit()
-
-#TODO: IN discard mode player should not be able to draw more cards
+	return characterCards.pop_back()
 
 ## Move the card to the player's hand
 func _on_resource_card_pressed(card: TextureButton) -> void:
@@ -104,7 +105,7 @@ func place_resource(slot: int):
 
 ## Moves the card to the player's hand
 func _on_character_card_pressed(card: TextureButton) -> void:
-	get_parent().currentPlayer.add_character(card.cost, card.diamondCost, card.points, card.diamonds)
+	get_parent().currentPlayer.add_character(card.specs)
 	card.queue_free()
 	place_character(card.slot)
 	action_used.emit()
@@ -117,15 +118,12 @@ func place_character(slot: int):
 		else:
 			_replenish_characters()
 
-	var card = characterCards.pop_back()
+	var specs = characterCards.pop_back()
 	
 	var card_node = load("res://card_character.tscn").instantiate() as TextureButton
-	card_node.texture_normal = load("res://assets/character-" + str(concat(card.cost)) + "-" + str(card.diamondCost) + "-" + str(card.points) + "-" + str(card.diamonds) + ".png")
+	card_node.texture_normal = load("res://assets/character-" + str(concat(specs.cost)) + "-" + str(specs.diamondCost) + "-" + str(specs.points) + "-" + str(specs.diamonds) + ".png")
 	card_node.custom_minimum_size = Vector2(CARD_WIDTH, 200.0)
-	card_node.cost = card.cost
-	card_node.diamondCost = card.diamondCost
-	card_node.points = card.points
-	card_node.diamonds = card.diamonds
+	card_node.specs = specs
 	card_node.visible = visible
 	card_node.slot = slot
 	add_child(card_node)
@@ -134,6 +132,11 @@ func place_character(slot: int):
 	card_node.position.y = 256
 	
 	card_node.pressed.connect(_on_character_card_pressed.bind(card_node))
+
+func draw_diamond():
+	var card = characterCards.pop_back()
+	get_parent().currentPlayer.add_diamond(card)
+
 
 func concat(arr: Array) -> String:
 	var result = ""
