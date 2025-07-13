@@ -53,7 +53,7 @@ func add_resource(value: int):
 	card_node.position.x = 24.0 + card_index * (CARD_WIDTH + 24.0)
 	card_node.position.y = get_viewport().size.y / 2
 	
-	card_node.pressed.connect(_on_resource_card_selected.bind(card_node))
+	card_node.pressed.connect(_on_resource_card_pressed.bind(card_node))
 
 func discard_if_too_many_cards():
 	var excess = resourcesOnHand.size() - resourceCapacity
@@ -67,7 +67,7 @@ func discard_if_too_many_cards():
 		discard_finished.emit()
 
 ## Selects or deselects a resource on press
-func _on_resource_card_selected(card: TextureButton) -> void:
+func _on_resource_card_pressed(card: TextureButton) -> void:
 	var index = selectedResources.find(card)
 	if discardMode:
 		if index == -1:
