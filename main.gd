@@ -85,7 +85,7 @@ func _next_player():
 	$CurrentPlayerLabel.text = "Player " + str(currentPlayerIdx) + "'s turn"
 
 func on_resource_spent(value):
-		$MiddleArea.graveyardResources.append(value)
+	$MiddleArea.graveyardResources.append(value)
 
 
 ## Finds player with highest points and displays them as Winner
