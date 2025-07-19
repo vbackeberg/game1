@@ -165,189 +165,196 @@ func on_discard_finished():
 func _load_character_cards() -> Array[Dictionary]:
 	return [
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [2, 2, 2]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [2, 2, 2]),
 			diamondCost = 1,
 			points = 3,
 			diamonds = 0,
 			effect = func(_player): pass
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [6, 6, 8, 8]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [6, 6, 8, 8]),
 			diamondCost = 0,
 			points = 3,
 			diamonds = 0,
 			effect = func(_player): pass
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [6, 6, 8, 8]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [6, 6, 8, 8]),
 			diamondCost = 0,
 			points = 3,
 			diamonds = 0,
 			effect = func(_player): pass
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [1, 3, 5, 7]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [1, 3, 5, 7]),
 			diamondCost = 0,
 			points = 2,
 			diamonds = 0,
 			effect = func(player): player.actionsLeft += 3; get_parent().on_actions_left_changed()
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [2, 4, 6, 8]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [2, 4, 6, 8]),
 			diamondCost = 0,
 			points = 2,
 			diamonds = 0,
 			effect = func(player): player.actionsLeft += 3; get_parent().on_actions_left_changed()
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [8, 8]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [8, 8]),
 			diamondCost = 0,
 			points = 2,
 			diamonds = 0,
 			effect = func(_player): pass
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [8, 8]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [8, 8]),
 			diamondCost = 0,
 			points = 2,
 			diamonds = 0,
 			effect = func(_player): pass
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [1, 1]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [1, 1]),
 			diamondCost = 0,
 			points = 1,
 			diamonds = 0,
-			effect = func(player): player.additionalResources.add(1)
+			effect = func(player): player.additionalResources.add(1) # TODO allow paying with additional resources
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [2, 2]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [2, 2]),
 			diamondCost = 0,
 			points = 1,
 			diamonds = 0,
 			effect = func(player): player.additionalResources.add(2)
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [3, 3]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [3, 3]),
 			diamondCost = 0,
 			points = 1,
 			diamonds = 0,
 			effect = func(player): player.additionalResources.add(3)
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [4, 4]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [4, 4]),
 			diamondCost = 0,
 			points = 1,
 			diamonds = 0,
 			effect = func(player): player.additionalResources.add(4) # Take into account
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [5, 5]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [5, 5]),
 			diamondCost = 0,
 			points = 1,
 			diamonds = 0,
 			effect = func(player): player.additionalResources.add(5)
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [6, 6]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [6, 6]),
 			diamondCost = 0,
 			points = 1,
 			diamonds = 0,
 			effect = func(player): player.additionalResources.add(6)
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [7, 7]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [7, 7]),
 			diamondCost = 0,
 			points = 1,
 			diamonds = 0,
 			effect = func(player): player.additionalResources.add(7)
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [1, 2, 3, 4]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [1, 2, 3, 4]),
 			diamondCost = 0,
 			points = 1,
 			diamonds = 2,
 			effect = func(_player): pass
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [7, 7, 7, 7]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [7, 7, 7, 7]),
 			diamondCost = 0,
 			points = 4,
 			diamonds = 0,
 			effect = func(_player): pass
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [7, 7, 7, 7]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [7, 7, 7, 7]),
 			diamondCost = 0,
 			points = 4,
 			diamonds = 0,
 			effect = func(_player): pass
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [1, 2]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [8, 8, 8, 8]),
+			diamondCost = 0,
+			points = 5,
+			diamonds = 0,
+			effect = func(_player): pass
+		},
+		{
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [1, 2]),
 			diamondCost = 0,
 			points = 0,
 			diamonds = 0,
 			effect = func(player): player.additionalResources.add(7)
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [4, 5, 6, 7, 8]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [4, 5, 6, 7, 8]),
 			diamondCost = 0,
 			points = 1,
 			diamonds = 0,
 			effect = func(player): player.actionsLeft += 1; player.actionsPerTurn += 1; get_parent().on_actions_left_changed()
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _sums_up_to_using_exactly_three(selectedResources, 10),
+			cost = func(player): return _sums_up_to_using_exactly_three(player.selectedResources, 10),
 			diamondCost = 0,
 			points = 1,
 			diamonds = 0,
 			effect = func(player): pass # TODO can use a 1 as an 8
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _sums_up_to_using_exactly_three(selectedResources, 20),
+			cost = func(player): return _sums_up_to_using_exactly_three(player.selectedResources, 20),
 			diamondCost = 0,
 			points = 2,
 			diamonds = 0,
 			effect = func(_player): pass
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _sums_up_to_in_any_combination(selectedResources, 10),
+			cost = func(player): return _sums_up_to_in_any_combination(player.selectedResources, 10),
 			diamondCost = 0,
 			points = 1,
 			diamonds = 0,
 			effect = func(player): player.resourceCapacity += 1
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _sums_up_to_in_any_combination(selectedResources, 10),
+			cost = func(player): return _sums_up_to_in_any_combination(player.selectedResources, 10),
 			diamondCost = 0,
 			points = 1,
 			diamonds = 0,
 			effect = func(player): player.resourceCapacity += 1
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _sums_up_to_in_any_combination(selectedResources, 10),
+			cost = func(player): return _sums_up_to_in_any_combination(player.selectedResources, 10),
 			diamondCost = 0,
 			points = 1,
 			diamonds = 0,
 			effect = func(player): player.resourceCapacity += 1
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [3, 4, 5]),
+			cost = func(player): return _includes(player.selectedResources, player.additionalResources, [3, 4, 5]),
 			diamondCost = 0,
 			points = 1,
 			diamonds = 0,
 			effect = func(_player): # TODO let player select one that should return to hand
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes_either_or(selectedResources, [3, 3, 3], [6, 6, 6]),
+			cost = func(player): return _includes_either_or(player.selectedResources, player.additionalResources, [3, 3, 3], [6, 6, 6]),
 			diamondCost = 0,
 			points = 3,
 			diamonds = 0,
-			effect = func(_player): pass #  TODO let neighbors play it
+			effect = func(_player): pass # TODO let neighbors play it
 		},
 		{
-			cost = func(selectedResources: Array[int]): return _includes_either_or(selectedResources, [4, 4, 4], [5, 5, 5]),
+			cost = func(player): return _includes_either_or(player.selectedResources, player.additionalResources, [4, 4, 4], [5, 5, 5]),
 			diamondCost = 0,
 			points = 3,
 			diamonds = 0,
@@ -358,11 +365,16 @@ func _load_character_cards() -> Array[Dictionary]:
 
 ## Checks if selected resources suffice to pay for the card.
 ## Returns the resources used to pay for the card or null if they do not suffice.
-func _includes(selectedResources: Array[int], required: Array[int]):
+func _includes(selectedResources: Array[int], additionalResources: Array[int], required: Array[int]):
 	var selected = selectedResources.duplicate()
+	var additional = additionalResources.duplicate()
 	var paid = []
 	for r in required:
-		var idx = selected.find(r)
+		var idx = additional.find(r) # Additional resources (e.g. from dwarves are preferred)
+		if idx != -1:
+			additional.remove_at(idx)
+			continue
+		idx = selected.find(r)
 		if idx == -1:
 			return null
 		paid.append(selected[idx])
@@ -371,12 +383,12 @@ func _includes(selectedResources: Array[int], required: Array[int]):
 
 ## Checks if selected resources suffice to pay for the card for two alternatives.
 ## Returns the resources used to pay or null if they do not suffice.
-func _includes_either_or(selectedResources: Array[int], eitherRequired: Array[int], orRequired: Array[int]):
-	var paid = _includes(selectedResources, eitherRequired)
+func _includes_either_or(selectedResources: Array[int], additionalResources: Array[int], eitherRequired: Array[int], orRequired: Array[int]):
+	var paid = _includes(selectedResources, additionalResources, eitherRequired)
 	if paid != null:
 		return paid
 
-	paid = _includes(selectedResources, orRequired)
+	paid = _includes(selectedResources, additionalResources, orRequired)
 	if paid != null:
 		return paid
 

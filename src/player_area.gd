@@ -4,6 +4,7 @@ const CARD_WIDTH = 128.0
 var playerName: String
 var resourcesOnHand: Array[Node]
 var resourceCapacity: int
+var additionalResources: Array[int]
 var charactersOnPayField: Array[Node]
 var diamonds: Array[Node]
 var selectedResources: Array[Node]
@@ -25,6 +26,7 @@ func _ready() -> void:
 	playerName = str(randi() % 100 + 1)
 	resourcesOnHand = []
 	resourceCapacity = 5
+	additionalResources = []
 	charactersOnPayField = []
 	diamonds = []
 	selectedResources = []
