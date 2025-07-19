@@ -14,20 +14,14 @@ var lastTurn: bool
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	middleArea = $MiddleArea
-
 	players = [$PlayerArea, $PlayerArea2]
 	startingPlayer = players[0]
+	_set_current_player(0)
 
-	currentPlayerIdx = 0
-	currentPlayer = players[currentPlayerIdx]
-	currentPlayer.actionsLeft = 3
-	
-	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
-	$CurrentPlayerLabel.text = "Player " + str(currentPlayerIdx) + "'s turn"
 	$WinOverlay.visible = false
-
 	twelvePointsReached = false
 	lastTurn = false
+
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"): # Space bar
@@ -79,10 +73,7 @@ func _next_player():
 	currentPlayer.visible = false
 	middleArea.visible = true
 
-	currentPlayerIdx = (currentPlayerIdx + 1) % players.size()
-	currentPlayer = players[currentPlayerIdx]
-	currentPlayer.actionsLeft = 3
-	$CurrentPlayerLabel.text = "Player " + str(currentPlayerIdx) + "'s turn"
+	_set_current_player((currentPlayerIdx + 1) % players.size())
 
 func on_resource_spent(value):
 	$MiddleArea.graveyardResources.append(value)
@@ -106,3 +97,13 @@ func _find_winner():
 	
 	$WinOverlay.visible = true
 	$WinOverlay/WinnerLabel.text = "Player " + str(sortedPlayers[0].playerName) + " has won!"
+
+func _on_new_game_button_pressed() -> void:
+	get_tree().reload_current_scene()
+
+func _set_current_player(nextPlayer: int):
+	currentPlayerIdx = nextPlayer
+	currentPlayer = players[currentPlayerIdx]
+	currentPlayer.actionsLeft = 3
+	$CurrentPlayerLabel.text = "Player " + str(currentPlayerIdx) + "'s turn"
+	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
