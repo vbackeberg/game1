@@ -107,3 +107,7 @@ func _set_current_player(nextPlayer: int):
 	currentPlayer.actionsLeft = currentPlayer.actionsPerTurn
 	$CurrentPlayerLabel.text = "Player " + str(currentPlayerIdx) + "'s turn"
 	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
+
+## Used by character that adds 3 actions.
+func _on_actions_left_changed():
+	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)

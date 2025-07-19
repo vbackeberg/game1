@@ -190,7 +190,14 @@ func _load_character_cards() -> Array[Dictionary]:
 			diamondCost = 0,
 			points = 2,
 			diamonds = 0,
-			effect = func(player): player.actionsLeft += 3 # TODO refresh label
+			effect = func(player): player.actionsLeft += 3; get_parent().on_actions_left_changed()
+		},
+		{
+			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [2, 4, 6, 8]),
+			diamondCost = 0,
+			points = 2,
+			diamonds = 0,
+			effect = func(player): player.actionsLeft += 3; get_parent().on_actions_left_changed()
 		},
 		{
 			cost = func(selectedResources: Array[int]): return _includes(selectedResources, [8, 8]),
@@ -288,7 +295,7 @@ func _load_character_cards() -> Array[Dictionary]:
 			diamondCost = 0,
 			points = 1,
 			diamonds = 0,
-			effect = func(player): player.actionsPerTurn += 1
+			effect = func(player): player.actionsLeft += 1; player.actionsPerTurn += 1; get_parent().on_actions_left_changed()
 		},
 		{
 			cost = func(selectedResources: Array[int]): return _sums_up_to_using_exactly_three(selectedResources, 10),
