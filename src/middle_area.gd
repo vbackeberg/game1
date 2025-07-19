@@ -298,6 +298,13 @@ func _load_character_cards() -> Array[Dictionary]:
 			effect = func(player): pass # TODO can use a 1 as an 8
 		},
 		{
+			cost = func(selectedResources: Array[int]): return _sums_up_to_using_exactly_three(selectedResources, 20),
+			diamondCost = 0,
+			points = 2,
+			diamonds = 0,
+			effect = func(_player): pass
+		},
+		{
 			cost = func(selectedResources: Array[int]): return _sums_up_to_in_any_combination(selectedResources, 10),
 			diamondCost = 0,
 			points = 1,
