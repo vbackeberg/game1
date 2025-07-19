@@ -155,6 +155,13 @@ func _on_button_pressed() -> void:
 		place_resource(i)
 	action_used.emit()
 
+func on_discard_started():
+	$DiscardOverlay.visible = true
+	$DiscardOverlay.move_to_front()
+
+func on_discard_finished():
+	$DiscardOverlay.visible = false
+
 func _load_character_cards() -> Array[Dictionary]:
 	return [
 		{
@@ -194,9 +201,7 @@ func _load_character_cards() -> Array[Dictionary]:
 		},
 	]
 
-func on_discard_started():
-	$DiscardOverlay.visible = true
-	$DiscardOverlay.move_to_front()
 
-func on_discard_finished():
-	$DiscardOverlay.visible = false
+
+
+
