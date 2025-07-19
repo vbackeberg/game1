@@ -10,6 +10,7 @@ var selectedResources: Array[Node]
 var selectedDiamonds: Array[Node]
 var charactersPlayed: Array[Node]
 var actionsLeft: int
+var actionsPerTurn: int
 var discardMode: bool
 var numToDiscard: int
 
@@ -30,7 +31,8 @@ func _ready() -> void:
 	selectedDiamonds = []
 	charactersPlayed = []
 	visible = false
-	actionsLeft = 3
+	actionsLeft = actionsPerTurn
+	actionsPerTurn = 3
 	victoryPoints = 0
 
 	discardMode = false

@@ -104,6 +104,6 @@ func _on_new_game_button_pressed() -> void:
 func _set_current_player(nextPlayer: int):
 	currentPlayerIdx = nextPlayer
 	currentPlayer = players[currentPlayerIdx]
-	currentPlayer.actionsLeft = 3
+	currentPlayer.actionsLeft = currentPlayer.actionsPerTurn
 	$CurrentPlayerLabel.text = "Player " + str(currentPlayerIdx) + "'s turn"
 	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
