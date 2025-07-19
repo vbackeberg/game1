@@ -129,17 +129,17 @@ func add_character(specs):
 		card_node.pressed.connect(_on_character_card_pressed.bind(card_node))
 
 func _on_character_card_pressed(card: TextureButton) -> void:
-	if _enoughDiamondsSelected(card) && _enoughResourcesSelected(card):
+	if _diamondCostPaid(card) && _resourceCostPaid(card):
 		_play_character(card)
 	else:
 		print("Not enough resources/diamonds selected to play character!")
 
 
-func _enoughDiamondsSelected(card):
+func _diamondCostPaid(card):
 	print(selectedDiamonds.size(), " diamonds selected. ", card.specs.diamondCost, " needed.")
 	return selectedDiamonds.size() >= card.specs.diamondCost
 
-func _enoughResourcesSelected(card):
+func _resourceCostPaid(card):
 	var remainingResourceCost = card.specs.cost.duplicate()
 	
 	for r in selectedResources:
