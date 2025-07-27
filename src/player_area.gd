@@ -2,14 +2,14 @@ extends Node2D
 
 const CARD_WIDTH = 128.0
 var playerName: String
-var resourcesOnHand: Array[Node]
+var resourcesOnHand: Array[CardResource]
 var resourceCapacity: int
 var additionalResources: Array[int]
 var charactersOnPayField: Array[Node]
 var diamonds: Array[Node]
-var selectedResources: Array[Node]
+var selectedResources: Array[CardResource]
 var selectedDiamonds: Array[Node]
-var charactersPlayed: Array[Node]
+var charactersPlayed: Array[CardCharacter]
 var actionsLeft: int
 var actionsPerTurn: int
 var discardMode: bool
@@ -43,12 +43,12 @@ func _ready() -> void:
 	discard_started.connect(get_parent().on_discard_started.bind())
 	discard_finished.connect(get_parent().on_discard_finished.bind())
 
-## Appends and prints card
+## Appends card
 func add_resource(value: int):
-	var card_node = load("res://src/card_resource.tscn").instantiate() as TextureButton
+	var card_node = load("res://src/card_resource.tscn").instantiate() as CardResource
 	card_node.custom_minimum_size = Vector2(CARD_WIDTH, 200.0)
 	card_node.texture_normal = load("res://assets/resource" + str(value) + ".png")
-	card_node.value = value
+	card_node.resourceValue = value
 	card_node.visible = visible # Match parent's visibility
 	resourcesOnHand.append(card_node)
 	add_child(card_node)
@@ -71,7 +71,7 @@ func discard_if_too_many_cards():
 		discard_finished.emit()
 
 ## Selects or deselects a resource on press
-func _on_resource_card_pressed(card: TextureButton) -> void:
+func _on_resource_card_pressed(card: CardResource) -> void:
 	var index = selectedResources.find(card)
 	if discardMode:
 		if index == -1:
@@ -99,7 +99,7 @@ func _on_resource_card_pressed(card: TextureButton) -> void:
 
 func _on_confirm_discard_button_pressed() -> void:
 	for r in selectedResources:
-		get_parent().on_resource_spent(r.value)
+		get_parent().on_resource_spent(r.resourceValue)
 		resourcesOnHand.erase(r)
 		r.queue_free()
 		numToDiscard -= 1
@@ -110,48 +110,37 @@ func _on_confirm_discard_button_pressed() -> void:
 			discard_finished.emit()
 
 ## Adds a character card with given specs and puts it on the right side.
-func add_character(specs):
+func add_character(card: CardCharacter):
 	if charactersOnPayField.size() == 2:
 		# TODO prevent player from doing that
 		print("Player has 2 character cards, already.")
 	
 	else:
-		var card_node = load("res://src/card_character.tscn").instantiate() as TextureButton
-		card_node.custom_minimum_size = Vector2(CARD_WIDTH, 200.0)
-		card_node.texture_normal = load("res://assets/character-" + str(concat(specs.cost)) + "-" + str(specs.diamondCost) + "-" + str(specs.points) + "-" + str(specs.diamonds) + ".png")
-		card_node.specs = specs
-		card_node.visible = visible
-		charactersOnPayField.append(card_node)
-		add_child(card_node)
+		card.visible = visible
+		charactersOnPayField.append(card)
+		add_child(card)
 
 		var card_index = charactersOnPayField.size()
-		card_node.position.x = get_viewport().size.x - 24.0 - card_index * (CARD_WIDTH + 24.0)
-		card_node.position.y = get_viewport().size.y / 2
+		card.position.x = get_viewport().size.x - 24.0 - card_index * (CARD_WIDTH + 24.0)
+		card.position.y = get_viewport().size.y / 2
 		
-		card_node.pressed.connect(_on_character_card_pressed.bind(card_node))
+		card.pressed.connect(_on_character_card_pressed.bind(card))
 
-func _on_character_card_pressed(card: TextureButton) -> void:
-	if _diamondCostPaid(card) && _resourceCostPaid(card):
-		_play_character(card)
+func _on_character_card_pressed(card: CardCharacter) -> void:
+	var paid = card.buy.call(self) # TODO: evaluate paid resources and paid diamonds
+	if paid == null:
+		print("not enough resources selected")
+		# TODO show label with missing resources
 	else:
-		print("Not enough resources/diamonds selected to play character!")
-
-
-func _diamondCostPaid(card):
-	print(selectedDiamonds.size(), " diamonds selected. ", card.specs.diamondCost, " needed.")
-	return selectedDiamonds.size() >= card.specs.diamondCost
-
-func _resourceCostPaid(card):
-	var remainingResourceCost = card.specs.cost.duplicate()
-	
-	for r in selectedResources:
-		var index = remainingResourceCost.find(r.value)
-		if index != -1:
-			remainingResourceCost.remove_at(index)
-
-	print("Remaining resource cost: ", remainingResourceCost)
-
-	return remainingResourceCost.size() == 0
+		for r in paid:
+			get_parent().on_resource_spent(r.value)
+			resourcesOnHand.erase(r)
+			r.queue_free()
+		
+		selectedResources.clear()
+		_reorder_resource_cards()
+		_place_character_on_played_area(card)
+		action_used.emit()
 
 ## Loads and positions diamond card asset. Connects on_pressed callback.
 ## Note: Character values are associated with the diamond to identify the card later in the graveyard.
@@ -184,43 +173,15 @@ func _on_diamond_card_pressed(card: TextureButton) -> void:
 
 ## Puts spent resources and diamonds on graveyard
 ## Places character card
-func _play_character(card: TextureButton):
+func _place_character_on_played_area(card: CardCharacter):
 	charactersPlayed.append(card)
 	var card_index = charactersPlayed.size()
 	card.position.x = 24.0 + card_index * (CARD_WIDTH + 24.0)
 	card.position.y = 24.0 + 200.0
 	card.rotation_degrees = 180
-	
+	 
 	charactersOnPayField.erase(card)
-
-	# TODO pass to-be-paid resources and diamonds to this function. Safer and simpler.
-	var remainingDiamondCost = card.specs.diamondCost
-	while remainingDiamondCost > 0:
-		remainingDiamondCost -= 1
-		var d = selectedDiamonds.pop_back()
-		get_parent().on_diamond_spent(d.specs)
-		diamonds.erase(d)
-		d.queue_free()
-
-	selectedDiamonds.clear()
-	_reorder_diamonds()
-
-	var remainingResourceCost = card.specs.cost.duplicate()
-	for r in selectedResources:
-		var index = remainingResourceCost.find(r.value)
-		if index != -1:
-			remainingResourceCost.remove_at(index)
-			get_parent().on_resource_spent(r.value)
-			resourcesOnHand.erase(r)
-			r.queue_free()
-	
-	selectedResources.clear()
-	_reorder_resource_cards()
-
-	action_used.emit()
-
-	victoryPoints += card.specs.points
-	get_parent().middleArea.draw_diamond()
+	victoryPoints += card.points
 
 func _reorder_diamonds():
 	for i in range(diamonds.size()):

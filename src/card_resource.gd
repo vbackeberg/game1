@@ -1,6 +1,7 @@
+class_name CardResource
 extends TextureButton
 
-var value: int
+var resourceValue: int
 var slot: int
 
 # Called when the node enters the scene tree for the first time.
