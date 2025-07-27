@@ -370,7 +370,7 @@ func _includes(selectedResources: Array[int], additionalResources: Array[int], r
 	var additional = additionalResources.duplicate()
 	var paid = []
 	for r in required:
-		var idx = additional.find(r) # Additional resources (e.g. from dwarves are preferred)
+		var idx = additional.find(r) # Additional resources (e.g. from dwarves) are preferred
 		if idx != -1:
 			additional.remove_at(idx)
 			continue
