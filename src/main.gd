@@ -22,7 +22,15 @@ func _ready() -> void:
 	twelvePointsReached = false
 	lastTurn = false
 
+	_test_setup()
 
+func _test_setup():
+	middleArea._draw_diamond()
+	currentPlayer.add_resource(2)
+	currentPlayer.add_resource(2)
+	currentPlayer.add_resource(2)
+
+	
 func _input(event):
 	if event.is_action_pressed("ui_accept"): # Space bar
 		toggle_view()
