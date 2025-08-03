@@ -5,10 +5,10 @@ var playerName: String
 var resourcesOnHand: Array[CardResource]
 var resourceCapacity: int
 var additionalResources: Array[int]
-var charactersOnPayField: Array[Node]
-var diamonds: Array[Node]
+var charactersOnPayField: Array[CardCharacter]
+var diamonds: Array[CardCharacter]
 var selectedResources: Array[CardResource]
-var selectedDiamonds: Array[Node]
+var selectedDiamonds: Array[CardCharacter]
 var charactersPlayed: Array[CardCharacter]
 var actionsLeft: int
 var actionsPerTurn: int
@@ -126,41 +126,53 @@ func add_character(card: CardCharacter):
 		
 		card.pressed.connect(_on_character_card_pressed.bind(card))
 
+# If any in paid is null, player cannot play the character.
+# Removes spent resources and diamonds and puts them on graveyard
 func _on_character_card_pressed(card: CardCharacter) -> void:
-	var paid = card.buy.call(self) # TODO: evaluate paid resources and paid diamonds
-	if paid == null:
+	var paid = card.buy.call(self)
+	if paid.resources == null or paid.diamonds == null:
 		print("not enough resources selected")
 		# TODO show label with missing resources
 	else:
-		for r in paid:
-			get_parent().on_resource_spent(r.value)
+		for r in paid.resources:
+			get_parent().on_resource_spent(r.resourceValue)
 			resourcesOnHand.erase(r)
 			r.queue_free()
-		
+
+		for r in selectedResources:
+			r.deselect()
+
 		selectedResources.clear()
 		_reorder_resource_cards()
+		
+		for d in paid.diamonds:
+			get_parent().on_diamond_spent(d)
+			diamonds.erase(d)
+			d.queue_free()
+
+		selectedDiamonds.clear()
+		_reorder_diamonds()
+		
 		_place_character_on_played_area(card)
 		action_used.emit()
 
-## Loads and positions diamond card asset. Connects on_pressed callback.
-## Note: Character values are associated with the diamond to identify the card later in the graveyard.
-func add_diamond(card: Dictionary):
-	var cardDiamond = load("res://src/card_character.tscn").instantiate() as TextureButton
-	cardDiamond.custom_minimum_size = Vector2(CARD_WIDTH, 200.0)
-	cardDiamond.texture_normal = load("res://assets/character_back.png")
-	cardDiamond.specs = card
-	cardDiamond.visible = visible
-	diamonds.append(cardDiamond)
-	add_child(cardDiamond)
+
+## Places a character with its backside up.
+## Note: Keeping track of the character is important in case it's reshuffled into the stack from the graveyard, later.
+func add_diamond(card: CardCharacter):
+	card.backside = true
+	card.visible = visible
+	diamonds.append(card)
+	add_child(card)
 
 	var card_index = diamonds.size()
-	cardDiamond.position.x = get_viewport().size.x - 24.0 - card_index * (CARD_WIDTH + 24.0)
-	cardDiamond.position.y = 24.0 
+	card.position.x = get_viewport().size.x - 24.0 - card_index * (CARD_WIDTH + 24.0)
+	card.position.y = 24.0
 	
-	cardDiamond.pressed.connect(_on_diamond_card_pressed.bind(cardDiamond))
+	card.pressed.connect(_on_diamond_card_pressed.bind(card))
 
 
-func _on_diamond_card_pressed(card: TextureButton) -> void:
+func _on_diamond_card_pressed(card: CardCharacter) -> void:
 	var index = selectedDiamonds.find(card)
 
 	if index == -1:
@@ -171,8 +183,6 @@ func _on_diamond_card_pressed(card: TextureButton) -> void:
 		card.deselect()
 
 
-## Puts spent resources and diamonds on graveyard
-## Places character card
 func _place_character_on_played_area(card: CardCharacter):
 	charactersPlayed.append(card)
 	var card_index = charactersPlayed.size()

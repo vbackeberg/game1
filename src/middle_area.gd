@@ -160,8 +160,10 @@ func on_discard_finished():
 func _load_chars() -> Array[CardCharacter]:
 	return [
 		CardCharacter.new(
-			# TODO correct buy functions
-			func(player): return _includes(player.selectedResources, player.additionalResources, [2, 2, 2]),
+			func(player): return {
+				resources =_includes(player.selectedResources, player.additionalResources, [2, 2, 2]),
+				diamonds = _enough_diamonds(player.selectedDiamonds, 1)
+				},
 			3,
 			0,
 			"pirate"
@@ -444,4 +446,9 @@ func _sums_up_to_in_any_combination(selectedResources: Array[int], sumTo: int):
 				total += selectedResources[i]
 		if total == sumTo:
 			return combo
+	return null
+
+func _enough_diamonds(selectedDiamonds: Array[CardCharacter], required: int):
+	if selectedDiamonds.size() >= required:
+		return selectedDiamonds.slice(0, required)
 	return null
