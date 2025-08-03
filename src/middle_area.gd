@@ -129,7 +129,7 @@ func place_character_in_middle(slot: int):
 	card.position.y = 256
 	card.pressed.connect(_on_character_card_pressed.bind(card))
 
-func draw_diamond():
+func _draw_diamond():
 	var card = characterCards.pop_back()
 	get_parent().currentPlayer.add_diamond(card)
 
