@@ -78,11 +78,11 @@ func _on_resource_card_pressed(card: CardResource) -> void:
 			if selectedResources.size() == numToDiscard:
 				return
 
-			card.modulate = Color(1.2, 0.8, 0.8) # Red tint for discard
 			selectedResources.append(card)
+			card.select(true)
 		else:
 			selectedResources.remove_at(index)
-			card.modulate = Color(1, 1, 1) # Reset to normal color
+			card.deselect()
 		
 		if selectedResources.size() == numToDiscard:
 			$ConfirmDiscardButton.visible = true
@@ -92,10 +92,10 @@ func _on_resource_card_pressed(card: CardResource) -> void:
 	else:
 		if index == -1:
 			selectedResources.append(card)
-			card.modulate = Color(1.2, 1.2, 0.8) # Yellow tint
+			card.select()
 		else:
 			selectedResources.remove_at(index)
-			card.modulate = Color(1, 1, 1) # Reset to normal color
+			card.deselect()
 
 func _on_confirm_discard_button_pressed() -> void:
 	for r in selectedResources:
@@ -165,10 +165,10 @@ func _on_diamond_card_pressed(card: TextureButton) -> void:
 
 	if index == -1:
 		selectedDiamonds.append(card)
-		card.modulate = Color(1.2, 1.2, 0.8) # Yellow tint
+		card.select()
 	else:
 		selectedDiamonds.remove_at(index)
-		card.modulate = Color(1, 1, 1) # Reset to normal color
+		card.deselect()
 
 
 ## Puts spent resources and diamonds on graveyard

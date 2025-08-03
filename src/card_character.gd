@@ -29,6 +29,13 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 
+func select(forDiscard := false):
+	self.modulate = Color(1.2, 0.8, 0.8) if forDiscard else Color(1.2, 1.2, 0.8) # Yellow and Red tint
+
+func deselect():
+	self.modulate = Color(1, 1, 1) # Reset to normal color
+
+
 static func concat(arr: Array) -> String:
 	var result = ""
 	for num in arr:
