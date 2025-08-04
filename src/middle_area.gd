@@ -181,7 +181,8 @@ func _load_chars() -> Array[CardCharacter]:
 				},
 			1,
 			0,
-			"dwarf-6"
+			"dwarf-6",
+			func(player): player.additionalResources.append(6)
 		),
 		CardCharacter.new(
 			func(player, card): return {
@@ -193,7 +194,8 @@ func _load_chars() -> Array[CardCharacter]:
 				},
 			1,
 			0,
-			"dwarf-7"
+			"dwarf-7",
+			func(player): player.additionalResources.append(7)
 		),
 		CardCharacter.new(
 			func(player): return {

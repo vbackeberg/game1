@@ -155,6 +155,8 @@ func _on_character_card_pressed(card: CardCharacter) -> void:
 		_reorder_diamonds()
 		
 		_place_character_on_played_area(card)
+		card.effect.call(self)
+		
 		action_used.emit()
 
 

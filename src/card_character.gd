@@ -4,19 +4,20 @@ extends TextureButton
 var slot: int
 
 ## Returns the cards paid to buy this card or null if it could not be played.
-var buy := func(_player): pass
+var buy: Callable
 var points: int
 var diamonds: int
-var effect := func(_player): pass
+var effect: Callable
 var asset_path: String
 var backside := false
 var playerOwner: Node2D
 
-func _init(p_buy, p_points, p_diamonds, p_asset_path) -> void:
+func _init(p_buy, p_points, p_diamonds, p_asset_path, p_effect := func(_player): pass) -> void:
 	buy = p_buy
 	points = p_points
 	diamonds = p_diamonds
 	asset_path = "res://assets/characters/" + p_asset_path + ".png"
+	effect = p_effect
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
