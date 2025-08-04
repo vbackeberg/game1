@@ -10,6 +10,7 @@ var diamonds: int
 var effect := func(_player): pass
 var asset_path: String
 var backside := false
+var playerOwner: Node2D
 
 func _init(p_buy, p_points, p_diamonds, p_asset_path) -> void:
 	buy = p_buy

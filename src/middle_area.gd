@@ -160,8 +160,11 @@ func on_discard_finished():
 func _load_chars() -> Array[CardCharacter]:
 	return [
 		CardCharacter.new(
-			func(player): return {
-				resources =_includes(player.selectedResources, player.additionalResources, [2, 2, 2]),
+			func(player, card): return {
+				resources = null,
+				diamonds = null
+				} if !_is_owner(player, card) else {
+				resources = _includes(player.selectedResources, player.additionalResources, [2, 2, 2]),
 				diamonds = _enough_diamonds(player.selectedDiamonds, 1)
 				},
 			3,
@@ -169,16 +172,46 @@ func _load_chars() -> Array[CardCharacter]:
 			"pirate"
 		),
 		CardCharacter.new(
-			func(player): return _includes(player.selectedResources, player.additionalResources, [2, 2, 2]),
-			3,
+			func(player, card): return {
+				resources = null,
+				diamonds = null
+				} if !_is_owner(player, card) else {
+				resources = _includes(player.selectedResources, player.additionalResources, [6, 6]),
+				diamonds = []
+				},
+			1,
 			0,
 			"dwarf-6"
 		),
 		CardCharacter.new(
-			func(player): return _includes(player.selectedResources, player.additionalResources, [2, 2, 2]),
-			3,
+			func(player, card): return {
+				resources = null,
+				diamonds = null
+				} if !_is_owner(player, card) else {
+				resources = _includes(player.selectedResources, player.additionalResources, [7, 7]),
+				diamonds = []
+				},
+			1,
 			0,
 			"dwarf-7"
+		),
+		CardCharacter.new(
+			func(player): return {
+				resources = _includes_either_or(player.selectedResources, player.additionalResources, [6, 6, 6], [8, 8, 8]),
+				diamonds = []
+				},
+			3,
+			0,
+			"neighbors-6-8"
+		),
+		CardCharacter.new(
+			func(player): return {
+				resources = _includes_either_or(player.selectedResources, player.additionalResources, [4, 4, 4], [5, 5, 5]),
+				diamonds = []
+				},
+			3,
+			0,
+			"neighbors-4-5"
 		),
 	]
 
@@ -452,3 +485,7 @@ func _enough_diamonds(selectedDiamonds: Array[CardCharacter], required: int):
 	if selectedDiamonds.size() >= required:
 		return selectedDiamonds.slice(0, required)
 	return null
+
+
+func _is_owner(player: Node2D, card: CardCharacter):
+	return player == card.playerOwner

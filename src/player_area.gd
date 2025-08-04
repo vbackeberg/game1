@@ -117,6 +117,7 @@ func add_character(card: CardCharacter):
 	
 	else:
 		card.visible = visible
+		card.playerOwner = self
 		charactersOnPayField.append(card)
 		add_child(card)
 
@@ -129,7 +130,7 @@ func add_character(card: CardCharacter):
 # If any in paid is null, player cannot play the character.
 # Removes spent resources and diamonds and puts them on graveyard
 func _on_character_card_pressed(card: CardCharacter) -> void:
-	var paid = card.buy.call(self)
+	var paid = card.buy.call(self, card)
 	if paid.resources == null or paid.diamonds == null:
 		print("not enough resources selected")
 		# TODO show label with missing resources
