@@ -290,3 +290,23 @@ func _enough_diamonds(selectedDiamonds: Array[CardCharacter], required: int):
 
 func _is_owner(player: Node2D, card: CardCharacter):
 	return player == card.playerOwner
+
+## Checks if the required number of identical cards are paid.
+## Example: For a pair required is 2.
+func _are_identical(selectedResources: Array[CardResource], additionalResources: Array[int], required: int):
+	var paid = []
+	var countByResourceValue = [0, 0, 0, 0, 0, 0, 0, 0]
+
+	for r in additionalResources:
+		countByResourceValue[r - 1] += 1
+	
+	countByResourceValue.sort()
+	countByResourceValue.reverse()
+
+	for r in selectedResources:
+		countByResourceValue += 1
+		
+		
+
+
+	return paid
