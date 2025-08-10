@@ -1,12 +1,13 @@
+class_name PlayerArea
 extends Node2D
 
 const CARD_WIDTH = 128.0
 var playerName: String
 var resourcesOnHand: Array[CardResource]
 var resourceCapacity: int
-var additionalResources: Array[int]
 var charactersOnPayField: Array[CardCharacter]
 var diamonds: Array[CardCharacter]
+var selectedVirtualResources: Array[int]
 var selectedResources: Array[CardResource]
 var selectedDiamonds: Array[CardCharacter]
 var charactersPlayed: Array[CardCharacter]
@@ -26,9 +27,9 @@ func _ready() -> void:
 	playerName = str(randi() % 100 + 1)
 	resourcesOnHand = []
 	resourceCapacity = 5
-	additionalResources = []
 	charactersOnPayField = []
 	diamonds = []
+	selectedVirtualResources = []
 	selectedResources = []
 	selectedDiamonds = []
 	charactersPlayed = []
@@ -131,9 +132,12 @@ func add_character(card: CardCharacter):
 # Removes spent resources and diamonds and puts them on graveyard
 func _on_unplayed_character_card_pressed(card: CardCharacter) -> void:
 	var paid = card.buy.call(self, card)
-	if paid.resources == null or paid.diamonds == null:
+	if paid == null:
 		print("not enough resources selected")
 		# TODO show label with missing resources
+		selectedResources.clear()
+		selectedDiamonds.clear()
+		
 	else:
 		for r in paid.resources:
 			get_parent().on_resource_spent(r.resourceValue)
@@ -155,7 +159,7 @@ func _on_unplayed_character_card_pressed(card: CardCharacter) -> void:
 		_reorder_diamonds()
 		
 		_place_character_on_played_area(card)
-		card.effect.call(self)
+		card.immediateEffect.call(self)
 		
 		action_used.emit()
 

@@ -160,153 +160,166 @@ func on_discard_finished():
 func _load_chars() -> Array[CardCharacter]:
 	return [
 		CardCharacter.new(
-			func(player, card): return {
-				resources = null,
-				diamonds = null
-				} if !_is_owner(player, card) else {
-				resources = _includes(player.selectedResources, player.additionalResources, [2, 2, 2]),
-				diamonds = _enough_diamonds(player.selectedDiamonds, 1)
-				},
+			func(player, card): return _includes(player, [2, 2, 2], 1) if _is_owner(player, card) else null,
 			3,
 			0,
 			"pirate"
 		),
 		CardCharacter.new(
-			func(player, card): return {
-				resources = null,
-				diamonds = null
-				} if !_is_owner(player, card) else {
-				resources = _includes(player.selectedResources, player.additionalResources, [6, 6]),
-				diamonds = []
-				},
+			func(player, card): return _includes(player, [6, 6], 0) if _is_owner(player, card) else null,
 			1,
 			0,
 			"dwarf-6",
-			null,
-			func(player): player.additionalResources.append(6)
+			func(_player): pass ,
+			func(player): player.selectedVirtualResources.append(6)
 		),
 		CardCharacter.new(
-			func(player, card): return {
-				resources = null,
-				diamonds = null
-				} if !_is_owner(player, card) else {
-				resources = _includes(player.selectedResources, player.additionalResources, [7, 7]),
-				diamonds = []
-				},
+			func(player, card): return _includes(player, [7, 7], 0) if _is_owner(player, card) else null,
 			1,
 			0,
 			"dwarf-7",
-			null,
-			func(player): player.additionalResources.append(7)
+			func(_player): pass ,
+			func(player): player.selectedVirtualResources.append(7)
 		),
 		CardCharacter.new(
-			func(player): return {
-				resources = _includes_either_or(player.selectedResources, player.additionalResources, [6, 6, 6], [8, 8, 8]),
-				diamonds = []
-				},
+			func(player):
+				var paid = _includes(player, [6, 6, 6], 0)
+				if paid == null:
+					paid = _includes(player, [7, 7, 7], 0)
+				return paid,
 			3,
 			0,
 			"neighbors-6-8"
 		),
 		CardCharacter.new(
-			func(player): return {
-				resources = _includes_either_or(player.selectedResources, player.additionalResources, [4, 4, 4], [5, 5, 5]),
-				diamonds = []
-				},
+			func(player):
+				var paid = _includes(player, [4, 4, 4], 0)
+				if paid == null:
+					paid = _includes(player, [5, 5, 5], 0)
+				return paid,
 			3,
 			0,
 			"neighbors-4-5"
-		),
+		)
 	]
 
-## Checks if selected resources suffice to pay for the card.
-## Returns the resources used to pay for the card or null if they do not suffice.
-func _includes(selectedResources: Array[CardResource], additionalResources: Array[int], wildcardResources: int, required: Array[int]):
-	var selected := selectedResources.map(func(s): return s.resourceValue)
-	var additional := additionalResources.duplicate()
-	var paid: Array[CardResource] = []
-	
-	# First check if can be paid from additional resources (e.g. dwarves), then use resources from hand.
-	for r in required:
-		var idx = additional.find(r)
-		if idx != -1:
-			additional.remove_at(idx)
-			continue
-		idx = selected.find(r)
+func _includes(player: PlayerArea, requiredResources: Array[int], requiredDiamonds: int) -> Object:
+	var paid = {
+		resources = [],
+		diamonds = []
+		}
+
+	while player.selectedVirtualResources.size() > 0:
+		var value = player.selectedVirtualResources.pop_back()
+		var idx = requiredResources.find(value)
 		if idx == -1:
 			return null
-		paid.append(selectedResources[idx])
-		selected.remove_at(idx)
+		else:
+			requiredResources.remove_at(idx)
+	
+	while player.selectedResources.size() > 0:
+		var card = player.selectedResources.pop_back()
+		var idx = requiredResources.find(card.resourceValue)
+		if idx == -1:
+			return null
+		else:
+			requiredResources.remove_at(idx)
+			paid.resources.append(card)
+
+
+	while player.selectedDiamonds.size() > 0:
+		requiredDiamonds -= 1
+		paid.diamonds.append(player.selectedDiamonds.pop_back())
+
+
+	if requiredDiamonds != 0 or requiredResources.size() > 0:
+		return null
+
 	return paid
 
-## Checks if selected resources suffice to pay for the card for two alternatives.
-## Returns the resources used to pay or null if they do not suffice.
-func _includes_either_or(selectedResources: Array[CardResource], additionalResources: Array[int], wildcardResources: int, eitherRequired: Array[int], orRequired: Array[int]):
-	var paid = _includes(selectedResources, additionalResources, wildcardResources, eitherRequired)
-	if paid != null:
-		return paid
+func _sums_up_to_s_using_exactly_n(player: PlayerArea, s: int, n: int) -> Object:
+	var paid = {
+		resources = [],
+		diamonds = []
+		}
 
-	paid = _includes(selectedResources, additionalResources, wildcardResources, orRequired)
-	if paid != null:
-		return paid
+	while player.selectedVirtualResources.size() > 0:
+		s -= player.selectedVirtualResources.pop_back()
+		n -= 1
 
-	return null
+	while player.selectedResources.size() > 0:
+		var card = player.selectedResources.pop_back()
+		s -= card.value
+		n -= 1
+		paid.resources.append(card)
 
-## Checks if a triple combination of the selected resources sum up to the given sum.
-## Returns the triple used to make the sum.
-func _sums_up_to_using_exactly_three(selectedResources: Array[int], sumUpTo: int):
-	for i in range(selectedResources.size()):
-		for j in range(i + 1, selectedResources.size()):
-			for k in range(j + 1, selectedResources.size()):
-				var triple = [selectedResources[i], selectedResources[j], selectedResources[k]]
-				if triple[0] + triple[1] + triple[2] == sumUpTo:
-					print("valid triple: ", triple)
-					return triple
-	return null
+	if n != 0 or s != 0:
+		return null
 
-## Checks if any combination of selected resources sums up to the given value.
-## Returns the first such combination found, or null if none exist.
-func _sums_up_to_in_any_combination(selectedResources: Array[int], sumTo: int):
-	var n = selectedResources.size()
+	return paid
 
-	# Creates a binary mask that grows from 1 to 2^n as a selector for cards.
-	# Then tries if the selected cards would sum up to sumTo.
-	for mask in range(1, 1 << n):
-		var combo = []
-		var total = 0
-		for i in range(n):
-			if mask & (1 << i):
-				combo.append(selectedResources[i])
-				total += selectedResources[i]
-		if total == sumTo:
-			return combo
-	return null
+func _sums_up_to_s(player: PlayerArea, s: int) -> Object:
+	var paid = {
+		resources = [],
+		diamonds = []
+		}
+	
+	while player.selectedVirtualResources.size() > 0:
+		s -= player.selectedVirtualResources.pop_back()
+	
+	while player.selectedResources.size() > 0:
+		var card = player.selectedResources.pop_back()
+		s -= card.value
+		paid.resources.append(card)
 
-func _enough_diamonds(selectedDiamonds: Array[CardCharacter], required: int):
-	if selectedDiamonds.size() >= required:
-		return selectedDiamonds.slice(0, required)
-	return null
+	if s != 0:
+		return null
+	
+	return paid
 
 
-func _is_owner(player: Node2D, card: CardCharacter):
+func _is_owner(player: Node2D, card: CardCharacter) -> bool:
 	return player == card.playerOwner
 
 ## Checks if the required number of identical cards are paid.
 ## Example: For a pair required is 2.
-func _are_identical(selectedResources: Array[CardResource], additionalResources: Array[int], required: int):
-	var paid = []
-	var countByResourceValue = [0, 0, 0, 0, 0, 0, 0, 0]
-
-	for r in additionalResources:
-		countByResourceValue[r - 1] += 1
+## Returns null if the player selected too many or too little resources.
+## Otherwise returns paid resources and diamonds.
+func _is_n_of_a_kind(player: PlayerArea, n: int) -> Object:
+	var paid = {
+		resources = [],
+		diamonds = []
+	}
 	
-	countByResourceValue.sort()
-	countByResourceValue.reverse()
+	var value: int
 
-	for r in selectedResources:
-		countByResourceValue += 1
-		
-		
+	while player.selectedVirtualResources.size() > 0:
+		if value == null:
+			value = player.selectedVirtualResources.pop_back()
+			n -= 1
+		else:
+			var nextValue = player.selectedVirtualResources.pop_back()
+			if value == nextValue:
+				n -= 1
+			else:
+				return null
+	
+	while player.selectedResources.size() > 0:
+		if value == null:
+			var nextCard = player.selectedResources.pop_back()
+			value = nextCard.resourceValue
+			paid.resource.append(nextCard)
+			n -= 1
+		else:
+			var nextCard = player.selectedResources.pop_back()
+			value = nextCard.resourceValue
+			if value == nextCard.resourceValue:
+				paid.resource.append(nextCard)
+				n -= 1
+			else:
+				return null
 
-
-	return paid
+	if n != 0:
+		return null
+	else:
+		return paid
