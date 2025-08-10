@@ -125,11 +125,11 @@ func add_character(card: CardCharacter):
 		card.position.x = get_viewport().size.x - 24.0 - card_index * (CARD_WIDTH + 24.0)
 		card.position.y = get_viewport().size.y / 2
 		
-		card.pressed.connect(_on_character_card_pressed.bind(card))
+		card.pressed.connect(_on_unplayed_character_card_pressed.bind(card))
 
 # If any in paid is null, player cannot play the character.
 # Removes spent resources and diamonds and puts them on graveyard
-func _on_character_card_pressed(card: CardCharacter) -> void:
+func _on_unplayed_character_card_pressed(card: CardCharacter) -> void:
 	var paid = card.buy.call(self, card)
 	if paid.resources == null or paid.diamonds == null:
 		print("not enough resources selected")
@@ -192,7 +192,9 @@ func _place_character_on_played_area(card: CardCharacter):
 	card.position.x = 24.0 + card_index * (CARD_WIDTH + 24.0)
 	card.position.y = 24.0 + 200.0
 	card.rotation_degrees = 180
-	 
+	card.pressed.disconnect(_on_unplayed_character_card_pressed)
+	card.activate_permanent_effect()
+
 	charactersOnPayField.erase(card)
 	victoryPoints += card.points
 
