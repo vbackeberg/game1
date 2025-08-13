@@ -45,6 +45,12 @@ static func load_characters() -> Array[CardCharacter]:
 			3,
 			0,
 			"neighbors-4-5"
+		),
+		CardCharacter.new(
+			func(player, card): return _is_n_of_a_kind(player, 2) if _is_owner(player, card) else null,
+			1,
+			0,
+			"goblin-x-x"
 		)
 	]
 
