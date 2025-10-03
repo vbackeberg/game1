@@ -74,7 +74,6 @@ func _draw_character():
 	if characterCards.size() == 0:
 		if graveyardCharacters.size() == 0:
 			print("No more character cards left in stack or graveyard!")
-			# TODO: do not continue
 		else:
 			_replenish_characters()
 
@@ -143,7 +142,7 @@ func concat(arr: Array) -> String:
 
 signal action_used()
 
-## Places 4 new cards
+## Places 4 new	 cards
 func _on_button_pressed() -> void:
 	for i in cardsLaidOut.size():
 		graveyardResources.append(cardsLaidOut[i].resourceValue)
