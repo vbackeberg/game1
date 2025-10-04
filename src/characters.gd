@@ -51,7 +51,37 @@ static func load_cards() -> Array[CardCharacter]:
 			1,
 			0,
 			"goblin-x-x"
-		)
+		),
+		CardCharacter.new(
+			func(player, card): return _is_n_of_a_kind(player, 2) if _is_owner(player, card) else null,
+			1,
+			0,
+			"goblin-x-x"
+		),
+		CardCharacter.new(
+			func(player, card): return _is_n_of_a_kind(player, 2) if _is_owner(player, card) else null,
+			1,
+			0,
+			"goblin-x-x"
+		),
+		CardCharacter.new(
+			func(player, card): return _is_n_of_a_kind(player, 3) if _is_owner(player, card) else null,
+			2,
+			0,
+			"kerberos-x-x-x"
+		),
+		CardCharacter.new(
+			func(player, card): return _is_n_of_a_kind(player, 3) if _is_owner(player, card) else null,
+			2,
+			0,
+			"kerberos-x-x-x"
+		),
+		CardCharacter.new(
+			func(player, card): return _is_n_of_a_kind(player, 4) if _is_owner(player, card) else null,
+			3,
+			0,
+			"ent-x-x-x-x"
+		),
 	]
 
 static func _includes(player: PlayerArea, requiredResources: Array[int], requiredDiamonds: int) -> Variant:
