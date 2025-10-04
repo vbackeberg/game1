@@ -10,5 +10,10 @@
 			"elif",
 			"tscn"
 		]
+	},
+	"extensions": {
+		"recommendations": [
+			"geequlim.godot-tools"
+		]
 	}
 }
