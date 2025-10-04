@@ -8,7 +8,7 @@ static func load_cards() -> Array[CardCharacter]:
 			func(player, card): return _includes(player, [2, 2, 2], 1) if _is_owner(player, card) else null,
 			3,
 			0,
-			"pirate"
+			"pirate-2-2-2"
 		),
 		CardCharacter.new(
 			func(player, card): return _includes(player, [6, 6], 0) if _is_owner(player, card) else null,
