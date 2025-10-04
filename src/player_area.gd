@@ -161,6 +161,8 @@ func _on_unplayed_character_card_pressed(card: CardCharacter) -> void:
 		_place_character_on_played_area(card)
 		card.immediateEffect.call(self)
 		
+		victoryPoints += card.points
+
 		action_used.emit()
 
 
@@ -200,7 +202,6 @@ func _place_character_on_played_area(card: CardCharacter):
 	card.activate_permanent_effect()
 
 	charactersOnPayField.erase(card)
-	victoryPoints += card.points
 
 func _reorder_diamonds():
 	for i in range(diamonds.size()):
