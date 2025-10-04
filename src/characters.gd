@@ -82,6 +82,13 @@ static func load_cards() -> Array[CardCharacter]:
 			0,
 			"ent-x-x-x-x"
 		),
+		
+		CardCharacter.new(
+			func(player, card): return _is_n_of_two_kinds(player, 2) if _is_owner(player, card) else null,
+			2,
+			0,
+			"neighbor-x-x-y-y"
+		),
 	]
 
 static func _includes(player: PlayerArea, requiredResources: Array[int], requiredDiamonds: int) -> Variant:
@@ -204,3 +211,21 @@ static func _is_n_of_a_kind(player: PlayerArea, n: int) -> Variant:
 		return null
 	else:
 		return paid
+
+
+static func _is_n_of_two_kinds(player: PlayerArea, n: int) -> Variant:
+	var firstPair = _is_n_of_a_kind(player, n)
+	var secondPair = _is_n_of_a_kind(player, n)
+
+	if firstPair == null or secondPair == null:
+		return null
+
+	var paid = {
+		resources = [],
+		diamonds = []
+	}
+
+	paid.resources.append_array(firstPair.resources)
+	paid.resources.append_array(secondPair.resources)
+
+	return paid
