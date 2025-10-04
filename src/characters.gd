@@ -89,6 +89,18 @@ static func load_cards() -> Array[CardCharacter]:
 			0,
 			"neighbor-x-x-y-y"
 		),
+		CardCharacter.new(
+			func(player, card): return _is_three_odd_or_even((player) if _is_owner(player, card) else null,
+			1,
+			1,
+			"bilbo-even"
+		),
+		CardCharacter.new(
+			func(player, card): return _is_three_odd_or_even((player) if _is_owner(player, card) else null,
+			1,
+			1,
+			"bilbo-odd"
+		),
 	]
 
 static func _includes(player: PlayerArea, requiredResources: Array[int], requiredDiamonds: int) -> Variant:
@@ -229,3 +241,29 @@ static func _is_n_of_two_kinds(player: PlayerArea, n: int) -> Variant:
 	paid.resources.append_array(secondPair.resources)
 
 	return paid
+
+static func _is_three_odd_or_even(player: PlayerArea, should_be_even: bool) -> Variant:
+	var paid = {
+		resources = [],
+		diamonds = []
+	}
+	var n = 3
+
+	while player.selectedVirtualResources.size() > 0:
+		var value = player.selectedVirtualResources.pop_back()
+		if (value % 2 == 0) == should_be_even:
+			n -= 1
+		else:
+			return null
+
+	while player.selectedResources.size() > 0:
+		var value = player.selectedResources.pop_back()
+		if (value % 2 == 0) == should_be_even:
+			n -= 1
+		else:
+			return null
+
+	if n != 0:
+		return null
+	else:
+		return paid
