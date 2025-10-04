@@ -54,7 +54,7 @@ static func load_characters() -> Array[CardCharacter]:
 		)
 	]
 
-static func _includes(player: PlayerArea, requiredResources: Array[int], requiredDiamonds: int) -> Object:
+static func _includes(player: PlayerArea, requiredResources: Array[int], requiredDiamonds: int) -> Variant:
 	var paid = {
 		resources = [],
 		diamonds = []
@@ -88,7 +88,7 @@ static func _includes(player: PlayerArea, requiredResources: Array[int], require
 
 	return paid
 
-static func _sums_up_to_s_using_exactly_n(player: PlayerArea, s: int, n: int) -> Object:
+static func _sums_up_to_s_using_exactly_n(player: PlayerArea, s: int, n: int) -> Variant:
 	var paid = {
 		resources = [],
 		diamonds = []
@@ -109,7 +109,7 @@ static func _sums_up_to_s_using_exactly_n(player: PlayerArea, s: int, n: int) ->
 
 	return paid
 
-static func _sums_up_to_s(player: PlayerArea, s: int) -> Object:
+static func _sums_up_to_s(player: PlayerArea, s: int) -> Variant:
 	var paid = {
 		resources = [],
 		diamonds = []
@@ -136,7 +136,7 @@ static func _is_owner(player: Node2D, card: CardCharacter) -> bool:
 ## Example: For a pair required is 2.
 ## Returns null if the player selected too many or too little resources.
 ## Otherwise returns paid resources and diamonds.
-static func _is_n_of_a_kind(player: PlayerArea, n: int) -> Object:
+static func _is_n_of_a_kind(player: PlayerArea, n: int) -> Variant:
 	var paid = {
 		resources = [],
 		diamonds = []
@@ -159,13 +159,13 @@ static func _is_n_of_a_kind(player: PlayerArea, n: int) -> Object:
 		if value == null:
 			var nextCard = player.selectedResources.pop_back()
 			value = nextCard.resourceValue
-			paid.resource.append(nextCard)
+			paid.resources.append(nextCard)
 			n -= 1
 		else:
 			var nextCard = player.selectedResources.pop_back()
 			value = nextCard.resourceValue
 			if value == nextCard.resourceValue:
-				paid.resource.append(nextCard)
+				paid.resources.append(nextCard)
 				n -= 1
 			else:
 				return null
