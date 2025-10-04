@@ -28,13 +28,13 @@ static func load_cards() -> Array[CardCharacter]:
 		),
 		CardCharacter.new(
 			func(player):
-				var paid = _includes(player, [6, 6, 6], 0)
+				var paid = _includes(player, [3, 3, 3], 0)
 				if paid == null:
-					paid = _includes(player, [7, 7, 7], 0)
+					paid = _includes(player, [6, 6, 6], 0)
 				return paid,
 			3,
 			0,
-			"neighbors-6-8"
+			"neighbors-3-6"
 		),
 		CardCharacter.new(
 			func(player):
