@@ -1,8 +1,8 @@
-class_name Cards
+class_name Characters
 extends Object
 
 
-static func load_characters() -> Array[CardCharacter]:
+static func load_cards() -> Array[CardCharacter]:
 	return [
 		CardCharacter.new(
 			func(player, card): return _includes(player, [2, 2, 2], 1) if _is_owner(player, card) else null,

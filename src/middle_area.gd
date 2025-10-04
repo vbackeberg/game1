@@ -10,14 +10,14 @@ var cardsLaidOut: Array[CardResource]
 @export var graveyardCharacters: Array[CardCharacter]
 
 func _ready() -> void:
-	var cards = preload("res://src/cards.gd")
+	var characters = preload("res://src/characters.gd")
 
 	$DiscardOverlay.visible = false
 
 	resourceCards = [1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8]
 	resourceCards.shuffle()
 	
-	characterCards = cards.load_characters()
+	characterCards = characters.load_cards()
 	characterCards.shuffle()
 	
 	graveyardResources = []
