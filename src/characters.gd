@@ -72,7 +72,7 @@ static func load_cards() -> Array[CardCharacter]:
 			0,
 			"dog-1-1-1-1",
 			func(_player): pass ,
-			func(player): player.selectedVirtualResources.append("*")
+			func(player): player.selectedVirtualResources.append("*") # TODO placeholder
 		),
 		CardCharacter.new(
 			func(player): return _includes_either_or(player, [3, 3, 3], [6, 6, 6]),
