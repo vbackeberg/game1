@@ -66,6 +66,10 @@ func _replenish_characters():
 	graveyardCharacters = []
 	
 func _on_stack_characters_pressed() -> void:
+	if get_parent().currentPlayer.charactersOnPayField.size() == 2:
+		print("Player has 2 character cards, already.")
+		return
+
 	var card = _draw_character()
 	get_parent().currentPlayer.add_character(card)
 	action_used.emit()
@@ -105,6 +109,10 @@ func place_resource(slot: int):
 
 ## Moves the card to the player's hand
 func _on_character_card_pressed(card: CardCharacter) -> void:
+	if get_parent().currentPlayer.charactersOnPayField.size() == 2:
+		print("Player has 2 character cards, already.")
+		return
+	
 	card.pressed.disconnect(_on_character_card_pressed)
 	remove_child(card)
 	get_parent().currentPlayer.add_character(card)

@@ -112,28 +112,23 @@ func _on_confirm_discard_button_pressed() -> void:
 
 ## Adds a character card with given specs and puts it on the right side.
 func add_character(card: CardCharacter):
-	if charactersOnPayField.size() == 2:
-		# TODO prevent player from doing that
-		print("Player has 2 character cards, already.")
-	
-	else:
-		card.visible = visible
-		card.playerOwner = self
-		charactersOnPayField.append(card)
-		add_child(card)
+	card.visible = visible
+	card.playerOwner = self
+	charactersOnPayField.append(card)
+	add_child(card)
 
-		var card_index = charactersOnPayField.size()
-		card.position.x = get_viewport().size.x - 24.0 - card_index * (CARD_WIDTH + 24.0)
-		card.position.y = get_viewport().size.y / 2
-		
-		card.pressed.connect(_on_unplayed_character_card_pressed.bind(card))
+	var card_index = charactersOnPayField.size()
+	card.position.x = get_viewport().size.x - 24.0 - card_index * (CARD_WIDTH + 24.0)
+	card.position.y = get_viewport().size.y / 2
+	
+	card.pressed.connect(_on_unplayed_character_card_pressed.bind(card))
 
 # If any in paid is null, player cannot play the character.
 # Removes spent resources and diamonds and puts them on graveyard
 func _on_unplayed_character_card_pressed(card: CardCharacter) -> void:
 	var paid = card.buy.call(self, card)
 	if paid == null:
-		print("not enough resources selected")
+		print("Selected resources are not correct.")
 		# TODO show label with missing resources
 		selectedResources.clear()
 		selectedDiamonds.clear()
