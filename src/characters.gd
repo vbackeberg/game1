@@ -101,9 +101,45 @@ static func load_cards() -> Array[CardCharacter]:
 			1,
 			"bilbo-odd"
 		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [6, 6, 8, 8]) if _is_owner(player, card) else null,
+			2,
+			1,
+			"pipe-x-x-6-6"
+		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [6, 6, 8, 8]) if _is_owner(player, card) else null,
+			2,
+			1,
+			"pipe-x-x-6-6"
+		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [6, 6, 8, 8]) if _is_owner(player, card) else null,
+			3,
+			0,
+			"viking-6-6-8-8"
+		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [6, 6, 8, 8]) if _is_owner(player, card) else null,
+			3,
+			0,
+			"viking-6-6-8-8"
+		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [7, 7, 8, 8]) if _is_owner(player, card) else null,
+			3,
+			1,
+			"bombadil-7-7-8-8"
+		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [7, 7, 8, 8]) if _is_owner(player, card) else null,
+			3,
+			1,
+			"bombadil-7-7-8-8"
+		),
 	]
 
-static func _includes(player: PlayerArea, requiredResources: Array[int], requiredDiamonds: int) -> Variant:
+static func _includes(player: PlayerArea, requiredResources: Array[int], requiredDiamonds = 0) -> Variant:
 	var paid = {
 		resources = [],
 		diamonds = []
