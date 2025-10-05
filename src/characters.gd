@@ -11,6 +11,46 @@ static func load_cards() -> Array[CardCharacter]:
 			"pirate-2-2-2"
 		),
 		CardCharacter.new(
+			func(player, card): return _includes(player, [1, 1]) if _is_owner(player, card) else null,
+			1,
+			0,
+			"dwarf-1",
+			func(_player): pass ,
+			func(player): player.selectedVirtualResources.append(1)
+		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [2, 2]) if _is_owner(player, card) else null,
+			1,
+			0,
+			"dwarf-2",
+			func(_player): pass ,
+			func(player): player.selectedVirtualResources.append(2)
+		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [3, 3]) if _is_owner(player, card) else null,
+			1,
+			0,
+			"dwarf-3",
+			func(_player): pass ,
+			func(player): player.selectedVirtualResources.append(3)
+		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [4, 4]) if _is_owner(player, card) else null,
+			1,
+			0,
+			"dwarf-4",
+			func(_player): pass ,
+			func(player): player.selectedVirtualResources.append(4)
+		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [5, 5]) if _is_owner(player, card) else null,
+			1,
+			0,
+			"dwarf-5",
+			func(_player): pass ,
+			func(player): player.selectedVirtualResources.append(5)
+		),
+		CardCharacter.new(
 			func(player, card): return _includes(player, [6, 6], 0) if _is_owner(player, card) else null,
 			1,
 			0,
