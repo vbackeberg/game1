@@ -27,21 +27,21 @@ static func load_cards() -> Array[CardCharacter]:
 			func(player): player.selectedVirtualResources.append(7)
 		),
 		CardCharacter.new(
-			func(player):
-				var paid = _includes(player, [3, 3, 3], 0)
-				if paid == null:
-					paid = _includes(player, [6, 6, 6], 0)
-				return paid,
+			func(player, card): return _includes(player, [1, 1, 1, 1], 0) if _is_owner(player, card) else null,
+			1,
+			0,
+			"dog-1-1-1-1",
+			func(_player): pass ,
+			func(player): player.selectedVirtualResources.append("*")
+		),
+		CardCharacter.new(
+			func(player): return _includes_either_or(player, [3, 3, 3], [6, 6, 6]),
 			3,
 			0,
 			"neighbors-3-6"
 		),
 		CardCharacter.new(
-			func(player):
-				var paid = _includes(player, [4, 4, 4], 0)
-				if paid == null:
-					paid = _includes(player, [5, 5, 5], 0)
-				return paid,
+			func(player): return _includes_either_or(player, [4, 4, 4], [5, 5, 5]),
 			3,
 			0,
 			"neighbors-4-5"
@@ -134,6 +134,13 @@ static func _includes(player: PlayerArea, requiredResources: Array[int], require
 
 	if requiredDiamonds != 0 or requiredResources.size() > 0:
 		return null
+
+	return paid
+
+static func _includes_either_or(player: PlayerArea, eitherRequired: Array[int], orRequired: Array[int]) -> Variant:
+	var paid = _includes(player, eitherRequired, 0)
+	if paid == null:
+		paid = _includes(player, orRequired, 0)
 
 	return paid
 
