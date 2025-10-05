@@ -229,6 +229,12 @@ static func load_cards() -> Array[CardCharacter]:
 			func(_player): pass ,
 			func(player): player.selectedVirtualResources.append(8)
 		),
+		CardCharacter.new(
+			func(player, card): return _sums_up_to_s_using_exactly_n(player, 20, 3) if _is_owner(player, card) else null,
+			2,
+			0,
+			"tarzan-20"
+		),
 	]
 
 static func _includes(player: PlayerArea, requiredResources: Array[int], requiredDiamonds = 0) -> Variant:
