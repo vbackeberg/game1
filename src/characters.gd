@@ -267,3 +267,22 @@ static func _is_three_odd_or_even(player: PlayerArea, should_be_even: bool) -> V
 		return null
 	else:
 		return paid
+
+static func _is_street_of_n(player: PlayerArea, n: int) -> Variant:
+	var paid = {resources = [], diamonds = []}
+	
+	var values: Array[int] = []
+	values.append_array(player.selectedVirtualResources)
+	for card in player.selectedResources:
+		values.append(card.resourceValue)
+	values.sort()
+	
+	if values.size() != n:
+		return null
+	
+	for i in range(1, n):
+		if values[i] != values[i - 1] + 1:
+			return null
+	
+	paid.resources.append_array(player.selectedResources)
+	return paid
