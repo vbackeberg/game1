@@ -90,13 +90,13 @@ static func load_cards() -> Array[CardCharacter]:
 			"neighbor-x-x-y-y"
 		),
 		CardCharacter.new(
-			func(player, card): return _is_three_odd_or_even((player) if _is_owner(player, card) else null,
+			func(player, card): return _is_three_odd_or_even(player, true) if _is_owner(player, card) else null,
 			1,
 			1,
 			"bilbo-even"
 		),
 		CardCharacter.new(
-			func(player, card): return _is_three_odd_or_even((player) if _is_owner(player, card) else null,
+			func(player, card): return _is_three_odd_or_even(player, false) if _is_owner(player, card) else null,
 			1,
 			1,
 			"bilbo-odd"
