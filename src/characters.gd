@@ -177,6 +177,58 @@ static func load_cards() -> Array[CardCharacter]:
 			1,
 			"bombadil-7-7-8-8"
 		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [8, 8]) if _is_owner(player, card) else null,
+			2,
+			0,
+			"twins-8-8"
+		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [8, 8]) if _is_owner(player, card) else null,
+			2,
+			0,
+			"twins-8-8"
+		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [1, 2, 3, 4]) if _is_owner(player, card) else null,
+			1,
+			2,
+			"unicorn-1-2-3-4"
+		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [7, 7, 7, 7]) if _is_owner(player, card) else null,
+			4,
+			0,
+			"mother-7-7-7-7"
+		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [7, 7, 7, 7]) if _is_owner(player, card) else null,
+			4,
+			0,
+			"mother-7-7-7-7"
+		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [8, 8, 8, 8]) if _is_owner(player, card) else null,
+			5,
+			0,
+			"lion-8-8-8-8"
+		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [1, 2]) if _is_owner(player, card) else null,
+			0,
+			0,
+			"phoenix-1-2",
+			func(_player): pass ,
+			func(player): player.selectedVirtualResources.append(8)
+		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [1, 2]) if _is_owner(player, card) else null,
+			0,
+			0,
+			"phoenix-1-2",
+			func(_player): pass ,
+			func(player): player.selectedVirtualResources.append(8)
+		),
 	]
 
 static func _includes(player: PlayerArea, requiredResources: Array[int], requiredDiamonds = 0) -> Variant:
