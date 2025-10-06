@@ -197,7 +197,7 @@ func _place_character_on_played_area(card: CardCharacter):
 	card.position.y = 24.0 + 200.0
 	card.rotation_degrees = 180
 	card.pressed.disconnect(_on_unplayed_character_card_pressed)
-	card.activate_effect()
+	card.activate_permanent_effect()
 
 	charactersOnPayField.erase(card)
 
