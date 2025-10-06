@@ -7,19 +7,17 @@ var slot: int
 var buy: Callable
 var points: int
 var diamonds: int
-var immediateEffect: Callable
-var permanentEffect: Callable
+var effect: Callable
 var asset_path: String
 var backside := false
 var playerOwner: Node2D
 
-func _init(p_buy, p_points, p_diamonds, p_asset_path, p_immediateEffect := func(_player): pass , p_permanentEffect := func(_player): pass ) -> void:
+func _init(p_buy, p_points, p_diamonds, p_asset_path, p_effect := func(_player): pass ) -> void:
 	buy = p_buy
 	points = p_points
 	diamonds = p_diamonds
 	asset_path = "res://assets/characters/" + p_asset_path + ".png"
-	immediateEffect = p_immediateEffect
-	permanentEffect = p_permanentEffect
+	effect = p_effect
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -39,8 +37,8 @@ func select(forDiscard := false):
 func deselect():
 	self.modulate = Color(1, 1, 1) # Reset to normal color
 
-func activate_permanent_effect():
-	self.pressed.connect(permanentEffect)
+func activate_effect():
+	self.pressed.connect(effect)
 
 static func concat(arr: Array) -> String:
 	var result = ""

@@ -15,7 +15,6 @@ static func load_cards() -> Array[CardCharacter]:
 			1,
 			0,
 			"dwarf-1",
-			func(_player): pass ,
 			func(player): player.selectedVirtualResources.append(1)
 		),
 		CardCharacter.new(
@@ -23,7 +22,6 @@ static func load_cards() -> Array[CardCharacter]:
 			1,
 			0,
 			"dwarf-2",
-			func(_player): pass ,
 			func(player): player.selectedVirtualResources.append(2)
 		),
 		CardCharacter.new(
@@ -31,7 +29,6 @@ static func load_cards() -> Array[CardCharacter]:
 			1,
 			0,
 			"dwarf-3",
-			func(_player): pass ,
 			func(player): player.selectedVirtualResources.append(3)
 		),
 		CardCharacter.new(
@@ -39,7 +36,6 @@ static func load_cards() -> Array[CardCharacter]:
 			1,
 			0,
 			"dwarf-4",
-			func(_player): pass ,
 			func(player): player.selectedVirtualResources.append(4)
 		),
 		CardCharacter.new(
@@ -47,7 +43,6 @@ static func load_cards() -> Array[CardCharacter]:
 			1,
 			0,
 			"dwarf-5",
-			func(_player): pass ,
 			func(player): player.selectedVirtualResources.append(5)
 		),
 		CardCharacter.new(
@@ -55,7 +50,6 @@ static func load_cards() -> Array[CardCharacter]:
 			1,
 			0,
 			"dwarf-6",
-			func(_player): pass ,
 			func(player): player.selectedVirtualResources.append(6)
 		),
 		CardCharacter.new(
@@ -63,7 +57,6 @@ static func load_cards() -> Array[CardCharacter]:
 			1,
 			0,
 			"dwarf-7",
-			func(_player): pass ,
 			func(player): player.selectedVirtualResources.append(7)
 		),
 		CardCharacter.new(
@@ -71,7 +64,6 @@ static func load_cards() -> Array[CardCharacter]:
 			1,
 			0,
 			"dog-1-1-1-1",
-			func(_player): pass ,
 			func(player): player.selectedVirtualResources.append("*") # TODO placeholder
 		),
 		CardCharacter.new(
@@ -218,7 +210,6 @@ static func load_cards() -> Array[CardCharacter]:
 			0,
 			0,
 			"phoenix-1-2",
-			func(_player): pass ,
 			func(player): player.selectedVirtualResources.append(8)
 		),
 		CardCharacter.new(
@@ -226,7 +217,6 @@ static func load_cards() -> Array[CardCharacter]:
 			0,
 			0,
 			"phoenix-1-2",
-			func(_player): pass ,
 			func(player): player.selectedVirtualResources.append(8)
 		),
 		CardCharacter.new(
