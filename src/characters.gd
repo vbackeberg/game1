@@ -246,6 +246,27 @@ static func load_cards() -> Array[CardCharacter]:
 			"ape-10",
 			func(player): player.resourceCapacity += 1
 		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [1, 3, 5, 7]) if _is_owner(player, card) else null,
+			2,
+			0,
+			"actions-1-3-5-7",
+			func(player): player.actionsLeft += 1
+		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [2, 4, 6, 8]) if _is_owner(player, card) else null,
+			2,
+			0,
+			"actions-2-4-6-8",
+			func(player): player.actionsLeft += 1
+		),
+		CardCharacter.new(
+			func(player, card): return _includes(player, [4, 5, 6, 7, 8]) if _is_owner(player, card) else null,
+			1,
+			0,
+			"redhood-4-5-6-7-8",
+			func(player): player.actionsPerTurn += 1
+		),
 		),
 	]
 
