@@ -225,6 +225,28 @@ static func load_cards() -> Array[CardCharacter]:
 			0,
 			"tarzan-20"
 		),
+		CardCharacter.new(
+			func(player, card): return _sums_up_to_s(player, 10) if _is_owner(player, card) else null,
+			1,
+			0,
+			"ape-10",
+			func(player): player.resourceCapacity += 1
+		),
+		CardCharacter.new(
+			func(player, card): return _sums_up_to_s(player, 10) if _is_owner(player, card) else null,
+			1,
+			0,
+			"ape-10",
+			func(player): player.resourceCapacity += 1
+		),
+		CardCharacter.new(
+			func(player, card): return _sums_up_to_s(player, 10) if _is_owner(player, card) else null,
+			1,
+			0,
+			"ape-10",
+			func(player): player.resourceCapacity += 1
+		),
+		),
 	]
 
 static func _includes(player: PlayerArea, requiredResources: Array[int], requiredDiamonds = 0) -> Variant:
