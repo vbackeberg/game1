@@ -1,7 +1,6 @@
 extends Node
 
 var playerArea: Node2D
-var middleArea: Node2D
 var middleVisible: bool
 
 var currentPlayerIdx: int
@@ -13,7 +12,6 @@ var lastTurn: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	middleArea = $MiddleArea
 	players = [$PlayerArea, $PlayerArea2]
 	startingPlayer = players[0]
 	_set_current_player(0)
@@ -31,11 +29,11 @@ func _input(event):
 # When discard mode, deactivate cards drawing, show how many to discard
 
 func toggle_view():
-	if middleArea.visible == true:
-		$MiddleArea.visible = false
+	if MiddleArea.visible == true:
+		MiddleArea.visible = false
 		currentPlayer.visible = true
 	else:
-		$MiddleArea.visible = true
+		MiddleArea.visible = true
 		currentPlayer.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,10 +50,10 @@ func _on_action_used():
 	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
 
 func on_discard_started():
-	$MiddleArea.on_discard_started()
+	MiddleArea.on_discard_started()
 
 func on_discard_finished():
-	$MiddleArea.on_discard_finished()
+	MiddleArea.on_discard_finished()
 	_next_player()
 
 func _next_player():
@@ -71,7 +69,7 @@ func _next_player():
 		return
 
 	currentPlayer.visible = false
-	middleArea.visible = true
+	MiddleArea.visible = true
 
 	_set_current_player((currentPlayerIdx + 1) % players.size())
 
