@@ -12,8 +12,12 @@ config_version=5
 
 config/name="portale-von-molthar"
 run/main_scene="uid://vj5feyq5sl6r"
-config/features=PackedStringArray("4.4", "Mobile")
+config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+MiddleArea="*res://src/middle_area.gd"
 
 [display]
 

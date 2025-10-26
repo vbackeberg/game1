@@ -5,9 +5,16 @@
 		}
 	],
 	"settings": {
+		"godotTools.editorPath.godot4": "c:\\Users\\Valerian\\Programs\\Godot\\Godot_v4.5-stable_win64.exe",
 		"cSpell.words": [
+			"bombadil",
 			"elif",
 			"tscn"
+		]
+	},
+	"extensions": {
+		"recommendations": [
+			"geequlim.godot-tools"
 		]
 	}
 }

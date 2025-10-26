@@ -9,14 +9,15 @@ var cardsLaidOut: Array[CardResource]
 @export var graveyardResources: Array[int]
 @export var graveyardCharacters: Array[CardCharacter]
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var characters = preload("res://src/characters.gd")
+
 	$DiscardOverlay.visible = false
 
 	resourceCards = [1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8]
 	resourceCards.shuffle()
 	
-	characterCards = _load_chars()
+	characterCards = characters.load_cards()
 	characterCards.shuffle()
 	
 	graveyardResources = []
@@ -65,6 +66,10 @@ func _replenish_characters():
 	graveyardCharacters = []
 	
 func _on_stack_characters_pressed() -> void:
+	if get_parent().currentPlayer.charactersOnPayField.size() == 2:
+		print("Player has 2 character cards, already.")
+		return
+
 	var card = _draw_character()
 	get_parent().currentPlayer.add_character(card)
 	action_used.emit()
@@ -73,7 +78,6 @@ func _draw_character():
 	if characterCards.size() == 0:
 		if graveyardCharacters.size() == 0:
 			print("No more character cards left in stack or graveyard!")
-			# TODO: do not continue
 		else:
 			_replenish_characters()
 
@@ -105,6 +109,10 @@ func place_resource(slot: int):
 
 ## Moves the card to the player's hand
 func _on_character_card_pressed(card: CardCharacter) -> void:
+	if get_parent().currentPlayer.charactersOnPayField.size() == 2:
+		print("Player has 2 character cards, already.")
+		return
+	
 	card.pressed.disconnect(_on_character_card_pressed)
 	remove_child(card)
 	get_parent().currentPlayer.add_character(card)
@@ -142,7 +150,7 @@ func concat(arr: Array) -> String:
 
 signal action_used()
 
-## Places 4 new cards
+## Places 4 new	 cards
 func _on_button_pressed() -> void:
 	for i in cardsLaidOut.size():
 		graveyardResources.append(cardsLaidOut[i].resourceValue)
@@ -156,135 +164,3 @@ func on_discard_started():
 
 func on_discard_finished():
 	$DiscardOverlay.visible = false
-	
-func _load_chars() -> Array[CardCharacter]:
-	return [
-		CardCharacter.new(
-			func(player, card): return {
-				resources = null,
-				diamonds = null
-				} if !_is_owner(player, card) else {
-				resources = _includes(player.selectedResources, player.additionalResources, [2, 2, 2]),
-				diamonds = _enough_diamonds(player.selectedDiamonds, 1)
-				},
-			3,
-			0,
-			"pirate"
-		),
-		CardCharacter.new(
-			func(player, card): return {
-				resources = null,
-				diamonds = null
-				} if !_is_owner(player, card) else {
-				resources = _includes(player.selectedResources, player.additionalResources, [6, 6]),
-				diamonds = []
-				},
-			1,
-			0,
-			"dwarf-6",
-			func(player): player.additionalResources.append(6)
-		),
-		CardCharacter.new(
-			func(player, card): return {
-				resources = null,
-				diamonds = null
-				} if !_is_owner(player, card) else {
-				resources = _includes(player.selectedResources, player.additionalResources, [7, 7]),
-				diamonds = []
-				},
-			1,
-			0,
-			"dwarf-7",
-			func(player): player.additionalResources.append(7)
-		),
-		CardCharacter.new(
-			func(player): return {
-				resources = _includes_either_or(player.selectedResources, player.additionalResources, [6, 6, 6], [8, 8, 8]),
-				diamonds = []
-				},
-			3,
-			0,
-			"neighbors-6-8"
-		),
-		CardCharacter.new(
-			func(player): return {
-				resources = _includes_either_or(player.selectedResources, player.additionalResources, [4, 4, 4], [5, 5, 5]),
-				diamonds = []
-				},
-			3,
-			0,
-			"neighbors-4-5"
-		),
-	]
-
-## Checks if selected resources suffice to pay for the card.
-## Returns the resources used to pay for the card or null if they do not suffice.
-func _includes(selectedResources: Array[CardResource], additionalResources: Array[int], required: Array[int]):
-	var selected := selectedResources.map(func(s): return s.resourceValue)
-	var additional := additionalResources.duplicate()
-	var paid: Array[CardResource] = []
-	
-	# First check if can be paid from additional resources (e.g. dwarves), then use resources from hand.
-	for r in required:
-		var idx = additional.find(r)
-		if idx != -1:
-			additional.remove_at(idx)
-			continue
-		idx = selected.find(r)
-		if idx == -1:
-			return null
-		paid.append(selectedResources[idx])
-		selected.remove_at(idx)
-	return paid
-
-## Checks if selected resources suffice to pay for the card for two alternatives.
-## Returns the resources used to pay or null if they do not suffice.
-func _includes_either_or(selectedResources: Array[CardResource], additionalResources: Array[int], eitherRequired: Array[int], orRequired: Array[int]):
-	var paid = _includes(selectedResources, additionalResources, eitherRequired)
-	if paid != null:
-		return paid
-
-	paid = _includes(selectedResources, additionalResources, orRequired)
-	if paid != null:
-		return paid
-
-	return null
-
-## Checks if a triple combination of the selected resources sum up to the given sum.
-## Returns the triple used to make the sum.
-func _sums_up_to_using_exactly_three(selectedResources: Array[int], sumUpTo: int):
-	for i in range(selectedResources.size()):
-		for j in range(i + 1, selectedResources.size()):
-			for k in range(j + 1, selectedResources.size()):
-				var triple = [selectedResources[i], selectedResources[j], selectedResources[k]]
-				if triple[0] + triple[1] + triple[2] == sumUpTo:
-					print("valid triple: ", triple)
-					return triple
-	return null
-
-## Checks if any combination of selected resources sums up to the given value.
-## Returns the first such combination found, or null if none exist.
-func _sums_up_to_in_any_combination(selectedResources: Array[int], sumTo: int):
-	var n = selectedResources.size()
-
-	# Creates a binary mask that grows from 1 to 2^n as a selector for cards.
-	# Then tries if the selected cards would sum up to sumTo.
-	for mask in range(1, 1 << n):
-		var combo = []
-		var total = 0
-		for i in range(n):
-			if mask & (1 << i):
-				combo.append(selectedResources[i])
-				total += selectedResources[i]
-		if total == sumTo:
-			return combo
-	return null
-
-func _enough_diamonds(selectedDiamonds: Array[CardCharacter], required: int):
-	if selectedDiamonds.size() >= required:
-		return selectedDiamonds.slice(0, required)
-	return null
-
-
-func _is_owner(player: Node2D, card: CardCharacter):
-	return player == card.playerOwner

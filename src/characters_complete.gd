@@ -1,3 +1,6 @@
+class_name CharactersComplete
+extends Object
+
 func _load_character_cards() -> Array[Dictionary]:
 	return [
 		{

@@ -1,12 +1,13 @@
+class_name PlayerArea
 extends Node2D
 
 const CARD_WIDTH = 128.0
 var playerName: String
 var resourcesOnHand: Array[CardResource]
 var resourceCapacity: int
-var additionalResources: Array[int]
 var charactersOnPayField: Array[CardCharacter]
 var diamonds: Array[CardCharacter]
+var selectedVirtualResources: Array[int]
 var selectedResources: Array[CardResource]
 var selectedDiamonds: Array[CardCharacter]
 var charactersPlayed: Array[CardCharacter]
@@ -26,9 +27,9 @@ func _ready() -> void:
 	playerName = str(randi() % 100 + 1)
 	resourcesOnHand = []
 	resourceCapacity = 5
-	additionalResources = []
 	charactersOnPayField = []
 	diamonds = []
+	selectedVirtualResources = []
 	selectedResources = []
 	selectedDiamonds = []
 	charactersPlayed = []
@@ -111,29 +112,27 @@ func _on_confirm_discard_button_pressed() -> void:
 
 ## Adds a character card with given specs and puts it on the right side.
 func add_character(card: CardCharacter):
-	if charactersOnPayField.size() == 2:
-		# TODO prevent player from doing that
-		print("Player has 2 character cards, already.")
-	
-	else:
-		card.visible = visible
-		card.playerOwner = self
-		charactersOnPayField.append(card)
-		add_child(card)
+	card.visible = visible
+	card.playerOwner = self
+	charactersOnPayField.append(card)
+	add_child(card)
 
-		var card_index = charactersOnPayField.size()
-		card.position.x = get_viewport().size.x - 24.0 - card_index * (CARD_WIDTH + 24.0)
-		card.position.y = get_viewport().size.y / 2
-		
-		card.pressed.connect(_on_character_card_pressed.bind(card))
+	var card_index = charactersOnPayField.size()
+	card.position.x = get_viewport().size.x - 24.0 - card_index * (CARD_WIDTH + 24.0)
+	card.position.y = get_viewport().size.y / 2
+	
+	card.pressed.connect(_on_unplayed_character_card_pressed.bind(card))
 
 # If any in paid is null, player cannot play the character.
 # Removes spent resources and diamonds and puts them on graveyard
-func _on_character_card_pressed(card: CardCharacter) -> void:
+func _on_unplayed_character_card_pressed(card: CardCharacter) -> void:
 	var paid = card.buy.call(self, card)
-	if paid.resources == null or paid.diamonds == null:
-		print("not enough resources selected")
+	if paid == null:
+		print("Selected resources are not correct.")
 		# TODO show label with missing resources
+		selectedResources.clear()
+		selectedDiamonds.clear()
+		
 	else:
 		for r in paid.resources:
 			get_parent().on_resource_spent(r.resourceValue)
@@ -155,8 +154,13 @@ func _on_character_card_pressed(card: CardCharacter) -> void:
 		_reorder_diamonds()
 		
 		_place_character_on_played_area(card)
-		card.effect.call(self)
+		card.immediateEffect.call(self)
 		
+		for d in card.diamonds:
+			get_parent().middleArea.draw_diamond()
+
+		victoryPoints += card.points
+
 		action_used.emit()
 
 
@@ -192,9 +196,10 @@ func _place_character_on_played_area(card: CardCharacter):
 	card.position.x = 24.0 + card_index * (CARD_WIDTH + 24.0)
 	card.position.y = 24.0 + 200.0
 	card.rotation_degrees = 180
-	 
+	card.pressed.disconnect(_on_unplayed_character_card_pressed)
+	card.activate_permanent_effect()
+
 	charactersOnPayField.erase(card)
-	victoryPoints += card.points
 
 func _reorder_diamonds():
 	for i in range(diamonds.size()):
