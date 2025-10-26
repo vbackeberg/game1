@@ -2,13 +2,24 @@ class_name ActionsOneThreeFiveSeven
 extends CardCharacter
 
 func _init():
-	super._init(2, 0, "actions-1-3-5-7")
+	points = 2
+	asset_path = "res://assets/characters/actions-1-3-5-7.png"
 
 func buy(player: PlayerArea) -> Variant:
-	if _is_owner(player):
-		var paid = _includes(player, [1, 3, 5, 7])
-		if paid:
-			
-			player.actionsLeft += 1
-			return paid
-	return null
+	if not _is_owner(player) or not _n_resources_selected(player, 4):
+		return null
+
+	var resources = _find(player, [1, 3, 5, 7])
+	if not resources:
+		return null
+
+	immediate_effect(player)
+
+	return {
+		resources = resources,
+		diamonds = []
+	}
+
+
+func immediate_effect(player: PlayerArea):
+	player.actionsLeft += 3

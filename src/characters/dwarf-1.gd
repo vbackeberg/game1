@@ -2,13 +2,23 @@ class_name DwarfOne
 extends CardCharacter
 
 func _init():
-	super._init(1, 0, "dwarf-1")
+	points = 1
+	asset_path = "res://assets/characters/dwarf-1.png"
 
 func buy(player: PlayerArea) -> Variant:
-	if _is_owner(player):
-		var paid = _includes(player, [1, 1])
-		if paid:
-			
-			player.selectedVirtualResources.append(1)
-			return paid
-	return null
+	if not _is_owner(player) or not _n_resources_selected(player, 2):
+		return null
+
+	var resources = _find(player, [1, 1])
+	if not resources:
+		return null
+
+	self.pressed.connect(_pressed)
+
+	return {
+		resources = resources,
+		diamonds = []
+	}
+
+func _pressed():
+	playerOwner.selectedVirtualResources.append(1)

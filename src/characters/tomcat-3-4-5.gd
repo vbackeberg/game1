@@ -2,11 +2,23 @@ class_name TomcatThreeFourFive
 extends CardCharacter
 
 func _init():
-	super._init(1, 0, "tomcat-3-4-5")
+	points = 1
+	asset_path = "res://assets/characters/tomcat-3-4-5.png"
 
 func buy(player: PlayerArea) -> Variant:
-	if _is_owner(player):
-		var paid = _includes(player, [3, 4, 5])
-		if paid:
-			return paid
-	return null
+	if not _is_owner(player) or not _n_resources_selected(player, 3):
+		return null
+
+	var resources = _find(player, [4, 5, 6])
+	if not resources:
+		return null
+
+	_immediate_effect()
+
+	return {
+		resources = resources,
+		diamonds = []
+	}
+
+func _immediate_effect():
+	pass # TODO: take one of payed cards back

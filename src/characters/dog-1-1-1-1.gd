@@ -2,13 +2,25 @@ class_name DogOneOneOneOne
 extends CardCharacter
 
 func _init():
-	super._init(1, 0, "dog-1-1-1-1")
+	points = 1
+	asset_path = "res://assets/characters/dog-1-1-1-1.png"
 
 func buy(player: PlayerArea) -> Variant:
-	if _is_owner(player):
-		var paid = _includes(player, [1, 1, 1, 1], 0)
-		if paid:
-			
-			player.selectedVirtualResources.append("*") # TODO placeholder
-			return paid
-	return null
+	if not _is_owner(player):
+		return null
+
+	var resources = _find(player, [1, 1, 1, 1])
+	if not resources:
+		return null
+		
+	self.pressed.connect(_pressed)
+
+	return {
+		resources = resources,
+		diamonds = []
+	}
+
+func _pressed():
+	# TODO: Let player choose resource
+	playerOwner.selectedVirtualResources.append( 0 )
+	

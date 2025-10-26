@@ -2,11 +2,18 @@ class_name ExchangeStreet
 extends CardCharacter
 
 func _init():
-	super._init(2, 0, "exchange-street")
+	points = 2
+	asset_path = "res://assets/characters/exchange-street.png"
 
 func buy(player: PlayerArea) -> Variant:
-	if _is_owner(player):
-		var paid = _is_street_of_n(player, 5)
-		if paid:
-			return paid
-	return null
+	if not _is_owner(player):
+		return null
+		
+	var resources = _is_street_of_n(player, 5)
+	if not resources:
+		return null
+	
+	return {
+		resources = resources,
+		diamonds = []
+	}

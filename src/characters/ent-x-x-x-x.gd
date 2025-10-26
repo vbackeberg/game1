@@ -2,11 +2,19 @@ class_name EntXXXX
 extends CardCharacter
 
 func _init():
-	super._init(3, 0, "ent-x-x-x-x")
+	points = 3
+	asset_path = "res://assets/characters/ent-x-x-x-x.png"
 
 func buy(player: PlayerArea) -> Variant:
-	if _is_owner(player):
-		var paid = _is_n_of_a_kind(player, 4)
-		if paid:
-			return paid
-	return null
+	if not _is_owner(player) or not _n_resources_selected(player, 4):
+		return null
+	
+	var resources = _find_n_of_same_kind(player, 4)
+	if not resources:
+			return null
+
+	return {
+		resources = resources,
+		diamonds = []
+	}
+

@@ -2,11 +2,21 @@ class_name NeighborXXYY
 extends CardCharacter
 
 func _init():
-	super._init(2, 0, "neighbor-x-x-y-y")
+	points = 2
+	asset_path = "res://assets/characters/neighbor-x-x-y-y.png"
 
 func buy(player: PlayerArea) -> Variant:
-	if _is_owner(player):
-		var paid = _is_n_of_two_kinds(player, 2)
-		if paid:
-			return paid
-	return null
+	if not _is_owner(player) or not _n_resources_selected(player, 4):
+		return null
+
+	var pair1 = _find_n_of_same_kind(player, 2)
+	var pair2 = _find_n_of_same_kind(player, 2)
+	if not pair1 or not pair2:
+		return null
+	
+	pair1.append_array(pair2)
+	
+	return {
+		resources = pair1,
+		diamonds = []
+	}

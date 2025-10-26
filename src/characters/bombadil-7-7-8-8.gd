@@ -2,11 +2,23 @@ class_name BombadilSevenSevenEightEight
 extends CardCharacter
 
 func _init():
-	super._init(3, 1, "bombadil-7-7-8-8")
+	points = 3
+	asset_path = "res://assets/characters/bombadil-7-7-8-8.png"
 
 func buy(player: PlayerArea) -> Variant:
-	if _is_owner(player):
-		var paid = _includes(player, [7, 7, 8, 8])
-		if paid:
-			return paid
-	return null
+	if not _is_owner(player) or not _n_resources_selected(player, 4):
+		return null
+
+	var resources = _find(player, [7,7,8,8])
+	if not resources:
+		return null
+
+	_immediate_effect()
+
+	return {
+		resources = resources,
+		diamonds = []
+	}
+
+func _immediate_effect():
+	MiddleArea.draw_diamond()

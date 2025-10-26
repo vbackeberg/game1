@@ -2,11 +2,23 @@ class_name BilboEven
 extends CardCharacter
 
 func _init():
-	super._init(1, 1, "bilbo-even")
+	points = 1
+	asset_path = "res://assets/characters/bilbo-even.png"
 
 func buy(player: PlayerArea) -> Variant:
-	if _is_owner(player):
-		var paid = _is_three_odd_or_even(player, true)
-		if paid:
-			return paid
-	return null
+	if not _is_owner(player) or not _n_resources_selected(player, 3):
+		return null
+	
+	var resources = _is_three_odd_or_even(player, true)
+	if not resources:
+		return null
+
+	_immediate_effect()
+
+	return {
+		resources = resources,
+		diamonds = []
+	}
+
+func _immediate_effect():
+	MiddleArea.draw_diamond()

@@ -2,24 +2,33 @@ class_name ReaperOneEight
 extends CardCharacter
 
 func _init():
-	super._init(1, 0, "reaper-1-8")
+	points = 1
+	asset_path = "res://assets/characters/reaper-1-8.png"
 
 func buy(player: PlayerArea) -> Variant:
-	if _is_owner(player):
-		var paid = _includes(player, [1, 8])
-		if paid:
-			self.pressed.connect(_pressed)
-			return paid
-			
-	return null
+	if not _is_owner(player) or not _n_resources_selected(player, 2):
+		return null
 
-func on_pressed():
+	var resources = _find(player, [1,8])
+	if not resources:
+		return null
+	
+	self.pressed.connect(_pressed)
+
+	return {
+		resources = resources,
+		diamonds = []
+	}
+
+
+func _pressed():
 	var cntResources = playerOwner.resourcesOnHand.size()
 
 	for r in playerOwner.resourcesOnHand:
+		get_parent().on_resource_spent(r.resourceValue)
 		r.queue_free()
 	playerOwner.resourcesOnHand.clear()
 
-	for n in range(cntResources):
+	for n in cntResources:
 		var card = MiddleArea.draw_resource()
 		playerOwner.add_resource(card)
