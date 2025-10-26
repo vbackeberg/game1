@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bov0ixvuurdny"]
+[gd_scene load_steps=3 format=3 uid="uid://bov0ixvuurdny"]
 
 [ext_resource type="Script" uid="uid://dyk64urnjk6ns" path="res://src/player_area.gd" id="1_omm1s"]
+[ext_resource type="Script" uid="uid://petlorstmpy6" path="res://src/turn_done_button.gd" id="2_qpexq"]
 
 [node name="PlayerArea" type="Node2D"]
 script = ExtResource("1_omm1s")
@@ -9,5 +10,10 @@ script = ExtResource("1_omm1s")
 offset_right = 8.0
 offset_bottom = 8.0
 text = "Confirm discard"
+
+[node name="TurnDoneButton" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("2_qpexq")
 
 [connection signal="pressed" from="ConfirmDiscardButton" to="." method="_on_confirm_discard_button_pressed"]

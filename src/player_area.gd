@@ -154,13 +154,8 @@ func _on_unplayed_character_card_pressed(card: CardCharacter) -> void:
 		_reorder_diamonds()
 		
 		_place_character_on_played_area(card)
-		card.immediateEffect.call(self)
 		
-		for d in card.diamonds:
-			get_parent().middleArea.draw_diamond()
-
 		victoryPoints += card.points
-
 		action_used.emit()
 
 

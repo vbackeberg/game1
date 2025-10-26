@@ -39,7 +39,7 @@ func _process(_delta: float) -> void:
 	pass
 
 
-func _draw_resource() -> int:
+func draw_resource() -> int:
 	if resourceCards.size() == 0:
 		if graveyardResources.size() == 0:
 			print("No more resource cards left in stack or graveyard!")
@@ -51,7 +51,7 @@ func _draw_resource() -> int:
 
 
 func _on_stack_resources_pressed() -> void:
-	var card = _draw_resource()
+	var card = draw_resource()
 	get_parent().currentPlayer.add_resource(card)
 	action_used.emit()
 
@@ -91,7 +91,7 @@ func _on_resource_card_pressed(card: CardResource) -> void:
 	action_used.emit()
 
 func place_resource(slot: int):
-	var value = _draw_resource()
+	var value = draw_resource()
 
 	var card_node = load("res://src/card_resource.tscn").instantiate() as CardResource
 	card_node.texture_normal = load("res://assets/resource" + str(value) + ".png")
@@ -137,7 +137,7 @@ func place_character_in_middle(slot: int):
 	card.position.y = 256
 	card.pressed.connect(_on_character_card_pressed.bind(card))
 
-func _draw_diamond():
+func draw_diamond():
 	var card = characterCards.pop_back()
 	get_parent().currentPlayer.add_diamond(card)
 

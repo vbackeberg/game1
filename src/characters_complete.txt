@@ -1,0 +1,190 @@
+class_name CharactersComplete
+extends Object
+
+func _load_cards() -> Array[Dictionary]:
+	return [
+        CardCharacter.new(
+			func(player, card): return includes(player, [2, 2, 2], 1) if _is_owner(player, card) else null,
+			3,
+			0,
+			"pirate"
+		),
+		CardCharacter.new(
+			func(player, card): return includes(player, [6, 6], 0) if _is_owner(player, card) else null,
+			1,
+			0,
+			"dwarf-6",
+			func(_player): pass ,
+			func(player): player.selectedVirtualResources.append(6)
+		),
+		CardCharacter.new(
+			func(player, card): return includes(player, [7, 7], 0) if _is_owner(player, card) else null,
+			1,
+			0,
+			"dwarf-7",
+			func(_player): pass ,
+			func(player): player.selectedVirtualResources.append(7)
+		),
+		CardCharacter.new(
+			func(player):
+				var paid = includes(player, [6, 6, 6], 0)
+				if paid == null:
+					paid = includes(player, [7, 7, 7], 0)
+				return paid,
+			3,
+			0,
+			"neighbors-6-8"
+		),
+		CardCharacter.new(
+			func(player):
+				var paid = includes(player, [4, 4, 4], 0)
+				if paid == null:
+					paid = includes(player, [5, 5, 5], 0)
+				return paid,
+			3,
+			0,
+			"neighbors-4-5"
+		),
+		CardCharacter.new(
+			func(player, card): return _is_n_of_a_kind(player, 2) if _is_owner(player, card) else null,
+			1,
+			0,
+			"goblin-x-x"
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [6, 6, 8, 8]),
+			0,
+			3,
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [6, 6, 8, 8]),
+			0,
+			3,
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [1, 3, 5, 7]),
+			0,
+			2,
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [2, 4, 6, 8]),
+			0,
+			2,
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [8, 8]),
+			0,
+			2,
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [8, 8]),
+			0,
+			2,
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [1, 1]),
+			0,
+			1,
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [2, 2]),
+			0,
+			1,
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [3, 3]),
+			0,
+			1,
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [4, 4]),
+			0,
+			1,
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [5, 5]),
+			0,
+			1,
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [6, 6]),
+			0,
+			1,
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [7, 7]),
+			0,
+			1,
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [1, 2, 3, 4]),
+			0,
+			1,
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [7, 7, 7, 7]),
+			0,
+			4,
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [7, 7, 7, 7]),
+			0,
+			4,
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [8, 8, 8, 8]),
+			0,
+			5,
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [1, 2]),
+			0,
+			0,
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [4, 5, 6, 7, 8]),
+			0,
+			1,
+		),
+        CardCharacter.new(
+			func(player): return _sums_up_to_using_exactly_three(player.selectedResources, 10),
+			0,
+			1,
+		),
+        CardCharacter.new(
+			func(player): return _sums_up_to_using_exactly_three(player.selectedResources, 20),
+			0,
+			2,
+		),
+        CardCharacter.new(
+			func(player): return _sums_up_to_in_any_combination(player.selectedResources, 10),
+			0,
+			1,
+		),
+        CardCharacter.new(
+			func(player): return _sums_up_to_in_any_combination(player.selectedResources, 10),
+			0,
+			1,
+		),
+        CardCharacter.new(
+			func(player): return _sums_up_to_in_any_combination(player.selectedResources, 10),
+			0,
+			1,
+		),
+        CardCharacter.new(
+			func(player): return includes(player.selectedResources, player.additionalResources, [3, 4, 5]),
+			0,
+			1,
+		),
+        CardCharacter.new(
+			func(player): return includes_either_or(player.selectedResources, player.additionalResources, [3, 3, 3], [6, 6, 6]),
+			0,
+			3,
+		),
+        CardCharacter.new(
+			func(player): return includes_either_or(player.selectedResources, player.additionalResources, [4, 4, 4], [5, 5, 5]),
+			0,
+			3,
+		),
+
+	]
