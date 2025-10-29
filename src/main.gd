@@ -5,14 +5,12 @@ var middleVisible: bool
 var currentPlayerIdx: int
 var currentPlayer: Node2D
 var players: Array[Node2D]
-var startingPlayer: Node2D
 var twelvePointsReached: bool
 var lastTurn: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	players = [$PlayerArea, $PlayerArea2]
-	startingPlayer = players[0]
 	_set_current_player(0)
 
 	$WinOverlay.visible = false
@@ -60,10 +58,10 @@ func _next_player():
 		print("Player " + str(currentPlayerIdx) + " has " + str(currentPlayer.victoryPoints) + " points. Last round!")
 		twelvePointsReached = true
 		
-	if twelvePointsReached && currentPlayer == startingPlayer:
+	if twelvePointsReached && currentPlayerIdx == 0:
 		lastTurn = true
 
-	if lastTurn && currentPlayer == startingPlayer:
+	if lastTurn && currentPlayerIdx == 0:
 		_find_winner()
 		return
 
