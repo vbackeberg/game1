@@ -99,9 +99,9 @@ func _on_new_game_button_pressed() -> void:
 	get_tree().reload_current_scene()
 
 func _set_current_player(nextPlayer: int):
+	currentPlayer.actionsLeft = currentPlayer.actionsPerTurn
 	currentPlayerIdx = nextPlayer
 	currentPlayer = players[currentPlayerIdx]
-	currentPlayer.actionsLeft = currentPlayer.actionsPerTurn
 	$CurrentPlayerLabel.text = "Player " + str(currentPlayerIdx) + "'s turn"
 	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
 

@@ -15,8 +15,15 @@ func buy(player: PlayerArea) -> Variant:
 		return null
 	
 	pair1.append_array(pair2)
-	
+
+	_immediate_effect()
+
 	return {
 		resources = pair1,
 		diamonds = []
 	}
+
+func _immediate_effect():
+	var main = get_node("/root/Main")
+	var nextIdx = (main.currentPlayerIdx + 1) % main.players.size()
+	main.players[nextIdx].actionsLeft += 1
