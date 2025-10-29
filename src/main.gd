@@ -1,6 +1,5 @@
 extends Node
 
-var playerArea: Node2D
 var middleVisible: bool
 
 var currentPlayerIdx: int
