@@ -13,6 +13,8 @@ func buy(player: PlayerArea) -> Variant:
 	if not resources:
 		return null
 		
+	_immediate_effect()
+	
 	return {
 		resources = resources,
 		diamonds = []
