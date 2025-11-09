@@ -1,0 +1,101 @@
+[gd_scene load_steps=11 format=3 uid="uid://cfwds4kpyxtrp"]
+
+[ext_resource type="Script" uid="uid://yqgeex1bablf" path="res://src/wildcard_select.gd" id="1_3y8vc"]
+[ext_resource type="Script" uid="uid://c51d06hyr4cxq" path="res://src/card_resource.gd" id="2_5o4ks"]
+[ext_resource type="Texture2D" uid="uid://c35yagqrnapr4" path="res://assets/resource1.png" id="2_c7346"]
+[ext_resource type="Texture2D" uid="uid://b8k1pvivck50m" path="res://assets/resource2.png" id="4_yhe4g"]
+[ext_resource type="Texture2D" uid="uid://bpay14y4kg4pm" path="res://assets/resource3.png" id="5_3y8vc"]
+[ext_resource type="Texture2D" uid="uid://d0i0dk72i70wr" path="res://assets/resource4.png" id="6_sm5l4"]
+[ext_resource type="Texture2D" uid="uid://b4x5in6plvinf" path="res://assets/resource5.png" id="7_e6hy3"]
+[ext_resource type="Texture2D" uid="uid://wgqyq4proaew" path="res://assets/resource6.png" id="8_gitjy"]
+[ext_resource type="Texture2D" uid="uid://dffucsgj4gtg7" path="res://assets/resource7.png" id="9_fd37r"]
+[ext_resource type="Texture2D" uid="uid://b8ep218x4ygmm" path="res://assets/resource8.png" id="10_3no7p"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_3y8vc")
+
+[node name="CardResource1" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(150, 225)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("2_c7346")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("2_5o4ks")
+metadata/_custom_type_script = "uid://c51d06hyr4cxq"
+
+[node name="CardResource2" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(150, 225)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("4_yhe4g")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("2_5o4ks")
+metadata/_custom_type_script = "uid://c51d06hyr4cxq"
+
+[node name="CardResource3" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(150, 225)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("5_3y8vc")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("2_5o4ks")
+metadata/_custom_type_script = "uid://c51d06hyr4cxq"
+
+[node name="CardResource4" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(150, 225)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("6_sm5l4")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("2_5o4ks")
+metadata/_custom_type_script = "uid://c51d06hyr4cxq"
+
+[node name="CardResource5" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(150, 225)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("7_e6hy3")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("2_5o4ks")
+metadata/_custom_type_script = "uid://c51d06hyr4cxq"
+
+[node name="CardResource6" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(150, 225)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("8_gitjy")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("2_5o4ks")
+metadata/_custom_type_script = "uid://c51d06hyr4cxq"
+
+[node name="CardResource7" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(150, 225)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("9_fd37r")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("2_5o4ks")
+metadata/_custom_type_script = "uid://c51d06hyr4cxq"
+
+[node name="CardResource8" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(150, 225)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("10_3no7p")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("2_5o4ks")
+metadata/_custom_type_script = "uid://c51d06hyr4cxq"
