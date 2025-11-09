@@ -29,6 +29,9 @@ static func concat(arr: Array) -> String:
 func _is_owner(player: PlayerArea):
 	return player == playerOwner
 
+
+# Buy functions
+
 static func _sums_up_to_s_using_exactly_n(player: PlayerArea, s: int, n: int) -> Variant:
 	var resources = []
 
