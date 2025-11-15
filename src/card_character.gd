@@ -10,8 +10,8 @@ var playerOwner: PlayerArea
 
 func _ready() -> void:
 	var p = "res://assets/character_back.png" if backside else asset_path
-	texture_normal = load(p)
-	scale = Vector2(128.0, 200.0) / texture_normal.get_size()
+	self.texture_normal = load(p)
+	scale = Vector2(128.0, 200.0) / self.texture_normal.get_size()
 	pass
 
 func select(forDiscard := false):
