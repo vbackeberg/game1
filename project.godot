@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-MiddleArea="*res://src/middle_area.gd"
+MiddleArea="*res://src/middle_area.tscn"
 
 [display]
 

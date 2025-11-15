@@ -1,13 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://vj5feyq5sl6r"]
+[gd_scene load_steps=3 format=3 uid="uid://vj5feyq5sl6r"]
 
 [ext_resource type="Script" uid="uid://bopt66vu8q8qa" path="res://src/main.gd" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://dkfqww1gfq0k" path="res://src/middle_area.tscn" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://bov0ixvuurdny" path="res://src/player_area.tscn" id="3_1bvp3"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_ig7tw")
-
-[node name="MiddleArea" parent="." instance=ExtResource("2_h2yge")]
 
 [node name="PlayerArea" parent="." instance=ExtResource("3_1bvp3")]
 
@@ -41,6 +38,7 @@ text = "Player 1's turn"
 horizontal_alignment = 1
 
 [node name="WinOverlay" type="Panel" parent="."]
+visible = false
 self_modulate = Color(0, 0, 0, 1)
 anchors_preset = 15
 anchor_right = 1.0
@@ -77,7 +75,6 @@ theme_override_font_sizes/font_size = 48
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="action_used" from="MiddleArea" to="." method="_on_action_used"]
 [connection signal="action_used" from="PlayerArea" to="." method="_on_action_used"]
 [connection signal="visibility_changed" from="PlayerArea" to="PlayerArea" method="_on_visibility_changed"]
 [connection signal="action_used" from="PlayerArea2" to="." method="_on_action_used"]

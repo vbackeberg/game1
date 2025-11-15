@@ -71,10 +71,10 @@ func _next_player():
 	_set_current_player((currentPlayerIdx + 1) % players.size())
 
 func on_resource_spent(value):
-	$MiddleArea.graveyardResources.append(value)
+	MiddleArea.graveyardResources.append(value)
 
 func on_diamond_spent(d):
-	$MiddleArea.graveyardCharacters.append(d)
+	MiddleArea.graveyardCharacters.append(d)
 
 
 ## Finds player with highest points and displays them as Winner
