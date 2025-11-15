@@ -34,7 +34,6 @@ func _ready() -> void:
 	selectedDiamonds = []
 	charactersPlayed = []
 	visible = false
-	actionsLeft = actionsPerTurn
 	actionsPerTurn = 3
 	victoryPoints = 0
 
