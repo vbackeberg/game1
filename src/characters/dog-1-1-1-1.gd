@@ -2,7 +2,7 @@ class_name DogOneOneOneOne
 extends CardCharacter
 
 func _init():
-	points = 1
+	points = 0
 	asset_path = "res://assets/characters/dog-1-1-1-1.png"
 
 func buy(player: PlayerArea) -> Variant:
@@ -21,12 +21,12 @@ func buy(player: PlayerArea) -> Variant:
 	}
 
 func _pressed():
-	$WildcardSelect.visible = true
-	$WildcardSelect.number_selected.connect(_on_number_selected)
+	WildcardSelect.visible = true
+	WildcardSelect.number_selected.connect(_on_number_selected)
 
 func _on_number_selected(number: int):
-	$WildcardSelect.number_selected.disconnect(_on_number_selected)
-	$WildcardSelect.visible = false
+	WildcardSelect.number_selected.disconnect(_on_number_selected)
+	WildcardSelect.visible = false
 
 	playerOwner.selectedVirtualResources.append(number)
 

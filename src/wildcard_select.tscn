@@ -11,16 +11,20 @@
 [ext_resource type="Texture2D" uid="uid://dffucsgj4gtg7" path="res://assets/resource7.png" id="9_fd37r"]
 [ext_resource type="Texture2D" uid="uid://b8ep218x4ygmm" path="res://assets/resource8.png" id="10_3no7p"]
 
-[node name="HBoxContainer" type="HBoxContainer"]
+[node name="WildcardSelect" type="CanvasLayer"]
+layer = 2
+visible = false
+script = ExtResource("1_3y8vc")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
-script = ExtResource("1_3y8vc")
 
-[node name="CardResource1" type="TextureButton" parent="."]
+[node name="CardResource1" type="TextureButton" parent="HBoxContainer"]
 custom_minimum_size = Vector2(150, 225)
 layout_mode = 2
 size_flags_vertical = 4
@@ -30,7 +34,7 @@ stretch_mode = 4
 script = ExtResource("2_5o4ks")
 metadata/_custom_type_script = "uid://c51d06hyr4cxq"
 
-[node name="CardResource2" type="TextureButton" parent="."]
+[node name="CardResource2" type="TextureButton" parent="HBoxContainer"]
 custom_minimum_size = Vector2(150, 225)
 layout_mode = 2
 size_flags_vertical = 4
@@ -40,7 +44,7 @@ stretch_mode = 4
 script = ExtResource("2_5o4ks")
 metadata/_custom_type_script = "uid://c51d06hyr4cxq"
 
-[node name="CardResource3" type="TextureButton" parent="."]
+[node name="CardResource3" type="TextureButton" parent="HBoxContainer"]
 custom_minimum_size = Vector2(150, 225)
 layout_mode = 2
 size_flags_vertical = 4
@@ -50,7 +54,7 @@ stretch_mode = 4
 script = ExtResource("2_5o4ks")
 metadata/_custom_type_script = "uid://c51d06hyr4cxq"
 
-[node name="CardResource4" type="TextureButton" parent="."]
+[node name="CardResource4" type="TextureButton" parent="HBoxContainer"]
 custom_minimum_size = Vector2(150, 225)
 layout_mode = 2
 size_flags_vertical = 4
@@ -60,7 +64,7 @@ stretch_mode = 4
 script = ExtResource("2_5o4ks")
 metadata/_custom_type_script = "uid://c51d06hyr4cxq"
 
-[node name="CardResource5" type="TextureButton" parent="."]
+[node name="CardResource5" type="TextureButton" parent="HBoxContainer"]
 custom_minimum_size = Vector2(150, 225)
 layout_mode = 2
 size_flags_vertical = 4
@@ -70,7 +74,7 @@ stretch_mode = 4
 script = ExtResource("2_5o4ks")
 metadata/_custom_type_script = "uid://c51d06hyr4cxq"
 
-[node name="CardResource6" type="TextureButton" parent="."]
+[node name="CardResource6" type="TextureButton" parent="HBoxContainer"]
 custom_minimum_size = Vector2(150, 225)
 layout_mode = 2
 size_flags_vertical = 4
@@ -80,7 +84,7 @@ stretch_mode = 4
 script = ExtResource("2_5o4ks")
 metadata/_custom_type_script = "uid://c51d06hyr4cxq"
 
-[node name="CardResource7" type="TextureButton" parent="."]
+[node name="CardResource7" type="TextureButton" parent="HBoxContainer"]
 custom_minimum_size = Vector2(150, 225)
 layout_mode = 2
 size_flags_vertical = 4
@@ -90,7 +94,7 @@ stretch_mode = 4
 script = ExtResource("2_5o4ks")
 metadata/_custom_type_script = "uid://c51d06hyr4cxq"
 
-[node name="CardResource8" type="TextureButton" parent="."]
+[node name="CardResource8" type="TextureButton" parent="HBoxContainer"]
 custom_minimum_size = Vector2(150, 225)
 layout_mode = 2
 size_flags_vertical = 4

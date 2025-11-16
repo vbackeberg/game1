@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bov0ixvuurdny"]
+[gd_scene load_steps=2 format=3 uid="uid://bov0ixvuurdny"]
 
 [ext_resource type="Script" uid="uid://dyk64urnjk6ns" path="res://src/player_area.gd" id="1_omm1s"]
-[ext_resource type="PackedScene" uid="uid://cfwds4kpyxtrp" path="res://src/wildcard_select.tscn" id="2_qpexq"]
 
 [node name="PlayerArea" type="Node2D"]
 script = ExtResource("1_omm1s")
@@ -10,16 +9,5 @@ script = ExtResource("1_omm1s")
 offset_right = 8.0
 offset_bottom = 8.0
 text = "Confirm discard"
-
-[node name="wildcard_select" parent="." instance=ExtResource("2_qpexq")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 26.0
-offset_top = 271.0
-offset_right = 1258.0
-offset_bottom = 496.0
 
 [connection signal="pressed" from="ConfirmDiscardButton" to="." method="_on_confirm_discard_button_pressed"]
