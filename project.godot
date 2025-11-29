@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 MiddleArea="*res://src/middle_area.tscn"
 WildcardSelect="*res://src/wildcard_select.tscn"
+GameManager="*res://src/game_manager.gd"
 
 [display]
 
