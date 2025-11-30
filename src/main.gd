@@ -1,7 +1,7 @@
 extends Node
 
 var middleVisible: bool
-
+var currentPlayer: PlayerArea
 var currentPlayerIdx: int
 var players: Array[PlayerArea]
 var twelvePointsReached: bool

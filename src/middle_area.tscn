@@ -66,4 +66,4 @@ vertical_alignment = 1
 
 [connection signal="pressed" from="StackResources" to="." method="_on_stack_resources_pressed"]
 [connection signal="pressed" from="StackCharacters" to="." method="_on_stack_characters_pressed"]
-[connection signal="pressed" from="NewCardsButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="NewCardsButton" to="." method="_on_new_cards_button_pressed"]
