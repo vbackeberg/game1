@@ -30,5 +30,5 @@ func _pressed():
 	playerOwner.resourcesOnHand.clear()
 
 	for n in cntResources:
-		var card = MiddleArea.draw_resource()
+		var card = GameManager.draw_resource()
 		playerOwner.add_resource(card)

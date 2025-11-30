@@ -19,5 +19,5 @@ func buy(player: PlayerArea) -> Variant:
 
 
 func _immediate_effect():
-	MiddleArea.draw_diamond()
-	MiddleArea.draw_diamond()
+	GameManager.draw_character()
+	GameManager.draw_character()

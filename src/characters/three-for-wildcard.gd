@@ -26,7 +26,7 @@ func _pressed():
 
 	var card = playerOwner.selectedResources.pop_back()
 
-	MiddleArea.graveyardResources.append(card.resourceValue)
+	GameManager.graveyardResources.append(card.resourceValue)
 	playerOwner.resourcesOnHand.erase(card)
 	card.queue_free()
 
