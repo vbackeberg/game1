@@ -5,7 +5,7 @@ var characterCards: Array[CardCharacter]
 var graveyardResources: Array[int]
 var graveyardCharacters: Array[CardCharacter]
 
-func _ready() -> void:
+func _init() -> void:
 	resourceCards = [1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8]
 	resourceCards.shuffle()
 
@@ -42,4 +42,3 @@ func _replenish_characters():
 	characterCards = graveyardCharacters.duplicate()
 	characterCards.shuffle()
 	graveyardCharacters = []
-
