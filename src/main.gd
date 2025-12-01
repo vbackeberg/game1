@@ -15,6 +15,10 @@ func _ready() -> void:
 	$WinOverlay.visible = false
 	twelvePointsReached = false
 	lastTurn = false
+	
+	for player in players:
+		player.discard_started.connect(on_discard_started.bind())
+		player.discard_finished.connect(on_discard_finished.bind())
 
 
 func _input(event):

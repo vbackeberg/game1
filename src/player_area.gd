@@ -40,8 +40,6 @@ func _ready() -> void:
 	discardMode = false
 	numToDiscard = 0
 	$ConfirmDiscardButton.visible = false
-	discard_started.connect(get_parent().on_discard_started.bind())
-	discard_finished.connect(get_parent().on_discard_finished.bind())
 
 ## Appends card
 func add_resource(value: int):
