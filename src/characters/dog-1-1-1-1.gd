@@ -30,7 +30,7 @@ func _on_number_selected(number: int):
 
 	playerOwner.selectedVirtualResources.append(number)
 
-	var virtual_resource = load("res://src/virtual_resource.tscn").instantiate() as TextureButton
+	var virtual_resource = load("res://src/virtual_resource.tscn").instantiate() as VirtualResource
 	virtual_resource.custom_minimum_size = Vector2(128.0, 200.0)
 	virtual_resource.texture_normal = load("res://assets/resource" + str(number) + ".png")
 	virtual_resource.position.x = self.position.x
@@ -39,6 +39,6 @@ func _on_number_selected(number: int):
 
 	add_child(virtual_resource)
 
-func _on_virtual_resource_pressed(virtual_resource: TextureButton):
+func _on_virtual_resource_pressed(virtual_resource: VirtualResource):
 	virtual_resource.queue_free()
 	playerOwner.selectedVirtualResources.erase(virtual_resource.resourceValue)
