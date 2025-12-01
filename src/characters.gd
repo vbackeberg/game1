@@ -58,4 +58,3 @@ static func load_cards() -> Array[CardCharacter]:
 		DiamondsSubtract.new(),
 		ThreeForWildcard.new(),
 	]
-
