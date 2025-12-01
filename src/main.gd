@@ -50,10 +50,10 @@ func _on_action_used():
 	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
 
 func _on_discard_started():
-	$MiddleArea._on_discard_started()
+	$MiddleArea.on_discard_started()
 
 func _on_discard_finished():
-	$MiddleArea._on_discard_finished()
+	$MiddleArea.on_discard_finished()
 	_next_player()
 
 func _next_player():
