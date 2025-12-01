@@ -17,8 +17,8 @@ func _ready() -> void:
 	lastTurn = false
 	
 	for player in players:
-		player.discard_started.connect(on_discard_started.bind())
-		player.discard_finished.connect(on_discard_finished.bind())
+		player.discard_started.connect(_on_discard_started.bind())
+		player.discard_finished.connect(_on_discard_finished.bind())
 
 
 func _input(event):
@@ -49,11 +49,11 @@ func _on_action_used():
 	
 	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
 
-func on_discard_started():
-	$MiddleArea.on_discard_started()
+func _on_discard_started():
+	$MiddleArea._on_discard_started()
 
-func on_discard_finished():
-	$MiddleArea.on_discard_finished()
+func _on_discard_finished():
+	$MiddleArea._on_discard_finished()
 	_next_player()
 
 func _next_player():
