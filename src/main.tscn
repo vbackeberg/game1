@@ -78,6 +78,7 @@ theme_override_font_sizes/font_size = 48
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="action_used" from="MiddleArea" to="." method="_on_action_used"]
 [connection signal="action_used" from="PlayerArea" to="." method="_on_action_used"]
 [connection signal="visibility_changed" from="PlayerArea" to="PlayerArea" method="_on_visibility_changed"]
 [connection signal="action_used" from="PlayerArea2" to="." method="_on_action_used"]
