@@ -119,7 +119,7 @@ static func _find(player: PlayerArea, given: Array[int]) -> Variant:
 		if idx != -1:
 			player.selectedVirtualResources.remove_at(idx)
 		else:
-			idx = player.selectedResources.find(g)
+			idx = player.selectedResources.find_custom(func(r): return r.resourceValue == g)
 			if idx != -1:
 				resources.append(player.selectedResources.pop_at(idx))
 			else:
@@ -149,7 +149,7 @@ static func _find_either_or(player: PlayerArea, eitherV: Array[int], orV: Array[
 		if idx != -1:
 			indicesVirtualResources.append(idx)
 		else:
-			idx = player.selectedResources.find(e)
+			idx = player.selectedResources.find_custom(func(r): return r.resourceValue == e)
 			if idx != -1:
 				indicesResources.append(idx)
 			else:
@@ -167,7 +167,7 @@ static func _find_either_or(player: PlayerArea, eitherV: Array[int], orV: Array[
 		if idx != -1:
 			indicesVirtualResources.append(idx)
 		else:
-			idx = player.selectedResources.find(o)
+			idx = player.selectedResources.find_custom(func(r): return r.resourceValue == o)
 			if idx != -1:
 				indicesResources.append(idx)
 			else:
