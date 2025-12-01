@@ -97,7 +97,7 @@ func _on_resource_card_pressed(card: CardResource) -> void:
 
 func _on_confirm_discard_button_pressed() -> void:
 	for r in selectedResources:
-		get_parent().on_resource_spent(r.resourceValue)
+		GameManager.graveyardResources.append(r)
 		resourcesOnHand.erase(r)
 		r.queue_free()
 		numToDiscard -= 1
@@ -143,7 +143,7 @@ func _on_unplayed_character_card_pressed(card: CardCharacter) -> void:
 		_reorder_resource_cards()
 		
 		for d in paid.diamonds:
-			get_parent().on_diamond_spent(d)
+			GameManager.graveyardCharacters.append(d)
 			diamonds.erase(d)
 			d.queue_free()
 

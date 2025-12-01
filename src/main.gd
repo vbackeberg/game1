@@ -74,13 +74,6 @@ func _next_player():
 
 	_set_current_player((currentPlayerIdx + 1) % players.size())
 
-func on_resource_spent(value):
-	GameManager.graveyardResources.append(value)
-
-func on_diamond_spent(d):
-	GameManager.graveyardCharacters.append(d)
-
-
 ## Finds player with highest points and displays them as Winner
 func _find_winner():
 	var sortedPlayers = players.duplicate()
