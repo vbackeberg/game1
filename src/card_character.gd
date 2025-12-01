@@ -41,7 +41,7 @@ static func _sums_up_to_s_using_exactly_n(player: PlayerArea, s: int, n: int) ->
 
 	while player.selectedResources.size() > 0:
 		var card = player.selectedResources.pop_back()
-		s -= card.value
+		s -= card.resourceValue
 		n -= 1
 		resources.append(card)
 
@@ -58,7 +58,7 @@ static func _sums_up_to_s(player: PlayerArea, s: int) -> Variant:
 	
 	while player.selectedResources.size() > 0:
 		var card = player.selectedResources.pop_back()
-		s -= card.value
+		s -= card.resourceValue
 		resources.append(card)
 
 	if s != 0:
