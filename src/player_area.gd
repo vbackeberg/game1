@@ -35,6 +35,7 @@ func _ready() -> void:
 	charactersPlayed = []
 	visible = false
 	actionsPerTurn = 3
+	actionsLeft = actionsPerTurn
 	victoryPoints = 0
 
 	discardMode = false
@@ -123,7 +124,7 @@ func add_character(card: CardCharacter):
 # If any in paid is null, player cannot play the character.
 # Removes spent resources and diamonds and puts them on graveyard
 func _on_unplayed_character_card_pressed(card: CardCharacter) -> void:
-	var paid = card.buy.call(self, card)
+	var paid = card.buy.call(self)
 	if paid == null:
 		print("Selected resources are not correct.")
 		# TODO show label with missing resources
