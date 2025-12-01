@@ -25,11 +25,11 @@ func _input(event):
 # When discard mode, deactivate cards drawing, show how many to discard
 
 func toggle_view():
-	if MiddleArea.visible == true:
-		MiddleArea.visible = false
+	if $MiddleArea.visible == true:
+		$MiddleArea.visible = false
 		currentPlayer.visible = true
 	else:
-		MiddleArea.visible = true
+		$MiddleArea.visible = true
 		currentPlayer.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -46,10 +46,10 @@ func _on_action_used():
 	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
 
 func on_discard_started():
-	MiddleArea.on_discard_started()
+	$MiddleArea.on_discard_started()
 
 func on_discard_finished():
-	MiddleArea.on_discard_finished()
+	$MiddleArea.on_discard_finished()
 	_next_player()
 
 func _next_player():
@@ -66,7 +66,7 @@ func _next_player():
 
 	currentPlayer.actionsLeft = currentPlayer.actionsPerTurn
 	currentPlayer.visible = false
-	MiddleArea.visible = true
+	$MiddleArea.visible = true
 
 	_set_current_player((currentPlayerIdx + 1) % players.size())
 
