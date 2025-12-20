@@ -4,3 +4,13 @@
 
 [node name="CardCharacter" type="TextureButton"]
 script = ExtResource("1_towqi")
+
+[node name="ActivatedOverlay" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ActivatedLabel" type="Label" parent="ActivatedOverlay"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
