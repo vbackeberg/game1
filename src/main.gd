@@ -50,6 +50,9 @@ func _on_action_used():
 		for r in currentPlayer.selectedResources:
 			r.deselect()
 		
+		for d in currentPlayer.selectedDiamonds:
+			d.deselect()
+		
 		currentPlayer.selectedResources.clear()
 		currentPlayer.selectedVirtualResources.clear()
 		currentPlayer.selectedDiamonds.clear()
