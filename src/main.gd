@@ -45,6 +45,15 @@ func _on_action_used():
 
 	if currentPlayer.actionsLeft == 0:
 		print("All actions used. Player " + str(currentPlayerIdx) + "'s turn is over.")
+		
+		# TODO Deselect r virt and dia. Consider Clean Up Phase
+		for r in currentPlayer.selectedResources:
+			r.deselect()
+		
+		currentPlayer.selectedResources.clear()
+		currentPlayer.selectedVirtualResources.clear()
+		currentPlayer.selectedDiamonds.clear()
+
 		currentPlayer.discard_if_too_many_cards()
 	
 	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
