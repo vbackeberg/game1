@@ -5,7 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "GDScript: Launch Pinned File",
+            "name": "GDScript: Launch main scene",
+            "type": "godot",
+            "request": "launch",
+            "scene": "main",
+            "project": "",
+            "additional_options": ""
+        },
+        {
+            "name": "GDScript: Launch pinned scene",
             "type": "godot",
             "request": "launch",
             "scene": "pinned",
