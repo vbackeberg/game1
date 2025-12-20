@@ -20,15 +20,18 @@ func select(forDiscard := false):
 func deselect():
 	self.modulate = Color(1, 1, 1) # Reset to normal color
 
+## Override to set a permanent effect
+func activate_permanent_effect():
+	pass
+
+func _is_owner(player: PlayerArea):
+	return player == playerOwner
+
 static func concat(arr: Array) -> String:
 	var result = ""
 	for num in arr:
 		result += str(num)
 	return result
-
-func _is_owner(player: PlayerArea):
-	return player == playerOwner
-
 
 # Buy functions
 
