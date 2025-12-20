@@ -13,7 +13,7 @@ func buy(player: PlayerArea) -> Variant:
 	if not resources:
 		return null
 
-	self.pressed.connect(_pressed)
+	self.pressed.connect(_on_pressed)
 
 	return {
 		resources = resources,
@@ -21,5 +21,5 @@ func buy(player: PlayerArea) -> Variant:
 	}
 
 
-func _pressed():
+func _on_pressed():
 	playerOwner.selectedVirtualResources.append(1)

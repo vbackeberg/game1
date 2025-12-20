@@ -13,14 +13,15 @@ func buy(player: PlayerArea) -> Variant:
 	if not resources:
 		return null
 
-	_immediate_effect()
+	_immediate_effect(player)
 
 	return {
 		resources = resources,
 		diamonds = []
 	}
 
-func _immediate_effect():
-	MiddleArea.draw_diamond()
+func _immediate_effect(player: PlayerArea):
+	var card = GameManager.draw_character()
+	player.add_diamond(card)
 
 # TODO: Allow playing 2s as diamonds

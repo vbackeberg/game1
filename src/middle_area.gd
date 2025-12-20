@@ -2,26 +2,9 @@ extends Node2D
 
 const CARD_WIDTH = 128.0
 
-var resourceCards: Array[int]
-var characterCards: Array[CardCharacter]
 var cardsLaidOut: Array[CardResource]
 
-@export var graveyardResources: Array[int]
-@export var graveyardCharacters: Array[CardCharacter]
-
 func _ready() -> void:
-	var characters = preload("res://src/characters.gd")
-
-	$DiscardOverlay.visible = false
-
-	resourceCards = [1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8]
-	resourceCards.shuffle()
-	
-	characterCards = characters.load_cards()
-	characterCards.shuffle()
-	
-	graveyardResources = []
-	graveyardCharacters = []
 	cardsLaidOut = []
 	cardsLaidOut.resize(4)
 
@@ -38,50 +21,19 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 
-
-func _draw_resource() -> int:
-	if resourceCards.size() == 0:
-		if graveyardResources.size() == 0:
-			print("No more resource cards left in stack or graveyard!")
-		else:
-			_replenish_resources()
-
-	var card = resourceCards.pop_back()
-	return card
-
-
 func _on_stack_resources_pressed() -> void:
-	var card = _draw_resource()
-	get_parent().currentPlayer.add_resource(card)
+	var value = GameManager.draw_resource()
+	get_parent().currentPlayer.add_resource(value)
 	action_used.emit()
-
-func _replenish_resources():
-	resourceCards = graveyardResources.duplicate()
-	resourceCards.shuffle()
-	graveyardResources = []
-	
-func _replenish_characters():
-	characterCards = graveyardCharacters.duplicate()
-	characterCards.shuffle()
-	graveyardCharacters = []
 	
 func _on_stack_characters_pressed() -> void:
 	if get_parent().currentPlayer.charactersOnPayField.size() == 2:
 		print("Player has 2 character cards, already.")
 		return
 
-	var card = _draw_character()
+	var card = GameManager.draw_character()
 	get_parent().currentPlayer.add_character(card)
 	action_used.emit()
-
-func _draw_character():
-	if characterCards.size() == 0:
-		if graveyardCharacters.size() == 0:
-			print("No more character cards left in stack or graveyard!")
-		else:
-			_replenish_characters()
-
-	return characterCards.pop_back()
 
 ## Move the card to the player's hand
 func _on_resource_card_pressed(card: CardResource) -> void:
@@ -91,7 +43,7 @@ func _on_resource_card_pressed(card: CardResource) -> void:
 	action_used.emit()
 
 func place_resource(slot: int):
-	var value = _draw_resource()
+	var value = GameManager.draw_resource()
 
 	var card_node = load("res://src/card_resource.tscn").instantiate() as CardResource
 	card_node.texture_normal = load("res://assets/resource" + str(value) + ".png")
@@ -120,14 +72,7 @@ func _on_character_card_pressed(card: CardCharacter) -> void:
 	action_used.emit()
 
 func place_character_in_middle(slot: int):
-	if characterCards.size() == 0:
-		if graveyardCharacters.size() == 0:
-			print("No more character cards left in stack or graveyard!")
-			return
-		else:
-			_replenish_characters()
-
-	var card = characterCards.pop_back()
+	var card = GameManager.draw_character()
 	
 	card.visible = visible
 	card.slot = slot
@@ -136,10 +81,6 @@ func place_character_in_middle(slot: int):
 	card.position.x = $StackCharacters.position.x - (1 + slot) * (CARD_WIDTH + 24.0)
 	card.position.y = 256
 	card.pressed.connect(_on_character_card_pressed.bind(card))
-
-func _draw_diamond():
-	var card = characterCards.pop_back()
-	get_parent().currentPlayer.add_diamond(card)
 
 func concat(arr: Array) -> String:
 	var result = ""
@@ -151,9 +92,9 @@ func concat(arr: Array) -> String:
 signal action_used()
 
 ## Places 4 new	 cards
-func _on_button_pressed() -> void:
+func _on_new_cards_button_pressed() -> void:
 	for i in cardsLaidOut.size():
-		graveyardResources.append(cardsLaidOut[i].resourceValue)
+		GameManager.graveyardResources.append(cardsLaidOut[i].resourceValue)
 		cardsLaidOut[i].queue_free()
 		place_resource(i)
 	action_used.emit()

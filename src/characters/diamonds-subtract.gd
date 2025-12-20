@@ -21,6 +21,6 @@ func buy(player: PlayerArea) -> Variant:
 	}
 
 func _immediate_effect():
-	MiddleArea.draw_diamond()
+	GameManager.draw_character()
 
 # TODO: Enable subtraction when playing diamond

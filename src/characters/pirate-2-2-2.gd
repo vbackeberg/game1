@@ -17,8 +17,6 @@ func buy(player: PlayerArea) -> Variant:
 	if not resources:
 		return null
 
-	self.pressed.connect(_pressed)
-
 	return {
 		resources = resources,
 		diamonds = [diamond]

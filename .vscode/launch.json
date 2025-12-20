@@ -1,0 +1,24 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "GDScript: Launch main scene",
+            "type": "godot",
+            "request": "launch",
+            "scene": "main",
+            "project": "",
+            "additional_options": ""
+        },
+        {
+            "name": "GDScript: Launch pinned scene",
+            "type": "godot",
+            "request": "launch",
+            "scene": "pinned",
+            "project": "",
+            "additional_options": ""
+        },
+    ]
+}

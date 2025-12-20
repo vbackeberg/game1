@@ -1,9 +1,8 @@
 extends Node
 
 var middleVisible: bool
-
-var currentPlayerIdx: int
 var currentPlayer: PlayerArea
+var currentPlayerIdx: int
 var players: Array[PlayerArea]
 var twelvePointsReached: bool
 var lastTurn: bool
@@ -16,6 +15,10 @@ func _ready() -> void:
 	$WinOverlay.visible = false
 	twelvePointsReached = false
 	lastTurn = false
+	
+	for player in players:
+		player.discard_started.connect(_on_discard_started.bind())
+		player.discard_finished.connect(_on_discard_finished.bind())
 
 
 func _input(event):
@@ -26,11 +29,11 @@ func _input(event):
 # When discard mode, deactivate cards drawing, show how many to discard
 
 func toggle_view():
-	if MiddleArea.visible == true:
-		MiddleArea.visible = false
+	if $MiddleArea.visible == true:
+		$MiddleArea.visible = false
 		currentPlayer.visible = true
 	else:
-		MiddleArea.visible = true
+		$MiddleArea.visible = true
 		currentPlayer.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -46,11 +49,11 @@ func _on_action_used():
 	
 	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
 
-func on_discard_started():
-	MiddleArea.on_discard_started()
+func _on_discard_started():
+	$MiddleArea.on_discard_started()
 
-func on_discard_finished():
-	MiddleArea.on_discard_finished()
+func _on_discard_finished():
+	$MiddleArea.on_discard_finished()
 	_next_player()
 
 func _next_player():
@@ -65,17 +68,11 @@ func _next_player():
 		_find_winner()
 		return
 
+	currentPlayer.actionsLeft = currentPlayer.actionsPerTurn
 	currentPlayer.visible = false
-	MiddleArea.visible = true
+	$MiddleArea.visible = true
 
 	_set_current_player((currentPlayerIdx + 1) % players.size())
-
-func on_resource_spent(value):
-	$MiddleArea.graveyardResources.append(value)
-
-func on_diamond_spent(d):
-	$MiddleArea.graveyardCharacters.append(d)
-
 
 ## Finds player with highest points and displays them as Winner
 func _find_winner():
@@ -97,11 +94,12 @@ func _on_new_game_button_pressed() -> void:
 	get_tree().reload_current_scene()
 
 func _set_current_player(nextPlayer: int):
-	currentPlayer.actionsLeft = currentPlayer.actionsPerTurn
 	currentPlayerIdx = nextPlayer
 	currentPlayer = players[currentPlayerIdx]
 	$CurrentPlayerLabel.text = "Player " + str(currentPlayerIdx) + "'s turn"
 	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
+
+
 
 ## Used by character that adds 3 actions.
 func _on_actions_left_changed():

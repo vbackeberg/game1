@@ -10,8 +10,8 @@ var playerOwner: PlayerArea
 
 func _ready() -> void:
 	var p = "res://assets/character_back.png" if backside else asset_path
-	texture_normal = load(p)
-	scale = Vector2(128.0, 200.0) / texture_normal.get_size()
+	self.texture_normal = load(p)
+	scale = Vector2(128.0, 200.0) / self.texture_normal.get_size()
 	pass
 
 func select(forDiscard := false):
@@ -41,7 +41,7 @@ static func _sums_up_to_s_using_exactly_n(player: PlayerArea, s: int, n: int) ->
 
 	while player.selectedResources.size() > 0:
 		var card = player.selectedResources.pop_back()
-		s -= card.value
+		s -= card.resourceValue
 		n -= 1
 		resources.append(card)
 
@@ -58,7 +58,7 @@ static func _sums_up_to_s(player: PlayerArea, s: int) -> Variant:
 	
 	while player.selectedResources.size() > 0:
 		var card = player.selectedResources.pop_back()
-		s -= card.value
+		s -= card.resourceValue
 		resources.append(card)
 
 	if s != 0:
@@ -119,7 +119,7 @@ static func _find(player: PlayerArea, given: Array[int]) -> Variant:
 		if idx != -1:
 			player.selectedVirtualResources.remove_at(idx)
 		else:
-			idx = player.selectedResources.find(g)
+			idx = player.selectedResources.find_custom(func(r): return r.resourceValue == g)
 			if idx != -1:
 				resources.append(player.selectedResources.pop_at(idx))
 			else:
@@ -149,7 +149,7 @@ static func _find_either_or(player: PlayerArea, eitherV: Array[int], orV: Array[
 		if idx != -1:
 			indicesVirtualResources.append(idx)
 		else:
-			idx = player.selectedResources.find(e)
+			idx = player.selectedResources.find_custom(func(r): return r.resourceValue == e)
 			if idx != -1:
 				indicesResources.append(idx)
 			else:
@@ -167,7 +167,7 @@ static func _find_either_or(player: PlayerArea, eitherV: Array[int], orV: Array[
 		if idx != -1:
 			indicesVirtualResources.append(idx)
 		else:
-			idx = player.selectedResources.find(o)
+			idx = player.selectedResources.find_custom(func(r): return r.resourceValue == o)
 			if idx != -1:
 				indicesResources.append(idx)
 			else:
