@@ -131,6 +131,7 @@ func _on_unplayed_character_card_pressed(card: CardCharacter) -> void:
 		# TODO show label with missing resources
 		selectedResources.clear()
 		selectedDiamonds.clear()
+		selectedVirtualResources.clear()
 		
 	else:
 		for r in paid.resources:
