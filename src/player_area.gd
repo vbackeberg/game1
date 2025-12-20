@@ -135,7 +135,7 @@ func _on_unplayed_character_card_pressed(card: CardCharacter) -> void:
 		
 	else:
 		for r in paid.resources:
-			get_parent().on_resource_spent(r.resourceValue)
+			GameManager.graveyardResources.append(r.resourceValue)
 			resourcesOnHand.erase(r)
 			r.queue_free()
 

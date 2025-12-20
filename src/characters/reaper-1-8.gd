@@ -21,11 +21,12 @@ func buy(player: PlayerArea) -> Variant:
 	}
 
 
+# TODO in After End Phase
 func _on_pressed():
 	var cntResources = playerOwner.resourcesOnHand.size()
 
 	for r in playerOwner.resourcesOnHand:
-		get_parent().on_resource_spent(r.resourceValue)
+		GameManager.graveyardResources.append(r.resourceValue)
 		r.queue_free()
 	playerOwner.resourcesOnHand.clear()
 
