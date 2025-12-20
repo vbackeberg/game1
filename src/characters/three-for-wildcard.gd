@@ -13,14 +13,14 @@ func buy(player: PlayerArea) -> Variant:
 	if not resources:
 		return null
 
-	self.pressed.connect(_pressed)
+	self.pressed.connect(_on_pressed)
 
 	return {
 		resources = resources,
 		diamonds = []
 	}
 
-func _pressed():
+func _on_pressed():
 	if not _n_resources_selected(playerOwner, 1):
 		return
 
