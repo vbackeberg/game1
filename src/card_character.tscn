@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://d0t6ik6al47h0" path="res://src/card_character.gd" id="1_towqi"]
 
-[node name="CardCharacter" type="Sprite2D"]
+[node name="CardCharacter" type="TextureButton"]
 script = ExtResource("1_towqi")
