@@ -67,7 +67,7 @@ static func _sums_up_to_s(player: PlayerArea, s: int) -> Variant:
 	return resources
 
 static func _n_resources_selected(player: PlayerArea, n: int):
-	return player.selectedVirtualResources.size() + player.selectedResources.size() != n
+	return player.selectedVirtualResources.size() + player.selectedResources.size() == n
 
 static func _is_three_odd_or_even(player: PlayerArea, should_be_even: bool) -> Variant:
 	var resources = []
