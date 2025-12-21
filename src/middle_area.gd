@@ -73,8 +73,7 @@ func _on_character_card_pressed(card: CardCharacter) -> void:
 
 func place_character_in_middle(slot: int):
 	var card = GameManager.draw_character()
-	
-	card.visible = visible
+	card.instantiate()	
 	card.slot = slot
 	add_child(card)
 

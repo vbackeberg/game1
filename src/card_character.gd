@@ -2,17 +2,16 @@ class_name CardCharacter
 extends TextureButton
 
 var slot: int
-
 var points: int
-var asset_path: String
+var asset_path:= "res://assets/character_back.png"
 var backside := false
 var playerOwner: PlayerArea
+var scene:= preload("res://src/card_character.tscn")
 
-func _ready() -> void:
-	var p = "res://assets/character_back.png" if backside else asset_path
-	self.texture_normal = load(p)
-	scale = Vector2(128.0, 200.0) / self.texture_normal.get_size()
-	pass
+func instantiate():
+	var instance = scene.instantiate() as CardCharacter
+	instance.texture_normal = load(asset_path)
+	add_child(instance)
 
 func select(forDiscard := false):
 	self.modulate = Color(1.2, 0.8, 0.8) if forDiscard else Color(1.2, 1.2, 0.8) # Yellow and Red tint

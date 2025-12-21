@@ -110,6 +110,7 @@ func _on_confirm_discard_button_pressed() -> void:
 
 ## Adds a character card with given specs and puts it on the right side.
 func add_character(card: CardCharacter):
+	card.instantiate()
 	card.visible = visible
 	card.playerOwner = self
 	charactersOnPayField.append(card)
