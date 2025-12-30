@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1s1v3ox1pfj0"]
+
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_fpfy4"]
+[ext_resource type="Texture2D" uid="uid://bgwvqenj0huar" path="res://assets/characters/dog-1-1-1-1.png" id="2_3s178"]
+
+[node name="Dog1111" instance=ExtResource("1_fpfy4")]
+texture_normal = ExtResource("2_3s178")

@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfsw66m20onlv"]
+
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_efdha"]
+[ext_resource type="Texture2D" uid="uid://b4uf2jcjpo6xi" path="res://assets/characters/dwarf-3.png" id="2_3loji"]
+
+[node name="Nils3" instance=ExtResource("1_efdha")]
+texture_normal = ExtResource("2_3loji")

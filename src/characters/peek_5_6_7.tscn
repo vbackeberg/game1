@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1wb3cea5c1gr"]
+
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_6avei"]
+[ext_resource type="Texture2D" uid="uid://vqexdgcx6lo3" path="res://assets/characters/peek-5-6-7.png" id="2_0oj8y"]
+
+[node name="Peek567" instance=ExtResource("1_6avei")]
+texture_normal = ExtResource("2_0oj8y")

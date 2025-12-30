@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://8545ah10frfv"]
+
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_x7xrb"]
+[ext_resource type="Texture2D" uid="uid://wtd6k1chmgq7" path="res://assets/characters/kerberos-x-x-x.png" id="2_aq30l"]
+
+[node name="KerberosXXX" instance=ExtResource("1_x7xrb")]
+texture_normal = ExtResource("2_aq30l")

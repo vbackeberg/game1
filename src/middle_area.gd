@@ -64,7 +64,7 @@ func _on_character_card_pressed(card: CardCharacter) -> void:
 	if get_parent().currentPlayer.charactersOnPayField.size() == 2:
 		print("Player has 2 character cards, already.")
 		return
-	
+
 	card.pressed.disconnect(_on_character_card_pressed)
 	remove_child(card)
 	get_parent().currentPlayer.add_character(card)
@@ -72,10 +72,9 @@ func _on_character_card_pressed(card: CardCharacter) -> void:
 	action_used.emit()
 
 func place_character_in_middle(slot: int):
-	var card = GameManager.draw_character()
-	card.instantiate()	
+	var card = GameManager.draw_character().instantiate()
 	card.slot = slot
-	add_child(card)
+	self.add_child(card)
 
 	card.position.x = $StackCharacters.position.x - (1 + slot) * (CARD_WIDTH + 24.0)
 	card.position.y = 256

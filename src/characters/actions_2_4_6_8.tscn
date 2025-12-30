@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0alqh6qpr3km"]
+
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_2ueeb"]
+[ext_resource type="Texture2D" uid="uid://drf1armyicxwu" path="res://assets/characters/actions-2-4-6-8.png" id="2_ghmyn"]
+[ext_resource type="Script" uid="uid://t6vbxqxiukwe" path="res://src/characters/actions_2_4_6_8.gd" id="3_ghmyn"]
+
+[node name="actions-2-4-6-8" instance=ExtResource("1_2ueeb")]
+texture_normal = ExtResource("2_ghmyn")
+script = ExtResource("3_ghmyn")

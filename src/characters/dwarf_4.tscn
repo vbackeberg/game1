@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://b18f5oy301vix"]
+
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_v2pob"]
+[ext_resource type="Texture2D" uid="uid://cj0d5lqae23l7" path="res://assets/characters/dwarf-4.png" id="2_pqvon"]
+
+[node name="Dwarf4" instance=ExtResource("1_v2pob")]
+texture_normal = ExtResource("2_pqvon")

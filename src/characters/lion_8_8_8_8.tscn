@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://sf30sukasg0e"]
+
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_ynqcr"]
+[ext_resource type="Texture2D" uid="uid://dy7m8dn5fbkbx" path="res://assets/characters/lion-8-8-8-8.png" id="2_0rw2d"]
+
+[node name="Lion8888" instance=ExtResource("1_ynqcr")]
+texture_normal = ExtResource("2_0rw2d")

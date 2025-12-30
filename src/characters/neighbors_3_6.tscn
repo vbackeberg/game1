@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://f1baqxakxi0k"]
+
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_n7wwv"]
+[ext_resource type="Texture2D" uid="uid://q8oac86pmp53" path="res://assets/characters/neighbors-3-6.png" id="2_pxpqi"]
+
+[node name="Neighbors36" instance=ExtResource("1_n7wwv")]
+texture_normal = ExtResource("2_pxpqi")

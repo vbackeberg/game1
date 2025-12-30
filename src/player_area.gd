@@ -110,11 +110,10 @@ func _on_confirm_discard_button_pressed() -> void:
 
 ## Adds a character card with given specs and puts it on the right side.
 func add_character(card: CardCharacter):
-	card.instantiate()
+	add_child(card)
 	card.visible = visible
 	card.playerOwner = self
 	charactersOnPayField.append(card)
-	add_child(card)
 
 	var card_index = charactersOnPayField.size()
 	card.position.x = get_viewport().size.x - 24.0 - card_index * (CARD_WIDTH + 24.0)

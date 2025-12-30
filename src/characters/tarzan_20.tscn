@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5fo1jn762v14"]
+
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_d0iru"]
+[ext_resource type="Texture2D" uid="uid://bemx3bllmht53" path="res://assets/characters/tarzan-20.png" id="2_ow5yo"]
+
+[node name="Tarzan20" instance=ExtResource("1_d0iru")]
+texture_normal = ExtResource("2_ow5yo")

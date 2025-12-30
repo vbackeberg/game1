@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://gnw2jt6k22qj"]
+
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_quasr"]
+[ext_resource type="Texture2D" uid="uid://csu2hj7gjxyg3" path="res://assets/characters/viking-6-6-8-8.png" id="2_3ajac"]
+[ext_resource type="Script" uid="uid://daslh5741rhmk" path="res://src/characters/viking_6_6_8_8.gd" id="2_kr3gf"]
+
+[node name="Viking6688" instance=ExtResource("1_quasr")]
+texture_normal = ExtResource("2_3ajac")
+script = ExtResource("2_kr3gf")

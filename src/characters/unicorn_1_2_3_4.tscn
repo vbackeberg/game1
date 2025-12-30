@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgh45mu4y2o6j"]
+
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_05ph4"]
+[ext_resource type="Texture2D" uid="uid://cskyhvo8lov2a" path="res://assets/characters/unicorn-1-2-3-4.png" id="2_n24uo"]
+
+[node name="Unicorn1234" instance=ExtResource("1_05ph4")]
+texture_normal = ExtResource("2_n24uo")

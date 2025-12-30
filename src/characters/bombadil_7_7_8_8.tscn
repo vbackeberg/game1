@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://22uvvbc02xrf"]
+
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_ojhpd"]
+[ext_resource type="Texture2D" uid="uid://sssjp7k0jvov" path="res://assets/characters/bombadil-7-7-8-8.png" id="2_ncue3"]
+
+[node name="Bombadil7788" instance=ExtResource("1_ojhpd")]
+texture_normal = ExtResource("2_ncue3")

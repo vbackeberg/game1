@@ -8,11 +8,6 @@ var backside := false
 var playerOwner: PlayerArea
 var scene:= preload("res://src/card_character.tscn")
 
-func instantiate():
-	var instance = scene.instantiate() as CardCharacter
-	instance.texture_normal = load(asset_path)
-	add_child(instance)
-
 func select(forDiscard := false):
 	self.modulate = Color(1.2, 0.8, 0.8) if forDiscard else Color(1.2, 1.2, 0.8) # Yellow and Red tint
 

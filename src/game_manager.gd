@@ -1,7 +1,7 @@
 extends Node
 
 var resourceCards: Array[int]
-var characterCards: Array[CardCharacter]
+var characterCards: Array[Resource]
 var graveyardResources: Array[int]
 var graveyardCharacters: Array[CardCharacter]
 
@@ -9,8 +9,7 @@ func _init() -> void:
 	resourceCards = [1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8]
 	resourceCards.shuffle()
 
-	var characters = preload("res://src/characters.gd")
-	characterCards = characters.load_cards()
+	characterCards = Characters.get_characters()
 	characterCards.shuffle()
 
 

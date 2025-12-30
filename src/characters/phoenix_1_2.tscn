@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbk4xcrv6r2c6"]
+
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_tf52u"]
+[ext_resource type="Texture2D" uid="uid://p1kovbfahcju" path="res://assets/characters/phoenix-1-2.png" id="2_4sjei"]
+
+[node name="Phoenix12" instance=ExtResource("1_tf52u")]
+texture_normal = ExtResource("2_4sjei")

@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjxpotqgdwjck"]
+
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_nima6"]
+[ext_resource type="Texture2D" uid="uid://dw3n8khr2srq1" path="res://assets/characters/diamonds-subtract.png" id="2_6njcw"]
+
+[node name="DiamondsSubtract" instance=ExtResource("1_nima6")]
+texture_normal = ExtResource("2_6njcw")

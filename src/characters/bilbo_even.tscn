@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjr5oev42nfpw"]
+
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_f4ak6"]
+[ext_resource type="Texture2D" uid="uid://chba7q0osetxr" path="res://assets/characters/bilbo-even.png" id="2_p2ays"]
+
+[node name="BilboEven" instance=ExtResource("1_f4ak6")]
+texture_normal = ExtResource("2_p2ays")

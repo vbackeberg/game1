@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2q6honpisawc"]
+
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_piqck"]
+[ext_resource type="Texture2D" uid="uid://b8k04wn5i4xju" path="res://assets/characters/redhood-4-5-6-7-8.png" id="2_pkelr"]
+
+[node name="Redhood45678" instance=ExtResource("1_piqck")]
+texture_normal = ExtResource("2_pkelr")

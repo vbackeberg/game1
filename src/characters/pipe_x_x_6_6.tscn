@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm1jcx7hxncyn"]
+
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_vr477"]
+[ext_resource type="Texture2D" uid="uid://b2ok2s2sjsyw1" path="res://assets/characters/pipe-x-x-6-6.png" id="2_vpvrg"]
+
+[node name="PipeXX66" instance=ExtResource("1_vr477")]
+texture_normal = ExtResource("2_vpvrg")

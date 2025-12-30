@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://ds4brxoc4u571"]
+
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_8ax68"]
+[ext_resource type="Texture2D" uid="uid://j3rc6e54o26g" path="res://assets/characters/pirate-2-2-2.png" id="2_jqsh5"]
+
+[node name="Pirate222" instance=ExtResource("1_8ax68")]
+texture_normal = ExtResource("2_jqsh5")

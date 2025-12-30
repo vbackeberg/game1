@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://ug6xqf22kwbh"]
+
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_ac6yo"]
+[ext_resource type="Texture2D" uid="uid://7h0hhhkk56m1" path="res://assets/characters/tomcat-3-4-5.png" id="2_q6ubt"]
+
+[node name="tomcat345" instance=ExtResource("1_ac6yo")]
+texture_normal = ExtResource("2_q6ubt")
