@@ -1,9 +1,12 @@
 class_name DwarfThree
 extends CardCharacter
 
+var resourceValue := 3
+
 func _init():
 	points = 1
 	asset_path = "res://assets/characters/dwarf-3.png"
+	$ActivatedOverlay/ActivatedLabel.text = str(resourceValue)
 
 func buy(player: PlayerArea) -> Variant:
 	if not _is_owner(player) or not _n_resources_selected(player, 2):
@@ -21,4 +24,10 @@ func buy(player: PlayerArea) -> Variant:
 	}
 
 func _on_pressed():
-	playerOwner.selectedVirtualResources.append(3)
+	var idx = playerOwner.selectedVirtualResources.find(self)
+	if idx == -1:
+		playerOwner.selectedVirtualResources.append(self)
+		$ActivatedOverlay.visible = true
+	else:
+		playerOwner.selectedVirtualResources.remove_at(idx)
+		$ActivatedOverlay.visible = false

@@ -7,7 +7,7 @@ var resourcesOnHand: Array[CardResource]
 var resourceCapacity: int
 var charactersOnPayField: Array[CardCharacter]
 var diamonds: Array[CardCharacter]
-var selectedVirtualResources: Array[int]
+var selectedVirtualResources: Array[CardCharacter]
 var selectedResources: Array[CardResource]
 var selectedDiamonds: Array[CardCharacter]
 var charactersPlayed: Array[CardCharacter]
@@ -124,7 +124,7 @@ func add_character(card: CardCharacter):
 ## If any in paid is null, player cannot play the character.
 ## Removes spent resources and diamonds and puts them on graveyard
 func _on_unplayed_character_card_pressed(card: CardCharacter) -> void:
-	print("Selected: Resources: " + ",".join(selectedResources.map(func(r): return r.resourceValue)) + ", Diamonds: " + ",".join(selectedDiamonds) + ", Virtual Resources: " + ",".join(selectedVirtualResources))
+	print("Selected: Resources: " + ",".join(selectedResources.map(func(r): return r.resourceValue)) + ", Diamonds: " + ",".join(selectedDiamonds) + ", Virtual Resources: " + ",".join(selectedVirtualResources.map(func (r): return r.resourceValue)))
 	var paid = card.buy.call(self)
 	if paid == null:
 		print("Selected resources are not correct.")
