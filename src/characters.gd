@@ -1,7 +1,7 @@
 class_name Characters
 extends Object
 
-static func get_characters():
+static func get_cards():
 	var cards = []
 	for c in _cardTypes:
 		for n in c[1]:
