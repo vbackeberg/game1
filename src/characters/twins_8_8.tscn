@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2d4v4x4bbu3n"]
+[gd_scene load_steps=4 format=3 uid="uid://b2d4v4x4bbu3n"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_72074"]
 [ext_resource type="Texture2D" uid="uid://canqquuweeydu" path="res://assets/characters/twins-8-8.png" id="2_i83p2"]
+[ext_resource type="Script" uid="uid://c38nafv3o842f" path="res://src/characters/twins_8_8.gd" id="3_o5han"]
 
 [node name="Twins88" instance=ExtResource("1_72074")]
 texture_normal = ExtResource("2_i83p2")
+script = ExtResource("3_o5han")

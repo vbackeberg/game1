@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1s1v3ox1pfj0"]
+[gd_scene load_steps=4 format=3 uid="uid://d1s1v3ox1pfj0"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_fpfy4"]
 [ext_resource type="Texture2D" uid="uid://bgwvqenj0huar" path="res://assets/characters/dog-1-1-1-1.png" id="2_3s178"]
+[ext_resource type="Script" uid="uid://dplwyt5b6sol0" path="res://src/characters/dog_1_1_1_1.gd" id="3_x2nqv"]
 
 [node name="Dog1111" instance=ExtResource("1_fpfy4")]
 texture_normal = ExtResource("2_3s178")
+script = ExtResource("3_x2nqv")

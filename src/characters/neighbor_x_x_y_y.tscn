@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://2swkbj77moqd"]
+[gd_scene load_steps=4 format=3 uid="uid://2swkbj77moqd"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_yoagj"]
 [ext_resource type="Texture2D" uid="uid://bfr3e8e6w7e5s" path="res://assets/characters/neighbor-x-x-y-y.png" id="2_bp4sp"]
+[ext_resource type="Script" uid="uid://cnxo7fwwmn2xh" path="res://src/characters/neighbor_x_x_y_y.gd" id="3_r7dhw"]
 
 [node name="NeighborXXYY" instance=ExtResource("1_yoagj")]
 texture_normal = ExtResource("2_bp4sp")
+script = ExtResource("3_r7dhw")

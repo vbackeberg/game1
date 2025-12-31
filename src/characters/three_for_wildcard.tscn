@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bj0eed4b33cgm"]
+[gd_scene load_steps=4 format=3 uid="uid://bj0eed4b33cgm"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_68k46"]
 [ext_resource type="Texture2D" uid="uid://dpxoqbc86vjkj" path="res://assets/characters/three-for-wildcard.png" id="2_nt0ns"]
+[ext_resource type="Script" uid="uid://c0s4scctnn0hq" path="res://src/characters/three_for_wildcard.gd" id="3_e331h"]
 
-[node name="threeForWildcard" instance=ExtResource("1_68k46")]
+[node name="ThreeForWildcard" instance=ExtResource("1_68k46")]
 texture_normal = ExtResource("2_nt0ns")
+script = ExtResource("3_e331h")

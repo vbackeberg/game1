@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://rrkgqe2bcg4n"]
+[gd_scene load_steps=4 format=3 uid="uid://rrkgqe2bcg4n"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_7ed80"]
 [ext_resource type="Texture2D" uid="uid://ca6a5cfbiiep3" path="res://assets/characters/discard-7.png" id="2_giled"]
+[ext_resource type="Script" uid="uid://dxxqwicx56fev" path="res://src/characters/discard_7.gd" id="3_kiu18"]
 
 [node name="Discard7" instance=ExtResource("1_7ed80")]
 texture_normal = ExtResource("2_giled")
+script = ExtResource("3_kiu18")

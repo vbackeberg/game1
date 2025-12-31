@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dydh4c5sy48eg"]
+[gd_scene load_steps=4 format=3 uid="uid://dydh4c5sy48eg"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_lj4m6"]
 [ext_resource type="Texture2D" uid="uid://ckxy68ldlkih0" path="res://assets/characters/peek-stack.png" id="2_e7hoo"]
+[ext_resource type="Script" uid="uid://d0n3w4obmi2hb" path="res://src/characters/peek_stack.gd" id="3_ok0ye"]
 
 [node name="PeekStack" instance=ExtResource("1_lj4m6")]
 texture_normal = ExtResource("2_e7hoo")
+script = ExtResource("3_ok0ye")

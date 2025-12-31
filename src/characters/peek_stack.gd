@@ -24,4 +24,3 @@ func _on_pressed():
 	# TODO: When player presses before turn start show first card of character stack
 	pass
 	
-

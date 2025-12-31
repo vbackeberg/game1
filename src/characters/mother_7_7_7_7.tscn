@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2evkw4hyldf7"]
+[gd_scene load_steps=4 format=3 uid="uid://c2evkw4hyldf7"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_xlg30"]
 [ext_resource type="Texture2D" uid="uid://d4gihbakrgfwe" path="res://assets/characters/mother-7-7-7-7.png" id="2_poe6i"]
+[ext_resource type="Script" uid="uid://ue7qnamebjmd" path="res://src/characters/mother_7_7_7_7.gd" id="3_d8bpw"]
 
 [node name="Mother7777" instance=ExtResource("1_xlg30")]
 texture_normal = ExtResource("2_poe6i")
+script = ExtResource("3_d8bpw")

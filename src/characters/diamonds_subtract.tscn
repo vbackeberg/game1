@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cjxpotqgdwjck"]
+[gd_scene load_steps=4 format=3 uid="uid://cjxpotqgdwjck"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_nima6"]
 [ext_resource type="Texture2D" uid="uid://dw3n8khr2srq1" path="res://assets/characters/diamonds-subtract.png" id="2_6njcw"]
+[ext_resource type="Script" uid="uid://cj6bwa8tppbrm" path="res://src/characters/diamonds_subtract.gd" id="3_2ry0o"]
 
 [node name="DiamondsSubtract" instance=ExtResource("1_nima6")]
 texture_normal = ExtResource("2_6njcw")
+script = ExtResource("3_2ry0o")

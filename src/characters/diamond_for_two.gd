@@ -1,15 +1,15 @@
-class_name BombadilSevenSevenEightEight
+class_name DiamondForTwo
 extends CardCharacter
 
 func _init():
-	points = 3
-	asset_path = "res://assets/characters/bombadil-7-7-8-8.png"
+	points = 0
+	asset_path = "res://assets/characters/diamond-for-two.png"
 
 func buy(player: PlayerArea) -> Variant:
-	if not _is_owner(player) or not _n_resources_selected(player, 4):
+	if not _is_owner(player) or not _n_resources_selected(player, 1):
 		return null
-
-	var resources = _find(player, [7, 7, 8, 8])
+	
+	var resources = _find(player, [2])
 	if not resources:
 		return null
 
@@ -23,3 +23,5 @@ func buy(player: PlayerArea) -> Variant:
 func _immediate_effect(player: PlayerArea):
 	var card = GameManager.draw_character()
 	player.add_diamond(card)
+
+# TODO: Allow playing 2s as diamonds

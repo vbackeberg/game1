@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkiwwtkj703ta"]
+[gd_scene load_steps=4 format=3 uid="uid://dkiwwtkj703ta"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_ety20"]
 [ext_resource type="Texture2D" uid="uid://c4qpl6calrkru" path="res://assets/characters/diamond-for-two.png" id="2_x0odn"]
+[ext_resource type="Script" uid="uid://dlc22b8m5801d" path="res://src/characters/diamond_for_two.gd" id="3_xbxus"]
 
 [node name="DiamondForTwo" instance=ExtResource("1_ety20")]
 texture_normal = ExtResource("2_x0odn")
+script = ExtResource("3_xbxus")

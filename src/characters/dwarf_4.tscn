@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b18f5oy301vix"]
+[gd_scene load_steps=4 format=3 uid="uid://b18f5oy301vix"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_v2pob"]
 [ext_resource type="Texture2D" uid="uid://cj0d5lqae23l7" path="res://assets/characters/dwarf-4.png" id="2_pqvon"]
+[ext_resource type="Script" uid="uid://c1nm6qutj3drw" path="res://src/characters/dwarf_4.gd" id="3_kdfg1"]
 
 [node name="Dwarf4" instance=ExtResource("1_v2pob")]
 texture_normal = ExtResource("2_pqvon")
+script = ExtResource("3_kdfg1")

@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5fo1jn762v14"]
+[gd_scene load_steps=4 format=3 uid="uid://c5fo1jn762v14"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_d0iru"]
 [ext_resource type="Texture2D" uid="uid://bemx3bllmht53" path="res://assets/characters/tarzan-20.png" id="2_ow5yo"]
+[ext_resource type="Script" uid="uid://b43mf5jmqlkwg" path="res://src/characters/tarzan_20.gd" id="3_ngr6j"]
 
 [node name="Tarzan20" instance=ExtResource("1_d0iru")]
 texture_normal = ExtResource("2_ow5yo")
+script = ExtResource("3_ngr6j")

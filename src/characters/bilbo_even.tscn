@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjr5oev42nfpw"]
+[gd_scene load_steps=4 format=3 uid="uid://bjr5oev42nfpw"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_f4ak6"]
 [ext_resource type="Texture2D" uid="uid://chba7q0osetxr" path="res://assets/characters/bilbo-even.png" id="2_p2ays"]
+[ext_resource type="Script" uid="uid://dc1dpctga5h88" path="res://src/characters/bilbo_even.gd" id="3_absjf"]
 
 [node name="BilboEven" instance=ExtResource("1_f4ak6")]
 texture_normal = ExtResource("2_p2ays")
+script = ExtResource("3_absjf")

@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://byuuwea3hata4"]
+[gd_scene load_steps=4 format=3 uid="uid://byuuwea3hata4"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_mkge0"]
 [ext_resource type="Texture2D" uid="uid://b1urrkntba0dn" path="res://assets/characters/exchange-street.png" id="2_fbqc7"]
+[ext_resource type="Script" uid="uid://co430tuulc5vk" path="res://src/characters/exchange_street.gd" id="3_obclu"]
 
 [node name="ExchangeStreet" instance=ExtResource("1_mkge0")]
 texture_normal = ExtResource("2_fbqc7")
+script = ExtResource("3_obclu")

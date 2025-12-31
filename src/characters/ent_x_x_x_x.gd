@@ -17,4 +17,3 @@ func buy(player: PlayerArea) -> Variant:
 		resources = resources,
 		diamonds = []
 	}
-

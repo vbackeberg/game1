@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://22uvvbc02xrf"]
+[gd_scene load_steps=4 format=3 uid="uid://22uvvbc02xrf"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_ojhpd"]
 [ext_resource type="Texture2D" uid="uid://sssjp7k0jvov" path="res://assets/characters/bombadil-7-7-8-8.png" id="2_ncue3"]
+[ext_resource type="Script" uid="uid://b18e66775uwml" path="res://src/characters/bombadil_7_7_8_8.gd" id="3_ldgpk"]
 
 [node name="Bombadil7788" instance=ExtResource("1_ojhpd")]
 texture_normal = ExtResource("2_ncue3")
+script = ExtResource("3_ldgpk")

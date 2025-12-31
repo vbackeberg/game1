@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://ds4brxoc4u571"]
+[gd_scene load_steps=4 format=3 uid="uid://ds4brxoc4u571"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_8ax68"]
 [ext_resource type="Texture2D" uid="uid://j3rc6e54o26g" path="res://assets/characters/pirate-2-2-2.png" id="2_jqsh5"]
+[ext_resource type="Script" uid="uid://duqn5gi7ednam" path="res://src/characters/pirate_2_2_2.gd" id="3_ju65y"]
 
 [node name="Pirate222" instance=ExtResource("1_8ax68")]
 texture_normal = ExtResource("2_jqsh5")
+script = ExtResource("3_ju65y")

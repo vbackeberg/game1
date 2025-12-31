@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://8545ah10frfv"]
+[gd_scene load_steps=4 format=3 uid="uid://8545ah10frfv"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_x7xrb"]
 [ext_resource type="Texture2D" uid="uid://wtd6k1chmgq7" path="res://assets/characters/kerberos-x-x-x.png" id="2_aq30l"]
+[ext_resource type="Script" uid="uid://bd0yx1teci68c" path="res://src/characters/kerberos_x_x_x.gd" id="3_3t1eu"]
 
 [node name="KerberosXXX" instance=ExtResource("1_x7xrb")]
 texture_normal = ExtResource("2_aq30l")
+script = ExtResource("3_3t1eu")

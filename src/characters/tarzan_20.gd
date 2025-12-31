@@ -14,4 +14,3 @@ func buy(player: PlayerArea) -> Variant:
 		return null
 	
 	return {resources = resources, diamonds = []}
-

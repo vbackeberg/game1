@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://ug6xqf22kwbh"]
+[gd_scene load_steps=4 format=3 uid="uid://ug6xqf22kwbh"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_ac6yo"]
 [ext_resource type="Texture2D" uid="uid://7h0hhhkk56m1" path="res://assets/characters/tomcat-3-4-5.png" id="2_q6ubt"]
+[ext_resource type="Script" uid="uid://bcqxo3x1dbt4v" path="res://src/characters/tomcat_3_4_5.gd" id="3_1pu6r"]
 
-[node name="tomcat345" instance=ExtResource("1_ac6yo")]
+[node name="Tomcat345" instance=ExtResource("1_ac6yo")]
 texture_normal = ExtResource("2_q6ubt")
+script = ExtResource("3_1pu6r")

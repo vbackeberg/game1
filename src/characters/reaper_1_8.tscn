@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://sd5r253lqlp8"]
+[gd_scene load_steps=4 format=3 uid="uid://sd5r253lqlp8"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_jw3e0"]
 [ext_resource type="Texture2D" uid="uid://cxmari61kfji3" path="res://assets/characters/reaper-1-8.png" id="2_543au"]
+[ext_resource type="Script" uid="uid://d3cma4pgmk46n" path="res://src/characters/reaper_1_8.gd" id="3_5ersj"]
 
 [node name="Reaper18" instance=ExtResource("1_jw3e0")]
 texture_normal = ExtResource("2_543au")
+script = ExtResource("3_5ersj")

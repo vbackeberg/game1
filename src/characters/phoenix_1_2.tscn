@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbk4xcrv6r2c6"]
+[gd_scene load_steps=4 format=3 uid="uid://dbk4xcrv6r2c6"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_tf52u"]
 [ext_resource type="Texture2D" uid="uid://p1kovbfahcju" path="res://assets/characters/phoenix-1-2.png" id="2_4sjei"]
+[ext_resource type="Script" uid="uid://d0rq1j6skk713" path="res://src/characters/phoenix_1_2.gd" id="3_p38h6"]
 
 [node name="Phoenix12" instance=ExtResource("1_tf52u")]
 texture_normal = ExtResource("2_4sjei")
+script = ExtResource("3_p38h6")

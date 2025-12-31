@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cw2ffks0552d"]
+[gd_scene load_steps=4 format=3 uid="uid://cw2ffks0552d"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_ci27w"]
 [ext_resource type="Texture2D" uid="uid://dvryvng3vvlab" path="res://assets/characters/goblin-x-x.png" id="2_aqulc"]
+[ext_resource type="Script" uid="uid://ceo31ndgea6an" path="res://src/characters/goblin_x_x.gd" id="3_agq3l"]
 
 [node name="GoblinXX" instance=ExtResource("1_ci27w")]
 texture_normal = ExtResource("2_aqulc")
+script = ExtResource("3_agq3l")

@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://2ueo0flaqkh4"]
+[gd_scene load_steps=4 format=3 uid="uid://2ueo0flaqkh4"]
 
 [ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/card_character.tscn" id="1_hpk3c"]
 [ext_resource type="Texture2D" uid="uid://cickl2pkw02p6" path="res://assets/characters/ape-10.png" id="2_i4bls"]
+[ext_resource type="Script" uid="uid://b38gidgdwfnph" path="res://src/characters/ape_10.gd" id="3_ogf0o"]
 
 [node name="Ape10" instance=ExtResource("1_hpk3c")]
 texture_normal = ExtResource("2_i4bls")
+script = ExtResource("3_ogf0o")
