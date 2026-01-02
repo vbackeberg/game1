@@ -142,7 +142,6 @@ func _on_unplayed_character_card_pressed(card: CardCharacter) -> void:
 			diamonds.erase(d)
 			d.queue_free()
 
-		selectedDiamonds.clear()
 		_reorder_diamonds()
 		
 		_place_character_on_played_area(card)
