@@ -9,9 +9,10 @@ func buy(player: PlayerArea) -> Variant:
 	if not _is_owner(player) or not _n_resources_selected(player, 3):
 		return null
 
-	var diamond = player.selectedVirtualResources.pop_back()
-	if not diamond:
+	if player.selectedDiamonds.size() != 1:
 		return null
+
+	var diamond = player.selectedDiamonds.pop_back()
 
 	var resources = _find(player, [2, 2, 2])
 	if not resources:
