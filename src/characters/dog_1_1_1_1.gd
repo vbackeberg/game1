@@ -9,18 +9,14 @@ func _init():
 
 func buy(player: PlayerArea) -> Variant:
 	if not _is_owner(player):
-		return null
+		return false
 
-	var resources = _find(player, [1, 1, 1, 1])
-	if not resources:
-		return null
+	if not _find(player, [1, 1, 1, 1]):
+		return false
 		
 	self.pressed.connect(_on_pressed)
 
-	return {
-		resources = resources,
-		diamonds = []
-	}
+	return true
 
 ## Displays a picker that sets the resource value
 func _on_pressed():

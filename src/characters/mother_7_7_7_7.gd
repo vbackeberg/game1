@@ -6,14 +6,4 @@ func _init():
 	asset_path = "res://assets/characters/mother-7-7-7-7.png"
 
 func buy(player: PlayerArea) -> Variant:
-	if not _is_owner(player) or not _n_resources_selected(player, 4):
-		return null
-
-	var resources = _find(player, [7, 7, 7, 7])
-	if not resources:
-		return null
-
-	return {
-		resources = resources,
-		diamonds = []
-	}
+	return _is_owner(player) and _find(player, [7, 7, 7, 7])

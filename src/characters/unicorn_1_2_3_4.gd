@@ -6,17 +6,12 @@ func _init():
 	asset_path = "res://assets/characters/unicorn-1-2-3-4.png"
 
 func buy(player: PlayerArea) -> Variant:
-	if not _is_owner(player) or not _n_resources_selected(player, 4):
-		return null
-
-	var resources = _find(player, [1, 2, 3, 4])
-	if not resources:
-		return null
+	if not _is_owner(player) or not _find(player, [1, 2, 3, 4]):
+		return false
 
 	_immediate_effect()
-	
-	return resources
 
+	return true
 
 func _immediate_effect():
 	GameManager.draw_character()

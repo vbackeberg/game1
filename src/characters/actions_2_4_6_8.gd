@@ -5,19 +5,15 @@ func _init():
 	asset_path = "res://assets/characters/actions-2-4-6-8.png"
 
 func buy(player: PlayerArea) -> Variant:
-	if not _is_owner(player) or not _n_resources_selected(player, 4):
-		return null
+	if not _is_owner(player):
+		return false
 
-	var resources = _find(player, [2, 4, 6, 8])
-	if not resources:
-		return null
+	if not _find(player, [2, 4, 6, 8]):
+		return false
 
 	immediate_effect(player)
 
-	return {
-		resources = resources,
-		diamonds = []
-	}
+	return true
 
 func immediate_effect(player: PlayerArea):
 	player.actionsLeft += 3

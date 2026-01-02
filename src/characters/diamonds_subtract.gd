@@ -8,17 +8,13 @@ func _init():
 func buy(player: PlayerArea) -> Variant:
 	if not _is_owner(player) or not _n_resources_selected(player, 1):
 		return null
-	
-	var resources = _find(player, [3, 5, 7])
-	if not resources:
-		return null
+
+	if not _find(player, [3, 5, 7]):
+		return false
 
 	_immediate_effect()
 
-	return {
-		resources = resources,
-		diamonds = []
-	}
+	return true
 
 func _immediate_effect():
 	GameManager.draw_character()

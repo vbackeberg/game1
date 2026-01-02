@@ -128,24 +128,17 @@ func _on_unplayed_character_card_pressed(card: CardCharacter) -> void:
 	var paid = card.buy.call(self)
 	if paid == null:
 		print("Selected resources are not correct.")
-		# TODO show label with missing resources
-		selectedResources.clear()
-		selectedDiamonds.clear()
-		selectedVirtualResources.clear()
-		
+		# TODO show label with missing resources		
 	else:
-		for r in paid.resources:
+		for r in selectedResources:
 			GameManager.graveyardResources.append(r.resourceValue)
 			resourcesOnHand.erase(r)
 			r.queue_free()
-
-		for r in selectedResources:
 			r.deselect()
-
-		selectedResources.clear()
+			
 		_reorder_resource_cards()
 		
-		for d in paid.diamonds:
+		for d in selectedDiamonds:
 			GameManager.graveyardCharacters.append(d)
 			diamonds.erase(d)
 			d.queue_free()
@@ -156,8 +149,12 @@ func _on_unplayed_character_card_pressed(card: CardCharacter) -> void:
 		_place_character_on_played_area(card)
 		
 		victoryPoints += card.points
-
 		action_used.emit()
+	
+	selectedResources.clear()
+	selectedDiamonds.clear()
+	selectedVirtualResources.clear()
+
 
 
 ## Places a character with its backside up.

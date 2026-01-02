@@ -7,18 +7,14 @@ func _init():
 
 func buy(player: PlayerArea) -> Variant:
 	if not _is_owner(player):
-		return null
+		return false
 
-	var resources = _sums_up_to_s_using_exactly_n(player, 10, 3)
-	if not resources:
-		return null
+	if not _sums_up_to_s_using_exactly_n(player, 10, 3):
+		return false
 
 	self.pressed.connect(_on_pressed)
 
-	return {
-		resources = resources,
-		diamonds = []
-	}
+	return true
 
 
 func _on_pressed():

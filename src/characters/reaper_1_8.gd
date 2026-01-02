@@ -6,19 +6,12 @@ func _init():
 	asset_path = "res://assets/characters/reaper-1-8.png"
 
 func buy(player: PlayerArea) -> Variant:
-	if not _is_owner(player) or not _n_resources_selected(player, 2):
-		return null
-
-	var resources = _find(player, [1,8])
-	if not resources:
-		return null
+	if not _is_owner(player) or not _find(player, [1, 8]):
+		return false
 	
 	self.pressed.connect(_on_pressed)
 
-	return {
-		resources = resources,
-		diamonds = []
-	}
+	return true
 
 
 # TODO in After End Phase

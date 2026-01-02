@@ -7,10 +7,6 @@ func _init():
 
 func buy(player: PlayerArea) -> Variant:
 	if not _is_owner(player):
-		return null
+		return false
 
-	var resources = _sums_up_to_s(player, 10)
-	if not resources:
-		return null
-	
-	return {resources = resources, diamonds = []}
+	return _sums_up_to_s(player, 10)

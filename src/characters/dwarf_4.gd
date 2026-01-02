@@ -12,16 +12,12 @@ func buy(player: PlayerArea) -> Variant:
 	if not _is_owner(player) or not _n_resources_selected(player, 2):
 		return null
 
-	var resources = _find(player, [4, 4])
-	if not resources:
-		return null
+	if not _find(player, [4, 4]):
+		return false
 
 	self.pressed.connect(_on_pressed)
 
-	return {
-		resources = resources,
-		diamonds = []
-	}
+	return true
 
 func _on_pressed():
 	var idx = playerOwner.selectedVirtualResources.find(self)

@@ -4,19 +4,12 @@ func _init():
 	points = 2
 
 func buy(player: PlayerArea) -> Variant:
-	if not _is_owner(player) or not _n_resources_selected(player, 4):
-		return null
-
-	var resources = _find(player, [1, 3, 5, 7])
-	if not resources:
-		return null
+	if not _is_owner(player) or not _find(player, [1, 3, 5, 7]):
+		return false
 
 	immediate_effect(player)
 
-	return {
-		resources = resources,
-		diamonds = []
-	}
+	return true
 
 
 func immediate_effect(player: PlayerArea):

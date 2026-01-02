@@ -6,19 +6,12 @@ func _init():
 	asset_path = "res://assets/characters/bilbo-odd.png"
 
 func buy(player: PlayerArea) -> Variant:
-	if not _is_owner(player) or not _n_resources_selected(player, 3):
-		return null
-	
-	var resources = _is_three_odd_or_even(player, false)
-	if not resources:
-		return null
+	if not _is_owner(player) or not _is_three_odd_or_even(player, false):
+		return false
 
 	_immediate_effect(player)
 
-	return {
-		resources = resources,
-		diamonds = []
-	}
+	return true
 
 func _immediate_effect(player: PlayerArea):
 	var card = GameManager.draw_character()

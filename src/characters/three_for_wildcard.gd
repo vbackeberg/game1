@@ -6,19 +6,12 @@ func _init():
 	asset_path = "res://assets/characters/three-for-wildcard.png"
 
 func buy(player: PlayerArea) -> Variant:
-	if not _is_owner(player) or not _n_resources_selected(player, 3):
-		return null
-
-	var resources = _find(player, [3, 3, 3])
-	if not resources:
-		return null
+	if not _is_owner(player) or not _find(player, [3, 3, 3]):
+		return false
 
 	self.pressed.connect(_on_pressed)
 
-	return {
-		resources = resources,
-		diamonds = []
-	}
+	return true
 
 func _on_pressed():
 	if not _n_resources_selected(playerOwner, 1):

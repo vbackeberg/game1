@@ -29,153 +29,101 @@ static func concat(arr: Array) -> String:
 
 # Buy functions
 
-static func _sums_up_to_s_using_exactly_n(player: PlayerArea, s: int, n: int) -> Variant:
+static func _sums_up_to_s_using_exactly_n(player: PlayerArea, s: int, n: int) -> bool:
 	var resources = []
+	resources.append_array(player.selectedResources)
+	resources.append_array(player.selectedVirtualResources)
 
-	while player.selectedVirtualResources.size() > 0:
-		var card = player.selectedVirtualResources.pop_back()
+	while resources.size() > 0:
+		var card = resources.pop_back()
 		s -= card.resourceValue
 		n -= 1
-
-	while player.selectedResources.size() > 0:
-		var card = player.selectedResources.pop_back()
-		s -= card.resourceValue
-		n -= 1
-		resources.append(card)
 
 	if n != 0 or s != 0:
-		return null
+		return false
 
-	return resources
+	return true
 
-static func _sums_up_to_s(player: PlayerArea, s: int) -> Variant:
+static func _sums_up_to_s(player: PlayerArea, s: int) -> bool:
 	var resources = []
-	
-	while player.selectedVirtualResources.size() > 0:
-		var card = player.selectedVirtualResources.pop_back()
-		s -= card.resourceValue
-	
-	while player.selectedResources.size() > 0:
-		var card = player.selectedResources.pop_back()
-		s -= card.resourceValue
-		resources.append(card)
+	resources.append_array(player.selectedResources)
+	resources.append_array(player.selectedVirtualResources)
 
-	if s != 0:
-		return null
+	while resources.size() > 0:
+		var card = resources.pop_back()
+		s -= card.resourceValue
 	
-	return resources
+	if s != 0:
+		return false
+	
+	return true
 
 static func _n_resources_selected(player: PlayerArea, n: int):
 	return player.selectedVirtualResources.size() + player.selectedResources.size() == n
 
-static func _is_three_odd_or_even(player: PlayerArea, should_be_even: bool) -> Variant:
+static func _is_three_odd_or_even(player: PlayerArea, should_be_even: bool) -> bool:
 	var resources = []
+	resources.append_array(player.selectedResources)
+	resources.append_array(player.selectedVirtualResources)
+
 	var n = 3
 
-	while player.selectedVirtualResources.size() > 0:
-		var card = player.selectedVirtualResources.pop_back()
+	while resources.size() > 0:
+		var card = resources.pop_back()
 		if (card.resourceValue % 2 == 0) == should_be_even:
 			n -= 1
 		else:
-			return null
-
-	while player.selectedResources.size() > 0:
-		var card = player.selectedResources.pop_back()
-		if (card.resourceValue % 2 == 0) == should_be_even:
-			resources.append(card)
-			n -= 1
-		else:
-			return null
+			return false
 
 	if n != 0:
-		return null
-	else:
-		return resources
+		return false
+	return true
 
-static func _is_street_of_n(player: PlayerArea, n: int) -> Variant:
+static func _is_street_of_n(player: PlayerArea, n: int) -> bool:
 	var resources = []
-	
-	var values: Array[int] = []
-	for card in player.selectedVirtualResources:
-		values.append(card.resourceValue)
-	for card in player.selectedResources:
-		values.append(card.resourceValue)
-	values.sort()
-	
-	if values.size() != n:
-		return null
+	resources.append_array(player.selectedResources)
+	resources.append_array(player.selectedVirtualResources)
+
+	if resources.size() != n:
+		return false
+
+	resources.sort_custom(func(a, b): return a.resourceValue - b.resourceValue)
 	
 	for i in range(1, n):
-		if values[i] != values[i - 1] + 1:
-			return null
-	
-	resources.append_array(player.selectedResources)
-	return resources
+		if resources[i].resourceValue != resources[i - 1].resourceValue + 1:
+			return false
 
-static func _find(player: PlayerArea, given: Array[int]) -> Variant:
+	return true
+
+static func _find(player: PlayerArea, given: Array[int]) -> bool:
 	var resources = []
-	for g in given:
-		var idx = player.selectedVirtualResources.find_custom(func(r): return r.resourceValue == g)
-		if idx != -1:
-			player.selectedVirtualResources.remove_at(idx)
-		else:
-			idx = player.selectedResources.find_custom(func(r): return r.resourceValue == g)
-			if idx != -1:
-				resources.append(player.selectedResources.pop_at(idx))
-			else:
-				return null
+	resources.append_array(player.selectedResources.duplicate())
+	resources.append_array(player.selectedVirtualResources.duplicate())
 
-	return resources
+	if resources.size() != given.size():
+		return false
+
+	for g in given:
+		var idx = resources.find_custom(func(r): return r.resourceValue == g)
+		if idx != -1:
+			resources.remove_at(idx)
+		else:
+			return false
+
+	return true
 
 static func _find_n_of_same_kind(player: PlayerArea, n: int):
 	for i in range(1, 8):
 		var g = []
 		g.resize(n)
 		g.fill(i)
-		var resources = _find(player, g)
-		if resources:
-			return resources
+		if _find(player, g):
+			return true
 	
-	return null
+	return false
 
-static func _find_either_or(player: PlayerArea, eitherV: Array[int], orV: Array[int]) -> Variant:
-	var indicesVirtualResources = []
-	var indicesResources = []
-
-	var resources = []
-
-	for e in eitherV:
-		var idx = player.selectedVirtualResources.find_custom(func(r): return r.resourceValue == e)
-		if idx != -1:
-			indicesVirtualResources.append(idx)
-		else:
-			idx = player.selectedResources.find_custom(func(r): return r.resourceValue == e)
-			if idx != -1:
-				indicesResources.append(idx)
-			else:
-				break
-		
-	if indicesVirtualResources.size() + indicesVirtualResources.size() == 3:
-		for idx in indicesVirtualResources:
-			player.selectedVirtualResources.remove_at(idx)
-		for idx in indicesResources:
-			resources.append(player.selectedResources.pop_at(idx))
-		return resources
-
-	for o in orV:
-		var idx = player.selectedVirtualResources.find_custom(func(r): return r.resourceValue == o)
-		if idx != -1:
-			indicesVirtualResources.append(idx)
-		else:
-			idx = player.selectedResources.find_custom(func(r): return r.resourceValue == o)
-			if idx != -1:
-				indicesResources.append(idx)
-			else:
-				return null
-
-	for idx in indicesVirtualResources:
-		player.selectedVirtualResources.remove_at(idx)
-	for idx in indicesResources:
-		resources.append(player.selectedResources.pop_at(idx))
-	return resources
+static func _find_either_or(player: PlayerArea, eitherV: Array[int], orV: Array[int]) -> bool:
+	if _find(player, eitherV) or _find(player, orV):
+		return true
+	return false
 	

@@ -9,19 +9,12 @@ func _init():
 	$ActivatedOverlay/ActivatedLabel.text = str(resourceValue)
 
 func buy(player: PlayerArea) -> Variant:
-	if not _is_owner(player) or not _n_resources_selected(player, 2):
-		return null
-
-	var resources = _find(player, [1, 2])
-	if not resources:
-		return null
+	if not _is_owner(player) or not _find(player, [1, 2]):
+		return false
 
 	self.pressed.connect(_on_pressed)
 	
-	return {
-		resources = resources,
-		diamonds = []
-	}
+	return true
 
 func _on_pressed():
 	var idx = playerOwner.selectedVirtualResources.find(self)
