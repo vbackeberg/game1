@@ -123,9 +123,9 @@ func add_character(card: CardCharacter):
 
 ## If buy successful, puts selected resources to graveyard, replaces character card, updates victory points and emits action used.
 func _on_unplayed_character_card_pressed(card: CardCharacter) -> void:
-	print("Selected: Resources: " + ",".join(selectedResources.map(func(r): return r.resourceValue)) + ", Diamonds: " + ",".join(selectedDiamonds) + ", Virtual Resources: " + ",".join(selectedVirtualResources.map(func (r): return r.resourceValue)))
-	var paid = card.buy.call(self)
-	if paid == null:
+	print("Selected: Resources: " + ",".join(selectedResources.map(func(r): return r.resourceValue)) + ", Diamonds: " + ",".join(selectedDiamonds) + ", Virtual Resources: " + ",".join(selectedVirtualResources.map(func(r): return r.resourceValue)))
+	var success = card.buy.call(self)
+	if not success:
 		print("Selected resources are not correct.")
 		# TODO show label with missing resources		
 	else:
