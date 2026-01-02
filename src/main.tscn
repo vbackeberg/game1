@@ -78,6 +78,15 @@ theme_override_font_sizes/font_size = 48
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ToggleViewButton" type="Button" parent="."]
+offset_left = 576.0
+offset_top = 657.0
+offset_right = 719.0
+offset_bottom = 700.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Toggle View"
+
 [connection signal="action_used" from="MiddleArea" to="." method="_on_action_used"]
 [connection signal="action_used" from="PlayerArea" to="." method="_on_action_used"]
 [connection signal="visibility_changed" from="PlayerArea" to="PlayerArea" method="_on_visibility_changed"]
@@ -92,3 +101,4 @@ vertical_alignment = 1
 [connection signal="action_used" from="PlayerArea6" to="." method="_on_action_used"]
 [connection signal="visibility_changed" from="PlayerArea6" to="PlayerArea6" method="_on_visibility_changed"]
 [connection signal="pressed" from="WinOverlay/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="ToggleViewButton" to="." method="toggle_view"]
