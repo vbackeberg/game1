@@ -33,7 +33,8 @@ static func _sums_up_to_s_using_exactly_n(player: PlayerArea, s: int, n: int) ->
 	var resources = []
 
 	while player.selectedVirtualResources.size() > 0:
-		s -= player.selectedVirtualResources.pop_back()
+		var card = player.selectedVirtualResources.pop_back()
+		s -= card.resourceValue
 		n -= 1
 
 	while player.selectedResources.size() > 0:
@@ -51,7 +52,8 @@ static func _sums_up_to_s(player: PlayerArea, s: int) -> Variant:
 	var resources = []
 	
 	while player.selectedVirtualResources.size() > 0:
-		s -= player.selectedVirtualResources.pop_back()
+		var card = player.selectedVirtualResources.pop_back()
+		s -= card.resourceValue
 	
 	while player.selectedResources.size() > 0:
 		var card = player.selectedResources.pop_back()
@@ -71,8 +73,8 @@ static func _is_three_odd_or_even(player: PlayerArea, should_be_even: bool) -> V
 	var n = 3
 
 	while player.selectedVirtualResources.size() > 0:
-		var value = player.selectedVirtualResources.pop_back()
-		if (value % 2 == 0) == should_be_even:
+		var card = player.selectedVirtualResources.pop_back()
+		if (card.resourceValue % 2 == 0) == should_be_even:
 			n -= 1
 		else:
 			return null
@@ -94,7 +96,8 @@ static func _is_street_of_n(player: PlayerArea, n: int) -> Variant:
 	var resources = []
 	
 	var values: Array[int] = []
-	values.append_array(player.selectedVirtualResources)
+	for card in player.selectedVirtualResources:
+		values.append(card.resourceValue)
 	for card in player.selectedResources:
 		values.append(card.resourceValue)
 	values.sort()
@@ -112,7 +115,7 @@ static func _is_street_of_n(player: PlayerArea, n: int) -> Variant:
 static func _find(player: PlayerArea, given: Array[int]) -> Variant:
 	var resources = []
 	for g in given:
-		var idx = player.selectedVirtualResources.find(g)
+		var idx = player.selectedVirtualResources.find_custom(func(r): return r.resourceValue == g)
 		if idx != -1:
 			player.selectedVirtualResources.remove_at(idx)
 		else:
@@ -142,7 +145,7 @@ static func _find_either_or(player: PlayerArea, eitherV: Array[int], orV: Array[
 	var resources = []
 
 	for e in eitherV:
-		var idx = player.selectedVirtualResources.find(e)
+		var idx = player.selectedVirtualResources.find_custom(func(r): return r.resourceValue == e)
 		if idx != -1:
 			indicesVirtualResources.append(idx)
 		else:
@@ -160,7 +163,7 @@ static func _find_either_or(player: PlayerArea, eitherV: Array[int], orV: Array[
 		return resources
 
 	for o in orV:
-		var idx = player.selectedVirtualResources.find(o)
+		var idx = player.selectedVirtualResources.find_custom(func(r): return r.resourceValue == o)
 		if idx != -1:
 			indicesVirtualResources.append(idx)
 		else:
