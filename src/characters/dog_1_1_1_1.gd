@@ -36,3 +36,4 @@ func _on_number_selected(number: int):
 	resourceValue = number
 	playerOwner.selectedVirtualResources.append(self)
 	$ActivatedOverlay.visible = true
+	$ActivatedOverlay/ActivatedLabel.text = str(resourceValue)
