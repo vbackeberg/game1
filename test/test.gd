@@ -13,6 +13,8 @@ func _ready() -> void:
 
 func give_player_character(cardName: String) -> void:
 	var idx = GameManager.characterCards.find_custom(func(c): return c.resource_path == "res://assets/characters/" + cardName + ".png")
+	if idx == -1:
+		print("Test setup failed! Character card not found: " + cardName)
 	var card = GameManager.characterCards.pop_at(idx).instantiate()
 	player.add_character(card)
 
