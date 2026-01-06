@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxqd2shf0ryhm"]
-
-[ext_resource type="Script" uid="uid://qlvjnevn5b42" path="res://src/virtual_resource.gd" id="1_1b8af"]
-
-[node name="VirtualResource" type="TextureButton"]
-script = ExtResource("1_1b8af")
