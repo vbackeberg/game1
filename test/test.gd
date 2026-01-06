@@ -12,8 +12,8 @@ func _ready() -> void:
 	
 
 func give_player_character(cardName: String) -> void:
-	var idx = GameManager.characterCards.find_custom(func(c): return c.asset_path == "res://assets/characters/" + cardName + ".png")
-	var card = GameManager.characterCards.pop_at(idx)
+	var idx = GameManager.characterCards.find_custom(func(c): return c.resource_path == "res://assets/characters/" + cardName + ".png")
+	var card = GameManager.characterCards.pop_at(idx).instantiate()
 	player.add_character(card)
 
 func give_player_resource(value: int) -> void:
