@@ -5,11 +5,11 @@ func _init():
 	points = 3
 	asset_path = "res://assets/characters/bombadil-7-7-8-8.png"
 
-func buy(player: PlayerArea) -> Variant:
+func buy(player: PlayerArea) -> bool:
 	if not _is_owner(player) or not _n_resources_selected(player, 4):
-		return null
+		return false
 
-	if not _find(player, [7, 7, 8, 8]):
+	if not _has_selected(player, [7, 7, 8, 8]):
 		return false
 
 	_immediate_effect(player)

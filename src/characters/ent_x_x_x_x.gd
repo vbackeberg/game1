@@ -5,8 +5,5 @@ func _init():
 	points = 3
 	asset_path = "res://assets/characters/ent-x-x-x-x.png"
 
-func buy(player: PlayerArea) -> Variant:
-	if not _is_owner(player) or not _n_resources_selected(player, 4):
-		return null
-	
-	return _find_n_of_same_kind(player, 4)
+func buy(player: PlayerArea) -> bool:
+	return _is_owner(player) and _has_n_of_same_kind(player, 4)

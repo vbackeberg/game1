@@ -1,12 +1,14 @@
 class_name ThreeForWildcard
 extends CardCharacter
 
+var resourceValue: int
+
 func _init():
 	points = 1
 	asset_path = "res://assets/characters/three-for-wildcard.png"
 
-func buy(player: PlayerArea) -> Variant:
-	if not _is_owner(player) or not _find(player, [3, 3, 3]):
+func buy(player: PlayerArea) -> bool:
+	if not _is_owner(player) or not _has_selected(player, [3, 3, 3]):
 		return false
 
 	self.pressed.connect(_on_pressed)

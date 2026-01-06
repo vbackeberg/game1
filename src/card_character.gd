@@ -95,35 +95,49 @@ static func _is_street_of_n(player: PlayerArea, n: int) -> bool:
 
 	return true
 
-static func _find(player: PlayerArea, given: Array[int]) -> bool:
+static func _has_selected(player: PlayerArea, given: Array[int]) -> bool:
 	var resources = []
 	resources.append_array(player.selectedResources.duplicate())
 	resources.append_array(player.selectedVirtualResources.duplicate())
+	var indices = _find(resources, given)
+	return indices.size() != 0
 
-	if resources.size() != given.size():
-		return false
+static func _has_n_of_same_kind(player: PlayerArea, n: int) -> bool:
+	var resources = []
+	resources.append_array(player.selectedResources.duplicate())
+	resources.append_array(player.selectedVirtualResources.duplicate())
+	var indices = _find_n_of_same_kind(resources, n)
+	return indices.size() != 0
+
+## Returns the indices of the found resources or an empty array if not all found
+static func _find(resources: Array, given: Array[int]) -> Array[int]:
+	var indices = []
 
 	for g in given:
 		var idx = resources.find_custom(func(r): return r.resourceValue == g)
 		if idx != -1:
 			resources.remove_at(idx)
+			indices.append(idx)
 		else:
-			return false
+			return []
+	return indices
 
-	return true
-
-static func _find_n_of_same_kind(player: PlayerArea, n: int):
+static func _find_n_of_same_kind(resources: Array, n: int) -> Array[int]:
 	for i in range(1, 8):
 		var g = []
 		g.resize(n)
 		g.fill(i)
-		if _find(player, g):
-			return true
-	
-	return false
+		var indices = _find(resources, g)
+		if indices.size() == n:
+			return indices
+	return []
 
-static func _find_either_or(player: PlayerArea, eitherV: Array[int], orV: Array[int]) -> bool:
-	if _find(player, eitherV) or _find(player, orV):
+static func _has_either_or(player: PlayerArea, eitherV: Array[int], orV: Array[int]) -> bool:
+	var resources = []
+	resources.append_array(player.selectedResources.duplicate())
+	resources.append_array(player.selectedVirtualResources.duplicate())
+
+	if _find(resources, eitherV).size() != 0 or _find(resources, orV).size() != 0:
 		return true
+
 	return false
-	

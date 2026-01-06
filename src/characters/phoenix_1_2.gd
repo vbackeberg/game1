@@ -8,8 +8,8 @@ func _init():
 	asset_path = "res://assets/characters/phoenix-1-2.png"
 	$ActivatedOverlay/ActivatedLabel.text = str(resourceValue)
 
-func buy(player: PlayerArea) -> Variant:
-	if not _is_owner(player) or not _find(player, [1, 2]):
+func buy(player: PlayerArea) -> bool:
+	if not _is_owner(player) or not _has_selected(player, [1, 2]):
 		return false
 
 	self.pressed.connect(_on_pressed)

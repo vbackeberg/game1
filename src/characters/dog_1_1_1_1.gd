@@ -7,11 +7,11 @@ func _init():
 	points = 0
 	asset_path = "res://assets/characters/dog-1-1-1-1.png"
 
-func buy(player: PlayerArea) -> Variant:
+func buy(player: PlayerArea) -> bool:
 	if not _is_owner(player):
 		return false
 
-	if not _find(player, [1, 1, 1, 1]):
+	if not _has_selected(player, [1, 1, 1, 1]):
 		return false
 		
 	self.pressed.connect(_on_pressed)

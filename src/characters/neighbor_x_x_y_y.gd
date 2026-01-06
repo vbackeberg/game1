@@ -5,23 +5,29 @@ func _init():
 	points = 2
 	asset_path = "res://assets/characters/neighbor-x-x-y-y.png"
 
-func buy(player: PlayerArea) -> Variant:
+func buy(player: PlayerArea) -> bool:
 	if not _is_owner(player) or not _n_resources_selected(player, 4):
-		return null
+		return false
 
-	var pair1 = _find_n_of_same_kind(player, 2)
-	var pair2 = _find_n_of_same_kind(player, 2)
-	if not pair1 or not pair2:
-		return null
-	
-	pair1.append_array(pair2)
+	var resources = []
+	resources.append_array(player.selectedResources.duplicate())
+	resources.append_array(player.selectedVirtualResources.duplicate())
+
+
+	var indices = _find_n_of_same_kind(resources, 2)
+	if indices.size() == 0:
+		return false
+
+	for i in indices:
+		resources.remove_at(i)
+
+	indices = _find_n_of_same_kind(resources, 2)
+	if indices.size() == 0:
+		return false
 
 	_immediate_effect()
 
-	return {
-		resources = pair1,
-		diamonds = []
-	}
+	return true
 
 func _immediate_effect():
 	var main = get_node("/root/Main")

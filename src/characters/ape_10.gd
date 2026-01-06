@@ -5,7 +5,7 @@ func _init():
 	points = 1
 	asset_path = "res://assets/characters/ape-10.png"
 
-func buy(player: PlayerArea) -> Variant:
+func buy(player: PlayerArea) -> bool:
 	if not _is_owner(player):
 		return false
 
