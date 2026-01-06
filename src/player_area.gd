@@ -105,7 +105,7 @@ func _on_confirm_discard_button_pressed() -> void:
 		if numToDiscard == 0:
 			$ConfirmDiscardButton.visible = false
 			discardMode = false
-			_reorder_resource_cards()
+			reorder_resource_cards()
 			discard_finished.emit()
 
 ## Adds a character card with given specs and puts it on the right side.
@@ -140,7 +140,7 @@ func _on_unplayed_character_card_pressed(card: CardCharacter) -> void:
 			resourcesOnHand.erase(r)
 			r.queue_free()
 			
-		_reorder_resource_cards()
+		reorder_resource_cards()
 		
 		for d in selectedDiamonds:
 			GameManager.graveyardCharacters.append(d)
@@ -203,7 +203,7 @@ func _reorder_diamonds():
 	for i in range(diamonds.size()):
 		diamonds[i].position.x = get_viewport().size.x - 24.0 - i * (CARD_WIDTH + 24.0)
 	
-func _reorder_resource_cards():
+func reorder_resource_cards():
 	for i in range(resourcesOnHand.size()):
 		resourcesOnHand[i].position.x = 24.0 + i * (CARD_WIDTH + 24.0)
 

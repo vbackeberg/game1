@@ -15,15 +15,31 @@ func buy(player: PlayerArea) -> bool:
 
 	return true
 
+## Turns a selected 3 into a wildcard
 func _on_pressed():
-	if not _n_resources_selected(playerOwner, 1):
-		return
+	if playerOwner.selectedVirtualResources.has(self):
+		playerOwner.selectedVirtualResources.erase(self)
+		$ActivatedOverlay.visible = false
+	else:
+		if not _n_resources_selected(playerOwner, 1):
+			return
 
-	var card = playerOwner.selectedResources.pop_back()
+		var card = playerOwner.selectedResources.pop_back()
 
-	GameManager.graveyardResources.append(card.resourceValue)
-	playerOwner.resourcesOnHand.erase(card)
-	card.queue_free()
+		GameManager.graveyardResources.append(card.resourceValue)
+		playerOwner.resourcesOnHand.erase(card)
+		card.queue_free()
+		playerOwner.reorder_resource_cards()
 
-	# TODO: Let player choose resource
-	playerOwner.selectedVirtualResources.append(0)
+		WildcardSelect.visible = true
+		WildcardSelect.number_selected.connect(_on_number_selected)
+
+
+func _on_number_selected(number: int):
+	WildcardSelect.number_selected.disconnect(_on_number_selected)
+	WildcardSelect.visible = false
+	resourceValue = number
+	playerOwner.selectedVirtualResources.append(self)
+	$ActivatedOverlay.visible = true
+	$ActivatedOverlay/ActivatedLabel.text = str(resourceValue)
+
