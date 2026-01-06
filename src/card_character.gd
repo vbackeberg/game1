@@ -110,7 +110,7 @@ static func _has_n_of_same_kind(player: PlayerArea, n: int) -> bool:
 	return indices.size() != 0
 
 ## Returns the indices of the found resources or an empty array if not all found
-static func _find(resources: Array, given: Array[int]) -> Array[int]:
+static func _find(resources: Array, given: Array[int]) -> Array:
 	var indices = []
 
 	for g in given:
@@ -122,7 +122,7 @@ static func _find(resources: Array, given: Array[int]) -> Array[int]:
 			return []
 	return indices
 
-static func _find_n_of_same_kind(resources: Array, n: int) -> Array[int]:
+static func _find_n_of_same_kind(resources: Array, n: int) -> Array:
 	for i in range(1, 8):
 		var g = []
 		g.resize(n)
