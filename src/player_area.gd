@@ -160,7 +160,9 @@ func _on_unplayed_character_card_pressed(card: CardCharacter) -> void:
 	selectedResources.clear()
 	selectedDiamonds.clear()
 	selectedVirtualResources.clear()
+	character_bought.emit()
 
+signal character_bought()
 
 ## Places a character with its backside up.
 ## Note: Keeping track of the character is important in case it's reshuffled into the stack from the graveyard, later.

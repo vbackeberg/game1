@@ -5,10 +5,12 @@ var player: PlayerArea
 func _ready() -> void:
 	player = $Main.players[0]
 	give_player_character("three_for_wildcard")
+	give_player_character("twins_8_8")
 	give_player_resource(3)
-	give_player_resource(4)
 	give_player_resource(3)
 	give_player_resource(3)
+	give_player_resource(3)
+	give_player_resource(8)
 	
 
 func give_player_character(cardName: String) -> void:
