@@ -17,6 +17,8 @@ func buy(player: PlayerArea) -> bool:
 	return true
 
 func _immediate_effect():
-	GameManager.draw_character()
+	var card = GameManager.draw_character()
+	playerOwner.add_diamond(card)
+	
 
 # TODO: Enable subtraction when playing diamond
