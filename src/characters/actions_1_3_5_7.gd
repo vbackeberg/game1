@@ -13,4 +13,4 @@ func buy(player: PlayerArea) -> bool:
 
 
 func immediate_effect(player: PlayerArea):
-	player.actionsLeft += 3
+	player.actionsThisTurn += 3

@@ -41,9 +41,10 @@ func _process(_delta: float) -> void:
 	pass
 
 func _on_action_used():
-	currentPlayer.actionsLeft -= 1
+	currentPlayer.actionsUsed += 1
+	var actionsLeft = currentPlayer.actionsThisTurn - currentPlayer.actionsUsed
 
-	if currentPlayer.actionsLeft == 0:
+	if actionsLeft == 0:
 		print("All actions used. Player " + str(currentPlayerIdx) + "'s turn is over.")
 		
 		# TODO Deselect r virt and dia. Consider Clean Up Phase
@@ -59,7 +60,7 @@ func _on_action_used():
 
 		currentPlayer.discard_if_too_many_cards()
 	
-	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
+	$ActionsLeftLabel.text = str(actionsLeft)
 
 func _on_discard_started():
 	$MiddleArea.on_discard_started()
@@ -80,7 +81,8 @@ func _next_player():
 		_find_winner()
 		return
 
-	currentPlayer.actionsLeft = currentPlayer.actionsPerTurn
+	currentPlayer.actionsThisTurn = currentPlayer.actionsPerTurn
+	currentPlayer.actionsUsed = 0
 	currentPlayer.visible = false
 	$MiddleArea.visible = true
 
@@ -109,10 +111,8 @@ func _set_current_player(nextPlayer: int):
 	currentPlayerIdx = nextPlayer
 	currentPlayer = players[currentPlayerIdx]
 	$CurrentPlayerLabel.text = "Player " + str(currentPlayerIdx) + "'s turn"
-	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
-
-
+	$ActionsLeftLabel.text = str(currentPlayer.actionsThisTurn - currentPlayer.actionsUsed)
 
 ## Used by character that adds 3 actions.
 func _on_actions_left_changed():
-	$ActionsLeftLabel.text = str(currentPlayer.actionsLeft)
+	$ActionsLeftLabel.text = str(currentPlayer.actionsThisTurn)

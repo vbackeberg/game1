@@ -11,8 +11,9 @@ var selectedVirtualResources: Array[CardCharacter]
 var selectedResources: Array[CardResource]
 var selectedDiamonds: Array[CardCharacter]
 var charactersPlayed: Array[CardCharacter]
-var actionsLeft: int
+var actionsThisTurn: int
 var actionsPerTurn: int
+var actionsUsed: int
 var discardMode: bool
 var numToDiscard: int
 
@@ -35,7 +36,8 @@ func _ready() -> void:
 	charactersPlayed = []
 	visible = false
 	actionsPerTurn = 3
-	actionsLeft = actionsPerTurn
+	actionsThisTurn = actionsPerTurn
+	actionsUsed = 0
 	victoryPoints = 0
 
 	discardMode = false

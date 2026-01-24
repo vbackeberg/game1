@@ -32,4 +32,4 @@ func buy(player: PlayerArea) -> bool:
 func _immediate_effect():
 	var main = get_node("/root/Main")
 	var nextIdx = (main.currentPlayerIdx + 1) % main.players.size()
-	main.players[nextIdx].actionsLeft += 1
+	main.players[nextIdx].actionsThisTurn += 1
