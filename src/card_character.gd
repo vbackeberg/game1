@@ -8,6 +8,10 @@ var backside := false
 var playerOwner: PlayerArea
 var scene:= preload("res://src/card_character.tscn")
 
+## Override to set buy conditions
+func buy(_player: PlayerArea) -> bool:
+	return false
+
 func select(forDiscard := false):
 	self.modulate = Color(1.2, 0.8, 0.8) if forDiscard else Color(1.2, 1.2, 0.8) # Yellow and Red tint
 
