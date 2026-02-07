@@ -8,8 +8,7 @@ static func get_cards():
 			cards.append(c[0])
 	return cards
 
-
-
+## The card scenes and how often they are present in the deck.
 static var _cardTypes = [
 	[preload("res://src/characters/actions_1_3_5_7.tscn"), 1],
 	[preload("res://src/characters/actions_2_4_6_8.tscn"), 1],
