@@ -5,7 +5,7 @@ var resourceValue: int
 
 func _init():
 	points = 0
-	asset_path = "res://assets/characters/dog-1-1-1-1.png"
+	
 
 func buy(player: PlayerArea) -> bool:
 	if not _is_owner(player):

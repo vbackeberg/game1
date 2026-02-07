@@ -3,7 +3,7 @@ extends CardCharacter
 
 func _init():
 	points = 2
-	asset_path = "res://assets/characters/pipe-x-x-6-6.png"
+	
 
 func buy(player: PlayerArea) -> bool:
 	if not _is_owner(player) or not _n_resources_selected(player, 4):

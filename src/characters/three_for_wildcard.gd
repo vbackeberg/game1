@@ -8,7 +8,7 @@ var selectedResource: CardResource
 
 func _init():
 	points = 1
-	asset_path = "res://assets/characters/three-for-wildcard.png"
+	
 
 func buy(player: PlayerArea) -> bool:
 	if not _is_owner(player) or not _has_selected(player, [3, 3, 3]):

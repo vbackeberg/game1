@@ -5,7 +5,7 @@ var resourceValue := 6
 
 func _init():
 	points = 1
-	asset_path = "res://assets/characters/dwarf-6.png"
+	
 	$ActivatedOverlay/ActivatedLabel.text = str(resourceValue)
 
 func buy(player: PlayerArea) -> bool:

@@ -3,8 +3,6 @@ extends TextureButton
 
 var slot: int
 var points: int
-var asset_path:= "res://assets/character_back.png"
-var backside := false
 var playerOwner: PlayerArea
 var scene:= preload("res://src/card_character.tscn")
 
