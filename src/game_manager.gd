@@ -22,15 +22,20 @@ func draw_resource() -> int:
 
 	return resourceCards.pop_back()
 
+var backsideTexture = preload("res://assets/character_back.png")
 
-func draw_character():
+func draw_character(backside: bool = false) -> CardCharacter:
 	if characterCards.size() == 0:
 		if graveyardCharacters.size() == 0:
 			print("No more character cards left in stack or graveyard!")
 		else:
 			_replenish_characters()
 
-	return characterCards.pop_back()
+	var card = characterCards.pop_back().instantiate()
+	if backside:
+		card.texture_normal = backsideTexture
+
+	return card
 
 func _replenish_resources():
 	resourceCards = graveyardResources.duplicate()
