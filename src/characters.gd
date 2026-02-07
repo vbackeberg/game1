@@ -38,7 +38,7 @@ static var _cardTypes = [
 	[preload("res://src/characters/neighbor_x_x_y_y.tscn"), 1],
 	[preload("res://src/characters/neighbors_3_6.tscn"), 1],
 	[preload("res://src/characters/neighbors_4_5.tscn"), 1],
-	[preload("res://src/characters/peek_5_6_7.tscn"), 2],
+	[preload("res://src/characters/steal_5_6_7.tscn"), 2],
 	[preload("res://src/characters/peek_stack.tscn"), 1],
 	[preload("res://src/characters/phoenix_1_2.tscn"), 1],
 	[preload("res://src/characters/pipe_x_x_6_6.tscn"), 2],
