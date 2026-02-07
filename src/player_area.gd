@@ -107,6 +107,7 @@ func _on_confirm_discard_button_pressed() -> void:
 		if numToDiscard == 0:
 			$ConfirmDiscardButton.visible = false
 			discardMode = false
+			selectedResources.clear()
 			reorder_resource_cards()
 			discard_finished.emit()
 
