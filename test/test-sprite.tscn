@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://d3tqk3bx7bsqd"]
+
+[ext_resource type="Texture2D" uid="uid://b4142aklmlr8y" path="res://assets/characters/dwarf-6.png" id="1_ma285"]
+[ext_resource type="Script" uid="uid://t1splwxndcbp" path="res://test/test_sprite.gd" id="2_ssxci"]
+
+[node name="TestSprit" type="Sprite2D" unique_id=95389003]
+texture = ExtResource("1_ma285")
+script = ExtResource("2_ssxci")
