@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bnrfylf0gv46j"]
+
+[ext_resource type="Script" uid="uid://cthsdkiqaup1l" path="res://test/tween/test_tween.gd" id="1_bn15p"]
+[ext_resource type="Texture2D" uid="uid://b4142aklmlr8y" path="res://assets/characters/dwarf-6.png" id="2_5pxgh"]
+[ext_resource type="Texture2D" uid="uid://j3rc6e54o26g" path="res://assets/characters/pirate-2-2-2.png" id="3_mnmgj"]
+
+[node name="TestTween" type="Node2D" unique_id=1394484128]
+script = ExtResource("1_bn15p")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1597658503]
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=609293243]
+offset_left = -538.0
+offset_top = -308.0
+offset_right = -157.0
+offset_bottom = 283.0
+texture_normal = ExtResource("2_5pxgh")
+
+[node name="Button" type="Button" parent="." unique_id=23320748]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "move"
+
+[node name="TextureButton2" type="TextureButton" parent="." unique_id=107412833]
+offset_left = 62.0
+offset_top = 416.0
+offset_right = 156.0
+offset_bottom = 606.0
+texture_normal = ExtResource("3_mnmgj")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
