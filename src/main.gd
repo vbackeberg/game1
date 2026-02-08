@@ -9,7 +9,7 @@ var lastTurn: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	players = [$PlayerArea, $PlayerArea2]
+	players = [$PlayerArea]
 	_set_current_player(0)
 
 	$WinOverlay.visible = false
@@ -25,16 +25,11 @@ func _input(event):
 	if event.is_action_pressed("ui_accept"): # Space bar
 		toggle_view()
 
-# TODO: Toggle does not yet work in discard mode.
-# When discard mode, deactivate cards drawing, show how many to discard
-
 func toggle_view():
-	if $MiddleArea.visible == true:
-		$MiddleArea.visible = false
-		currentPlayer.visible = true
-	else:
-		$MiddleArea.visible = true
-		currentPlayer.visible = false
+	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
+	tween.set_parallel(true) # Run all animations simultaneously
+	tween.tween_property($Camera2D, "global_position", Vector2(0, 300), 0.5)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
