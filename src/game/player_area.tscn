@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bov0ixvuurdny"]
+
+[ext_resource type="Script" uid="uid://dyk64urnjk6ns" path="res://src/game/player_area.gd" id="1_omm1s"]
+
+[node name="PlayerArea" type="Node2D" unique_id=1442293069]
+script = ExtResource("1_omm1s")
+
+[node name="ConfirmDiscardButton" type="Button" parent="." unique_id=947153994]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Confirm discard"
+
+[connection signal="pressed" from="ConfirmDiscardButton" to="." method="_on_confirm_discard_button_pressed"]

@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://vj5feyq5sl6r"]
+
+[ext_resource type="Script" uid="uid://bopt66vu8q8qa" path="res://src/game/game_scene.gd" id="1_jr7q5"]
+[ext_resource type="PackedScene" uid="uid://dkfqww1gfq0k" path="res://src/game/middle_area.tscn" id="2_lhik4"]
+[ext_resource type="PackedScene" uid="uid://bov0ixvuurdny" path="res://src/game/player_area.tscn" id="3_p835m"]
+
+[node name="GameScene" type="Node2D" unique_id=2046145857]
+script = ExtResource("1_jr7q5")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=340020315]
+
+[node name="MiddleArea" parent="." unique_id=1610996483 instance=ExtResource("2_lhik4")]
+position = Vector2(-640, -360)
+
+[node name="PlayerArea" parent="." unique_id=987378068 instance=ExtResource("3_p835m")]
+position = Vector2(-640, 360)
+
+[node name="ActionsLeftLabel" type="Label" parent="." unique_id=122699932]
+offset_left = 528.0
+offset_top = 264.0
+offset_right = 632.0
+offset_bottom = 352.0
+theme_override_font_sizes/font_size = 64
+text = "3"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="CurrentPlayerLabel" type="Label" parent="." unique_id=1843246647]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -224.0
+offset_top = -360.0
+offset_right = 220.0
+offset_bottom = -272.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 64
+text = "Player 1's turn"
+horizontal_alignment = 1
+
+[node name="WinOverlay" type="Panel" parent="." unique_id=324845957]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NewGameButton" type="Button" parent="WinOverlay" unique_id=854454326]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -37.5
+offset_right = 210.0
+offset_bottom = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "  Start new game  "
+
+[node name="WinnerLabel" type="Label" parent="WinOverlay" unique_id=1352409240]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_right = 25.0
+offset_bottom = 200.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ToggleViewButton" type="Button" parent="." unique_id=550081648]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = 320.0
+offset_right = 64.0
+offset_bottom = 359.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Toggle View"
+
+[connection signal="action_used" from="MiddleArea" to="." method="_on_action_used"]
+[connection signal="action_used" from="PlayerArea" to="." method="_on_action_used"]
+[connection signal="visibility_changed" from="PlayerArea" to="PlayerArea" method="_on_visibility_changed"]
+[connection signal="pressed" from="WinOverlay/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="ToggleViewButton" to="." method="toggle_view"]

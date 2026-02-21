@@ -21,8 +21,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-WildcardSelect="*res://src/wildcard_select.tscn"
-GameManager="*res://src/game_manager.gd"
+WildcardSelect="*res://src/game/wildcard_select.tscn"
+GameManager="*res://src/game/game_manager.gd"
 
 [display]
 
