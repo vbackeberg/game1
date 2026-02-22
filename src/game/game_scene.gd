@@ -45,7 +45,7 @@ func _on_action_used():
 	var actionsLeft = currentPlayer.actionsThisTurn - currentPlayer.actionsUsed
 
 	if actionsLeft == 0:
-		print("All actions used. Player " + str(currentPlayerIdx) + "'s turn is over.")
+		print("All actions used. " + str(players[currentPlayerIdx].playerName) + "'s turn is over.")
 		
 		# TODO Deselect r virt and dia. Consider Clean Up Phase
 		for r in currentPlayer.selectedResources:
@@ -110,7 +110,7 @@ func _on_new_game_button_pressed() -> void:
 func _set_current_player(nextPlayer: int):
 	currentPlayerIdx = nextPlayer
 	currentPlayer = players[currentPlayerIdx]
-	$CurrentPlayerLabel.text = "Player " + str(currentPlayerIdx) + "'s turn"
+	$CurrentPlayerLabel.text = str(players[currentPlayerIdx].playerName) + "'s turn"
 	$ActionsLeftLabel.text = str(currentPlayer.actionsThisTurn - currentPlayer.actionsUsed)
 
 ## Used by character that adds 3 actions.
