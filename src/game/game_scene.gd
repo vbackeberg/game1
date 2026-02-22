@@ -1,3 +1,4 @@
+class_name GameScene
 extends Node
 
 var middleVisible: bool
@@ -7,15 +8,19 @@ var players: Array[PlayerArea]
 var twelvePointsReached: bool
 var lastTurn: bool
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	players = [$PlayerArea]
-	_set_current_player(0)
+var playerArea = preload("res://src/game/player_area.tscn")
 
+func add_player(playerName: String):
+	var player = playerArea.instantiate()
+	player.playerName = playerName
+	add_child(player)
+	players.append(player)
+
+func start():
+	_set_current_player(0)
 	$WinOverlay.visible = false
 	twelvePointsReached = false
 	lastTurn = false
-	
 	for player in players:
 		player.discard_started.connect(_on_discard_started.bind())
 		player.discard_finished.connect(_on_discard_finished.bind())

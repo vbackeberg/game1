@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bopt66vu8q8qa" path="res://src/game/game_scene.gd" id="1_jr7q5"]
 [ext_resource type="PackedScene" uid="uid://dkfqww1gfq0k" path="res://src/game/middle_area.tscn" id="2_lhik4"]
-[ext_resource type="PackedScene" uid="uid://bov0ixvuurdny" path="res://src/game/player_area.tscn" id="3_p835m"]
 
 [node name="GameScene" type="Node2D" unique_id=2046145857]
 script = ExtResource("1_jr7q5")
@@ -11,9 +10,6 @@ script = ExtResource("1_jr7q5")
 
 [node name="MiddleArea" parent="." unique_id=1610996483 instance=ExtResource("2_lhik4")]
 position = Vector2(-640, -360)
-
-[node name="PlayerArea" parent="." unique_id=987378068 instance=ExtResource("3_p835m")]
-position = Vector2(-640, 360)
 
 [node name="ActionsLeftLabel" type="Label" parent="." unique_id=122699932]
 offset_left = 528.0
@@ -92,7 +88,5 @@ size_flags_vertical = 8
 text = "Toggle View"
 
 [connection signal="action_used" from="MiddleArea" to="." method="_on_action_used"]
-[connection signal="action_used" from="PlayerArea" to="." method="_on_action_used"]
-[connection signal="visibility_changed" from="PlayerArea" to="PlayerArea" method="_on_visibility_changed"]
 [connection signal="pressed" from="WinOverlay/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="ToggleViewButton" to="." method="toggle_view"]

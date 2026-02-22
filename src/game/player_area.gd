@@ -2,7 +2,7 @@ class_name PlayerArea
 extends Node2D
 
 const CARD_WIDTH = 128.0
-var playerName: String
+var playerName: String = ""
 var resourcesOnHand: Array[CardResource]
 var resourceCapacity: int
 var charactersOnPayField: Array[CardCharacter]
@@ -25,7 +25,6 @@ signal discard_finished()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	playerName = str(randi() % 100 + 1)
 	resourcesOnHand = []
 	resourceCapacity = 5
 	charactersOnPayField = []

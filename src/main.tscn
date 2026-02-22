@@ -1,10 +1,63 @@
 [gd_scene format=3 uid="uid://8f45kj4ev03x"]
 
-[ext_resource type="PackedScene" uid="uid://vj5feyq5sl6r" path="res://src/game/game_scene.tscn" id="1_gh0ne"]
-[ext_resource type="PackedScene" uid="uid://bhjbyqhqpm5wn" path="res://src/main_menu.tscn" id="2_5q4o7"]
+[ext_resource type="Script" uid="uid://e6geuab71sco" path="res://src/main.gd" id="1_5q4o7"]
 
 [node name="Main" type="Node" unique_id=1571740787]
+script = ExtResource("1_5q4o7")
 
-[node name="GameScene" parent="." unique_id=2046145857 instance=ExtResource("1_gh0ne")]
+[node name="MainMenu" type="MarginContainer" parent="." unique_id=1160066877]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
 
-[node name="MainMenu" parent="." unique_id=588062647 instance=ExtResource("2_5q4o7")]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu" unique_id=222988431]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="SelectPlayersLabel" type="Label" parent="MainMenu/VBoxContainer" unique_id=690593717]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Select Players"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NamePlayer1" type="LineEdit" parent="MainMenu/VBoxContainer" unique_id=950493113]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+placeholder_text = "your name"
+
+[node name="NamePlayer2" type="LineEdit" parent="MainMenu/VBoxContainer" unique_id=340909493]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+placeholder_text = "your name"
+
+[node name="NamePlayer3" type="LineEdit" parent="MainMenu/VBoxContainer" unique_id=1724283401]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+placeholder_text = "your name"
+
+[node name="NamePlayer4" type="LineEdit" parent="MainMenu/VBoxContainer" unique_id=356754796]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+placeholder_text = "your name"
+
+[node name="NamePlayer5" type="LineEdit" parent="MainMenu/VBoxContainer" unique_id=1351426914]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+placeholder_text = "your name"
+
+[node name="ReadyButton" type="Button" parent="MainMenu/VBoxContainer" unique_id=1314140258]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "READY"
+
+[connection signal="pressed" from="MainMenu/VBoxContainer/ReadyButton" to="." method="_on_ready_button_pressed"]
