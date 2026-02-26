@@ -18,7 +18,7 @@ func add_player(playerName: String):
 
 func start():
 	_set_current_player(0)
-	$WinOverlay.visible = false
+	$MainOverlay/WinOverlay.visible = false
 	twelvePointsReached = false
 	lastTurn = false
 	for player in players:
@@ -60,13 +60,13 @@ func _on_action_used():
 
 		currentPlayer.discard_if_too_many_cards()
 	
-	$ActionsLeftLabel.text = str(actionsLeft)
+	$MainOverlay/ActionsLeftLabel.text = str(actionsLeft)
 
 func _on_discard_started():
-	$MiddleArea.on_discard_started()
+	$Canvas/Canvas/MiddleArea.on_discard_started()
 
 func _on_discard_finished():
-	$MiddleArea.on_discard_finished()
+	$Canvas/Canvas/MiddleArea.on_discard_finished()
 	_next_player()
 
 func _next_player():
@@ -84,11 +84,11 @@ func _next_player():
 	currentPlayer.actionsThisTurn = currentPlayer.actionsPerTurn
 	currentPlayer.actionsUsed = 0
 	currentPlayer.visible = false
-	$MiddleArea.visible = true
+	$Canvas/MiddleArea.visible = true
 
 	_set_current_player((currentPlayerIdx + 1) % players.size())
 
-## Finds player with highest points and displays them as Winner
+## Finds player with highest points and displays them as Winner	
 func _find_winner():
 	var sortedPlayers = players.duplicate()
 	sortedPlayers.sort_custom(func(a, b): return a.victoryPoints > b.victoryPoints || (a.victoryPoints == b.victoryPoints && a.diamonds.size() > b.diamonds.size()))
@@ -98,21 +98,27 @@ func _find_winner():
 		var player = sortedPlayers[i]
 		print("Player " + str(i) + ": " + str(player.victoryPoints) + " victory points")
 	
-	$ActionsLeftLabel.visible = false
-	$CurrentPlayerLabel.visible = false
+	$MainOverlay/ActionsLeftLabel.visible = false
+	$MainOverlay/CurrentPlayerLabel.visible = false
 	
-	$WinOverlay.visible = true
-	$WinOverlay/WinnerLabel.text = "Player " + str(sortedPlayers[0].playerName) + " has won!"
+	$MainOverlay/WinOverlay.visible = true
+	$MainOverlay/WinOverlay/WinnerLabel.text = "Player " + str(sortedPlayers[0].playerName) + " has won!"
 
 func _on_new_game_button_pressed() -> void:
 	get_tree().reload_current_scene()
 
+signal main_menu_button_pressed()
+
+func _on_main_menu_button_pressed() -> void:
+	main_menu_button_pressed.emit()
+	
 func _set_current_player(nextPlayer: int):
 	currentPlayerIdx = nextPlayer
 	currentPlayer = players[currentPlayerIdx]
-	$CurrentPlayerLabel.text = str(players[currentPlayerIdx].playerName) + "'s turn"
-	$ActionsLeftLabel.text = str(currentPlayer.actionsThisTurn - currentPlayer.actionsUsed)
+	$Canvas/MiddleArea.currentPlayer = players[currentPlayerIdx]
+	$MainOverlay/CurrentPlayerLabel.text = str(players[currentPlayerIdx].playerName) + "'s turn"
+	$MainOverlay/ActionsLeftLabel.text = str(currentPlayer.actionsThisTurn - currentPlayer.actionsUsed)
 
 ## Used by character that adds 3 actions.
 func _on_actions_left_changed():
-	$ActionsLeftLabel.text = str(currentPlayer.actionsThisTurn)
+	$MainOverlay/ActionsLeftLabel.text = str(currentPlayer.actionsThisTurn)

@@ -3,6 +3,7 @@ extends Node2D
 const CARD_WIDTH = 128.0
 
 var cardsLaidOut: Array[CardResource]
+@export var currentPlayer: PlayerArea
 
 func _ready() -> void:
 	cardsLaidOut = []
@@ -23,21 +24,21 @@ func _process(_delta: float) -> void:
 
 func _on_stack_resources_pressed() -> void:
 	var value = GameManager.draw_resource()
-	get_parent().currentPlayer.add_resource(value)
+	currentPlayer.add_resource(value)
 	action_used.emit()
 	
 func _on_stack_characters_pressed() -> void:
-	if get_parent().currentPlayer.charactersOnPayField.size() == 2:
+	if currentPlayer.charactersOnPayField.size() == 2:
 		print("Player has 2 character cards, already.")
 		return
 
 	var card = GameManager.draw_character()
-	get_parent().currentPlayer.add_character(card)
+	currentPlayer.add_character(card)
 	action_used.emit()
 
 ## Move the card to the player's hand
 func _on_resource_card_pressed(card: CardResource) -> void:
-	get_parent().currentPlayer.add_resource(card.resourceValue)
+	currentPlayer.add_resource(card.resourceValue)
 	place_resource(card.slot)
 	card.queue_free()
 	action_used.emit()
@@ -61,13 +62,13 @@ func place_resource(slot: int):
 
 ## Moves the card to the player's hand
 func _on_character_card_pressed(card: CardCharacter) -> void:
-	if get_parent().currentPlayer.charactersOnPayField.size() == 2:
+	if currentPlayer.charactersOnPayField.size() == 2:
 		print("Player has 2 character cards, already.")
 		return
 
 	card.pressed.disconnect(_on_character_card_pressed)
 	remove_child(card)
-	get_parent().currentPlayer.add_character(card)
+	currentPlayer.add_character(card)
 	place_character_in_middle(card.slot)
 	action_used.emit()
 

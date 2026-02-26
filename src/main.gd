@@ -12,8 +12,9 @@ func _process(delta: float) -> void:
 
 
 var gameScene = preload("res://src/game/game_scene.tscn")
+var instance: GameScene
 func _on_ready_button_pressed() -> void:
-	var instance = gameScene.instantiate() as GameScene
+	instance = gameScene.instantiate() as GameScene
 	for n in [$MainMenu/VBoxContainer/NamePlayer1.text,
 			$MainMenu/VBoxContainer/NamePlayer2.text,
 			$MainMenu/VBoxContainer/NamePlayer3.text,
@@ -23,5 +24,11 @@ func _on_ready_button_pressed() -> void:
 			instance.add_player(n)
 	add_child(instance)
 	instance.start()
+	instance.main_menu_button_pressed.connect(return_to_main_menu)
 		
 	$MainMenu.hide()
+
+func return_to_main_menu():
+	$MainMenu.show()
+	instance.queue_free()
+	pass
