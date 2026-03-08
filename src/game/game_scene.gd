@@ -107,11 +107,6 @@ func _find_winner():
 func _on_new_game_button_pressed() -> void:
 	get_tree().reload_current_scene()
 
-signal main_menu_button_pressed()
-
-func _on_main_menu_button_pressed() -> void:
-	main_menu_button_pressed.emit()
-	
 func _set_current_player(nextPlayer: int):
 	currentPlayerIdx = nextPlayer
 	currentPlayer = players[currentPlayerIdx]
@@ -122,3 +117,7 @@ func _set_current_player(nextPlayer: int):
 ## Used by character that adds 3 actions.
 func _on_actions_left_changed():
 	$MainOverlay/ActionsLeftLabel.text = str(currentPlayer.actionsThisTurn)
+
+signal stop_game_button_pressed()
+func _on_stop_game_button_pressed() -> void:
+	stop_game_button_pressed.emit()

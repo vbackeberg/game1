@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://vj5feyq5sl6r"]
 
 [ext_resource type="Script" uid="uid://bopt66vu8q8qa" path="res://src/game/game_scene.gd" id="1_jr7q5"]
-[ext_resource type="PackedScene" path="res://src/game/middle_area.tscn" id="2_sia5v"]
+[ext_resource type="PackedScene" uid="uid://dkfqww1gfq0k" path="res://src/game/middle_area.tscn" id="2_sia5v"]
 
 [node name="GameScene" type="Node" unique_id=108084504]
 script = ExtResource("1_jr7q5")
@@ -94,6 +94,7 @@ limit_bottom = 720
 
 [node name="MiddleArea" parent="Canvas" unique_id=1593471768 instance=ExtResource("2_sia5v")]
 
+[connection signal="pressed" from="MainOverlay/StopGameButton" to="." method="_on_stop_game_button_pressed"]
 [connection signal="pressed" from="MainOverlay/WinOverlay/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="MainOverlay/WinOverlay/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="MainOverlay/ToggleViewButton" to="." method="toggle_view"]

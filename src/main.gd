@@ -24,7 +24,7 @@ func _on_ready_button_pressed() -> void:
 			instance.add_player(n)
 	add_child(instance)
 	instance.start()
-	instance.main_menu_button_pressed.connect(return_to_main_menu)
+	instance.stop_game_button_pressed.connect(return_to_main_menu)
 		
 	$MainMenu.hide()
 
