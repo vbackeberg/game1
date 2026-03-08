@@ -1,104 +1,63 @@
-[gd_scene load_steps=4 format=3 uid="uid://vj5feyq5sl6r"]
+[gd_scene format=3 uid="uid://8f45kj4ev03x"]
 
-[ext_resource type="Script" uid="uid://bopt66vu8q8qa" path="res://src/main.gd" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://dkfqww1gfq0k" path="res://src/middle_area.tscn" id="2_5q4o7"]
-[ext_resource type="PackedScene" uid="uid://bov0ixvuurdny" path="res://src/player_area.tscn" id="3_1bvp3"]
+[ext_resource type="Script" uid="uid://e6geuab71sco" path="res://src/main.gd" id="1_5q4o7"]
 
-[node name="Main" type="Node"]
-script = ExtResource("1_ig7tw")
+[node name="Main" type="Node" unique_id=1571740787]
+script = ExtResource("1_5q4o7")
 
-[node name="MiddleArea" parent="." instance=ExtResource("2_5q4o7")]
-
-[node name="PlayerArea" parent="." instance=ExtResource("3_1bvp3")]
-
-[node name="PlayerArea2" parent="." instance=ExtResource("3_1bvp3")]
-
-[node name="PlayerArea3" parent="." instance=ExtResource("3_1bvp3")]
-
-[node name="PlayerArea4" parent="." instance=ExtResource("3_1bvp3")]
-
-[node name="PlayerArea5" parent="." instance=ExtResource("3_1bvp3")]
-
-[node name="PlayerArea6" parent="." instance=ExtResource("3_1bvp3")]
-
-[node name="ActionsLeftLabel" type="Label" parent="."]
-offset_left = 1144.0
-offset_top = 600.0
-offset_right = 1248.0
-offset_bottom = 688.0
-theme_override_font_sizes/font_size = 64
-text = "3"
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="CurrentPlayerLabel" type="Label" parent="."]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 88.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 64
-text = "Player 1's turn"
-horizontal_alignment = 1
-
-[node name="WinOverlay" type="Panel" parent="."]
-visible = false
-self_modulate = Color(0, 0, 0, 1)
+[node name="MainMenu" type="MarginContainer" parent="." unique_id=1160066877]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
 
-[node name="NewGameButton" type="Button" parent="WinOverlay"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -210.0
-offset_top = -37.5
-offset_right = 210.0
-offset_bottom = 37.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 48
-text = "  Start new game  "
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu" unique_id=222988431]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
 
-[node name="WinnerLabel" type="Label" parent="WinOverlay"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -24.0
-offset_right = 25.0
-offset_bottom = 200.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 48
+[node name="SelectPlayersLabel" type="Label" parent="MainMenu/VBoxContainer" unique_id=690593717]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "Select Players"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ToggleViewButton" type="Button" parent="."]
-offset_left = 576.0
-offset_top = 657.0
-offset_right = 719.0
-offset_bottom = 700.0
-size_flags_horizontal = 4
-size_flags_vertical = 8
-text = "Toggle View"
+[node name="NamePlayer1" type="LineEdit" parent="MainMenu/VBoxContainer" unique_id=950493113]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+placeholder_text = "your name"
 
-[connection signal="action_used" from="MiddleArea" to="." method="_on_action_used"]
-[connection signal="action_used" from="PlayerArea" to="." method="_on_action_used"]
-[connection signal="visibility_changed" from="PlayerArea" to="PlayerArea" method="_on_visibility_changed"]
-[connection signal="action_used" from="PlayerArea2" to="." method="_on_action_used"]
-[connection signal="visibility_changed" from="PlayerArea2" to="PlayerArea2" method="_on_visibility_changed"]
-[connection signal="action_used" from="PlayerArea3" to="." method="_on_action_used"]
-[connection signal="visibility_changed" from="PlayerArea3" to="PlayerArea3" method="_on_visibility_changed"]
-[connection signal="action_used" from="PlayerArea4" to="." method="_on_action_used"]
-[connection signal="visibility_changed" from="PlayerArea4" to="PlayerArea4" method="_on_visibility_changed"]
-[connection signal="action_used" from="PlayerArea5" to="." method="_on_action_used"]
-[connection signal="visibility_changed" from="PlayerArea5" to="PlayerArea5" method="_on_visibility_changed"]
-[connection signal="action_used" from="PlayerArea6" to="." method="_on_action_used"]
-[connection signal="visibility_changed" from="PlayerArea6" to="PlayerArea6" method="_on_visibility_changed"]
-[connection signal="pressed" from="WinOverlay/NewGameButton" to="." method="_on_new_game_button_pressed"]
-[connection signal="pressed" from="ToggleViewButton" to="." method="toggle_view"]
+[node name="NamePlayer2" type="LineEdit" parent="MainMenu/VBoxContainer" unique_id=340909493]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+placeholder_text = "your name"
+
+[node name="NamePlayer3" type="LineEdit" parent="MainMenu/VBoxContainer" unique_id=1724283401]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+placeholder_text = "your name"
+
+[node name="NamePlayer4" type="LineEdit" parent="MainMenu/VBoxContainer" unique_id=356754796]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+placeholder_text = "your name"
+
+[node name="NamePlayer5" type="LineEdit" parent="MainMenu/VBoxContainer" unique_id=1351426914]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+placeholder_text = "your name"
+
+[node name="ReadyButton" type="Button" parent="MainMenu/VBoxContainer" unique_id=1314140258]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "READY"
+
+[connection signal="pressed" from="MainMenu/VBoxContainer/ReadyButton" to="." method="_on_ready_button_pressed"]
