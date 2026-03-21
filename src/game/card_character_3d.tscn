@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://c4io50wds0giv"]
+
+[ext_resource type="Texture2D" uid="uid://y6vorsgamkxj" path="res://assets/character_back.png" id="1_7fy5d"]
+[ext_resource type="Script" uid="uid://hqt15hv5b3ke" path="res://src/game/card_character_3d.gd" id="1_ncy1e"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_7fy5d"]
+size = Vector2(1, 1.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ncy1e"]
+transparency = 1
+albedo_texture = ExtResource("1_7fy5d")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ncy1e"]
+size = Vector2(1, 1.4)
+
+[node name="CardCharacter3d" type="Node3D" unique_id=1671261367]
+script = ExtResource("1_ncy1e")
+
+[node name="Front" type="MeshInstance3D" parent="." unique_id=2125086250]
+mesh = SubResource("QuadMesh_7fy5d")
+
+[node name="Back" type="MeshInstance3D" parent="." unique_id=1367559999]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ncy1e")
+mesh = SubResource("QuadMesh_ncy1e")
