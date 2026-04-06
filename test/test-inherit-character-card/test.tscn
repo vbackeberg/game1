@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cd33eertawo71"]
+
+[ext_resource type="PackedScene" uid="uid://gfhopxqi3dd" path="res://test/test-inherit-character-card/card_character.tscn" id="1_0u1do"]
+[ext_resource type="PackedScene" uid="uid://w6i8l07gb6p8" path="res://test/test-inherit-character-card/inherited_card_character.tscn" id="2_uyjdm"]
+
+[node name="Camera" type="Node3D" unique_id=220081856]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=351615884]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2, 0)
+
+[node name="CardCharacter" parent="." unique_id=430942510 instance=ExtResource("1_0u1do")]
+visible = false
+
+[node name="CardCharacter2" parent="." unique_id=1532165736 instance=ExtResource("2_uyjdm")]
