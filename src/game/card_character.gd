@@ -4,7 +4,6 @@ extends TextureButton
 var slot: int
 var points: int
 var playerOwner: PlayerArea
-var scene:= preload("res://src/game/card_character.tscn")
 
 ## Override to set buy conditions
 func buy(_player: PlayerArea) -> bool:
