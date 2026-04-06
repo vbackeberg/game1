@@ -1,13 +1,13 @@
 extends Node3D
 
-class_name CardCharacter
+class_name CardCharacter3d
 
 @export var data: CardData:
 	set(value):
-		var card_front = $Front
-		var card_back = $Back
-		
-		data = value
+		var front = $Front
+		var mat = StandardMaterial3D.new()
+		front.material_override = mat
+		mat.albedo_texture = value.art
 
 
 
