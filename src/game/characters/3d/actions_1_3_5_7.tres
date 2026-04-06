@@ -1,7 +1,12 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://cit1gjotixk3d"]
 
 [ext_resource type="Script" uid="uid://cjymc5k75ly8b" path="res://src/game/card_data.gd" id="1_0nogc"]
+[ext_resource type="Texture2D" uid="uid://ceh31172f08rl" path="res://assets/characters/actions-1-3-5-7.png" id="1_8e44v"]
 
 [resource]
 script = ExtResource("1_0nogc")
+characterName = null
+art = ExtResource("1_8e44v")
+points = null
+diamonds = null
 metadata/_custom_type_script = "uid://cjymc5k75ly8b"
