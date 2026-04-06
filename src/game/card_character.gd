@@ -1,5 +1,5 @@
 class_name CardCharacter
-extends TextureButton
+extends Node3D
 
 var slot: int
 var points: int
@@ -8,6 +8,19 @@ var playerOwner: PlayerArea
 ## Override to set buy conditions
 func buy(_player: PlayerArea) -> bool:
 	return false
+
+signal pressed()
+
+func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed == true:
+			print("pressed mouse")
+			pressed.emit()
+						
+	if event is InputEventScreenTouch:
+		if event.pressed == true:
+			print("pressed touch")
+			pressed.emit()
 
 func select(forDiscard := false):
 	self.modulate = Color(1.2, 0.8, 0.8) if forDiscard else Color(1.2, 1.2, 0.8) # Yellow and Red tint

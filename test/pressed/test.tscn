@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cd0hj0elcbhck"]
+
+[ext_resource type="PackedScene" uid="uid://fjgdp8m8uuiq" path="res://src/game/characters/actions_1_3_5_7.tscn" id="1_fsndw"]
+
+[node name="Test" type="Node3D" unique_id=2144354758]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1239336196]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2, 0)
+
+[node name="Actions1357" parent="." unique_id=943978199 instance=ExtResource("1_fsndw")]

@@ -84,13 +84,10 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Toggle View"
 
-[node name="Canvas" type="Node2D" parent="." unique_id=1492304921]
+[node name="Canvas" type="Node3D" parent="." unique_id=807349849]
 
-[node name="Camera2D" type="Camera2D" parent="Canvas" unique_id=340020315]
-limit_left = 0
-limit_top = 0
-limit_right = 1280
-limit_bottom = 720
+[node name="Camera2D" type="Camera3D" parent="Canvas" unique_id=1937035089]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1, 0)
 
 [node name="MiddleArea" parent="Canvas" unique_id=1593471768 instance=ExtResource("2_sia5v")]
 

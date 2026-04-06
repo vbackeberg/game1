@@ -7,7 +7,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_1"]
 font_size = 32
 
-[node name="MiddleArea" type="Node2D" unique_id=1593471768]
+[node name="MiddleArea" type="Node3D" unique_id=889265960]
 script = ExtResource("1_fbp2b")
 
 [node name="StackResources" type="TextureButton" parent="." unique_id=1623950931]

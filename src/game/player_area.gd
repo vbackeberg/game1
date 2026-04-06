@@ -1,5 +1,5 @@
 class_name PlayerArea
-extends Node2D
+extends Node3D
 
 const CARD_WIDTH = 128.0
 var playerName: String = ""
@@ -197,7 +197,7 @@ func _place_character_on_played_area(card: CardCharacter):
 	var card_index = charactersPlayed.size()
 	card.position.x = 24.0 + card_index * (CARD_WIDTH + 24.0)
 	card.position.y = 24.0 + 200.0
-	card.rotation_degrees = 180
+	#card.rotation_degrees = 180
 	card.pressed.disconnect(_on_unplayed_character_card_pressed)
 	card.activate_permanent_effect()
 

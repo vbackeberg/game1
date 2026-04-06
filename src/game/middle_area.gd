@@ -1,4 +1,4 @@
-extends Node2D
+extends Node3D
 
 const CARD_WIDTH = 128.0
 
