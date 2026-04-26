@@ -4,6 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://dy7m8dn5fbkbx" path="res://assets/characters/lion-8-8-8-8.png" id="2_0rw2d"]
 [ext_resource type="Script" uid="uid://cb423h465ibjp" path="res://src/game/characters/lion_8_8_8_8.gd" id="3_bux7q"]
 
-[node name="Lion8888" instance=ExtResource("1_ynqcr")]
-texture_normal = ExtResource("2_0rw2d")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n1vbw"]
+albedo_texture = ExtResource("2_0rw2d")
+
+[node name="Lion8888" unique_id=2025742615 instance=ExtResource("1_ynqcr")]
 script = ExtResource("3_bux7q")
+
+[node name="Front" parent="." index="0" unique_id=2043411026]
+material_override = SubResource("StandardMaterial3D_n1vbw")
