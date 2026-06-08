@@ -8,7 +8,7 @@ albedo_texture = ExtResource("2_uyjdm")
 
 [sub_resource type="QuadMesh" id="QuadMesh_uyjdm"]
 
-[node name="test" type="Node3D" unique_id=220081856]
+[node name="test" type="Node" unique_id=823464227]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=786806250]
 transform = Transform3D(0.836267, -0.33605552, -0.43327144, 0.5483224, 0.51253086, 0.6607985, -4.5868465e-10, -0.7901764, 0.6128794, 0, 5, 2.842171e-14)
@@ -16,6 +16,7 @@ shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=351615884]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.5223677, 0.079349756)
+current = true
 
 [node name="Lion8888" parent="." unique_id=869239660 instance=ExtResource("1_0u1do")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.124844134, -0.06412363)
@@ -24,3 +25,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.124844134, -0.06412363)
 transform = Transform3D(10, 0, 0, 0, -4.371139e-07, 10, 0, -10, -4.371139e-07, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_tqsq5")
 mesh = SubResource("QuadMesh_uyjdm")
+
+[node name="UserInterface" type="Control" parent="." unique_id=202970433]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="UserInterface" unique_id=148089582]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Hello
+"

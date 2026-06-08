@@ -1,9 +1,9 @@
-[gd_scene format=3 uid="uid://gfhopxqi3dd"]
+[gd_scene format=3 uid="uid://c4io50wds0giv"]
 
-[ext_resource type="Texture2D" uid="uid://y6vorsgamkxj" path="res://assets/character_back.png" id="1_wqp5v"]
+[ext_resource type="Texture2D" uid="uid://y6vorsgamkxj" path="res://assets/character_back.png" id="1_tjl07"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ksox"]
-albedo_texture = ExtResource("1_wqp5v")
+albedo_texture = ExtResource("1_tjl07")
 
 [sub_resource type="QuadMesh" id="QuadMesh_wqp5v"]
 size = Vector2(1, 1.4)
