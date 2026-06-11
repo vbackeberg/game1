@@ -3,6 +3,12 @@
 [ext_resource type="Script" uid="uid://bopt66vu8q8qa" path="res://src/game/game_scene.gd" id="1_jr7q5"]
 [ext_resource type="PackedScene" uid="uid://dkfqww1gfq0k" path="res://src/game/middle_area.tscn" id="2_sia5v"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sia5v"]
+albedo_color = Color(0.16371086, 0.3093077, 0.28243786, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_sia5v"]
+size = Vector2(10, 10)
+
 [node name="GameScene" type="Node" unique_id=108084504]
 script = ExtResource("1_jr7q5")
 
@@ -87,9 +93,20 @@ text = "Toggle View"
 [node name="Canvas" type="Node3D" parent="." unique_id=807349849]
 
 [node name="Camera2D" type="Camera3D" parent="Canvas" unique_id=1937035089]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 3.2, 0)
 
 [node name="MiddleArea" parent="Canvas" unique_id=1593471768 instance=ExtResource("2_sia5v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="Background" type="MeshInstance3D" parent="Canvas" unique_id=1323155353]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_sia5v")
+mesh = SubResource("QuadMesh_sia5v")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Canvas" unique_id=1669852085]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 23.385279, 0)
+shadow_enabled = true
+shadow_opacity = 0.87
 
 [connection signal="pressed" from="MainOverlay/StopGameButton" to="." method="_on_stop_game_button_pressed"]
 [connection signal="pressed" from="MainOverlay/WinOverlay/NewGameButton" to="." method="_on_new_game_button_pressed"]
