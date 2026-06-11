@@ -81,13 +81,6 @@ func place_character_in_middle(slot: int):
 	card.position.y = 256
 	card.pressed.connect(_on_character_card_pressed.bind(card))
 
-func concat(arr: Array) -> String:
-	var result = ""
-	for num in arr:
-		result += str(num)
-	return result
-
-
 signal action_used()
 
 ## Places 4 new	 cards
