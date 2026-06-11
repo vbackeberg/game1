@@ -7,7 +7,7 @@
 albedo_color = Color(0.16371086, 0.3093077, 0.28243786, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_sia5v"]
-size = Vector2(10, 10)
+size = Vector2(12, 12)
 
 [node name="GameScene" type="Node" unique_id=108084504]
 script = ExtResource("1_jr7q5")
@@ -93,7 +93,7 @@ text = "Toggle View"
 [node name="Canvas" type="Node3D" parent="." unique_id=807349849]
 
 [node name="Camera2D" type="Camera3D" parent="Canvas" unique_id=1937035089]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 3.2, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 4.2, 0)
 
 [node name="MiddleArea" parent="Canvas" unique_id=1593471768 instance=ExtResource("2_sia5v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)

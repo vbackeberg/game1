@@ -43,7 +43,7 @@ func _on_resource_card_pressed(card: CardResource) -> void:
 	card.queue_free()
 	action_used.emit()
 
-const resourceSlots = [-3.0, -2.0, -1.0, 0.0]
+const resourceSlots = [-2.9, -1.8, -0.7, 0.4]
 
 func place_resource(slot: int):
 	var card = GameManager.draw_resource()
@@ -53,7 +53,7 @@ func place_resource(slot: int):
 	cardsLaidOut[slot] = card
 
 	card.position.x = resourceSlots[slot]
-	card.position.y = 256
+	card.position.y = 0
 	card.pressed.connect(_on_resource_card_pressed.bind(card))
 
 ## Moves the card to the player's hand
@@ -68,7 +68,7 @@ func _on_character_card_pressed(card: CardCharacter) -> void:
 	place_character_in_middle(card.slot)
 	action_used.emit()
 
-const characterSlots = [1.0, 2.0]
+const characterSlots = [1.8, 2.9]
 
 func place_character_in_middle(slot: int):
 	var card = GameManager.draw_character()
@@ -76,7 +76,7 @@ func place_character_in_middle(slot: int):
 
 	self.add_child(card)
 	card.position.x = characterSlots[slot]
-	card.position.y = 256
+	card.position.y = 0
 	card.pressed.connect(_on_character_card_pressed.bind(card))
 
 signal action_used()
