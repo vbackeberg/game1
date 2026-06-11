@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ba41s01qfyx31"]
+
+[ext_resource type="Script" uid="uid://dl65fi73kf6fq" path="res://src/game/card_resource.gd" id="1_1w15u"]
+
+[node name="6" type="Node3D" unique_id=177919957]
+script = ExtResource("1_1w15u")
+resourceValue = 6
+metadata/_custom_type_script = "uid://dl65fi73kf6fq"
