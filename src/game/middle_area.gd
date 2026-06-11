@@ -43,22 +43,18 @@ func _on_resource_card_pressed(card: CardResource) -> void:
 	card.queue_free()
 	action_used.emit()
 
+const resourceSlots = [-3.0, -2.0, -1.0, 0.0]
+
 func place_resource(slot: int):
-	var value = GameManager.draw_resource()
+	var card = GameManager.draw_resource()
+	card.slot = slot
 
-	var card_node = load("res://src/game/card_resource.tscn").instantiate() as CardResource
-	card_node.texture_normal = load("res://assets/resource" + str(value) + ".png")
-	card_node.custom_minimum_size = Vector2(CARD_WIDTH, 200.0)
-	card_node.resourceValue = value
-	card_node.visible = visible
-	card_node.slot = slot
-	add_child(card_node)
-	cardsLaidOut[slot] = card_node
+	self.add_child(card)
+	cardsLaidOut[slot] = card
 
-	card_node.position.x = 24.0 + (1 + slot) * (CARD_WIDTH + 24.0)
-	card_node.position.y = 256
-	
-	card_node.pressed.connect(_on_resource_card_pressed.bind(card_node))
+	card.position.x = resourceSlots[slot]
+	card.position.y = 256
+	card.pressed.connect(_on_resource_card_pressed.bind(card))
 
 ## Moves the card to the player's hand
 func _on_character_card_pressed(card: CardCharacter) -> void:
@@ -72,12 +68,14 @@ func _on_character_card_pressed(card: CardCharacter) -> void:
 	place_character_in_middle(card.slot)
 	action_used.emit()
 
+const characterSlots = [1.0, 2.0]
+
 func place_character_in_middle(slot: int):
 	var card = GameManager.draw_character()
 	card.slot = slot
-	self.add_child(card)
 
-	card.position.x = $StackCharacters.position.x - (1 + slot) * (CARD_WIDTH + 24.0)
+	self.add_child(card)
+	card.position.x = characterSlots[slot]
 	card.position.y = 256
 	card.pressed.connect(_on_character_card_pressed.bind(card))
 

@@ -45,7 +45,7 @@ func _ready() -> void:
 
 ## Appends card
 func add_resource(value: int):
-	var card_node = load("res://src/game/card_resource.tscn").instantiate() as CardResource
+	var card_node = load("res://src/game/card_resource_3d.tscn").instantiate() as CardResource
 	card_node.custom_minimum_size = Vector2(CARD_WIDTH, 200.0)
 	card_node.texture_normal = load("res://assets/resource" + str(value) + ".png")
 	card_node.resourceValue = value

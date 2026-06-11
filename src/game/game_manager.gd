@@ -1,29 +1,31 @@
 extends Node
 
-var resourceCards: Array[int]
+var resourceCards: Array
 var characterCards: Array
-var graveyardResources: Array[int]
+var graveyardResources: Array[CardResource]
 var graveyardCharacters: Array[CardCharacter]
 
 func _init() -> void:
-	resourceCards = [1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8]
+	resourceCards = Resources.get_cards()
 	resourceCards.shuffle()
 
 	characterCards = Characters.get_cards()
 	characterCards.shuffle()
 
-
-func draw_resource() -> int:
+var resourceBackside = preload("res://assets/resource_back.png")
+func draw_resource(backside: bool = false) -> CardResource:
 	if resourceCards.size() == 0:
 		if graveyardResources.size() == 0:
 			print("No more resource cards left in stack or graveyard!")
 		else:
 			_replenish_resources()
 
-	return resourceCards.pop_back()
+	var card = resourceCards.pop_back().instantiate()
+	if backside:
+		card.texture_normal = resourceBackside
+	return card
 
-var backsideTexture = preload("res://assets/character_back.png")
-
+var characterBackside = preload("res://assets/character_back.png")
 func draw_character(backside: bool = false) -> CardCharacter:
 	if characterCards.size() == 0:
 		if graveyardCharacters.size() == 0:
@@ -33,7 +35,7 @@ func draw_character(backside: bool = false) -> CardCharacter:
 
 	var card = characterCards.pop_back().instantiate()
 	if backside:
-		card.texture_normal = backsideTexture
+		card.texture_normal = characterBackside
 
 	return card
 
