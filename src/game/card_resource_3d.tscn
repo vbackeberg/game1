@@ -2,10 +2,15 @@
 
 [ext_resource type="Script" uid="uid://dl65fi73kf6fq" path="res://src/game/card_resource.gd" id="1_1mgc6"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_25tbh"]
-albedo_color = Color(0.27431393, 0.17436108, 0.03477779, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v1jjl"]
+albedo_color = Color(0.34336883, 0.2503648, 0.09244122, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_25tbh"]
+size = Vector2(1, 1.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1mgc6"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_v1jjl"]
 size = Vector2(1, 1.4)
 
 [node name="CardResource3d" type="Node3D" unique_id=710458555]
@@ -13,5 +18,10 @@ script = ExtResource("1_1mgc6")
 
 [node name="Front" type="MeshInstance3D" parent="." unique_id=1891863544]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_25tbh")
+material_override = SubResource("StandardMaterial3D_v1jjl")
 mesh = SubResource("QuadMesh_25tbh")
+
+[node name="Back" type="MeshInstance3D" parent="." unique_id=248215770]
+transform = Transform3D(-1, 8.742278e-08, -3.821371e-15, 0, -4.371139e-08, -1, -8.742278e-08, -1, 4.371139e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_1mgc6")
+mesh = SubResource("QuadMesh_v1jjl")
