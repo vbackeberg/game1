@@ -1,8 +1,5 @@
-[gd_scene format=3 uid="uid://b20t41m7xhnbs"]
+[gd_scene format=3 uid="uid://bieeky56gewtr"]
 
-[ext_resource type="Script" uid="uid://dl65fi73kf6fq" path="res://src/game/card_resource.gd" id="1_ha3v6"]
+[ext_resource type="PackedScene" uid="uid://d34uvyora1v2f" path="res://src/game/card_resource_3d.tscn" id="1_5fsio"]
 
-[node name="7" type="Node3D" unique_id=1322021675]
-script = ExtResource("1_ha3v6")
-resourceValue = 7
-metadata/_custom_type_script = "uid://dl65fi73kf6fq"
+[node name="7" unique_id=710458555 instance=ExtResource("1_5fsio")]
