@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://byuuwea3hata4"]
 
-[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/game/card_character.tscn" id="1_mkge0"]
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/game/card_character_3d.tscn" id="1_mkge0"]
 [ext_resource type="Texture2D" uid="uid://b1urrkntba0dn" path="res://assets/characters/exchange-street.png" id="2_fbqc7"]
 [ext_resource type="Script" uid="uid://co430tuulc5vk" path="res://src/game/characters/exchange_street.gd" id="3_obclu"]
 

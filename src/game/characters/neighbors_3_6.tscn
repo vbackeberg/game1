@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://f1baqxakxi0k"]
 
-[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/game/card_character.tscn" id="1_n7wwv"]
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/game/card_character_3d.tscn" id="1_n7wwv"]
 [ext_resource type="Texture2D" uid="uid://q8oac86pmp53" path="res://assets/characters/neighbors-3-6.png" id="2_pxpqi"]
 [ext_resource type="Script" uid="uid://dcaf3tgwqfb0l" path="res://src/game/characters/neighbors_3_6.gd" id="3_ksrmu"]
 

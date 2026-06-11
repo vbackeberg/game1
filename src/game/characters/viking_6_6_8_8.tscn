@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://gnw2jt6k22qj"]
 
-[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/game/card_character.tscn" id="1_quasr"]
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/game/card_character_3d.tscn" id="1_quasr"]
 [ext_resource type="Texture2D" uid="uid://csu2hj7gjxyg3" path="res://assets/characters/viking-6-6-8-8.png" id="2_3ajac"]
 [ext_resource type="Script" uid="uid://daslh5741rhmk" path="res://src/game/characters/viking_6_6_8_8.gd" id="2_kr3gf"]
 

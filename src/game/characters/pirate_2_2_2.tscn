@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ds4brxoc4u571"]
 
-[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/game/card_character.tscn" id="1_8ax68"]
+[ext_resource type="PackedScene" uid="uid://dye1ym1nkalfn" path="res://src/game/card_character_3d.tscn" id="1_8ax68"]
 [ext_resource type="Texture2D" uid="uid://j3rc6e54o26g" path="res://assets/characters/pirate-2-2-2.png" id="2_jqsh5"]
 [ext_resource type="Script" uid="uid://duqn5gi7ednam" path="res://src/game/characters/pirate_2_2_2.gd" id="3_ju65y"]
 
