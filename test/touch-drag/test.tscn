@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cda502mhotowh" path="res://test/touch-drag/test.gd" id="1_jmac2"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_jmac2"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_jmac2"]
 size = Vector3(1, 1, 0.1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_jmac2"]
 
 [node name="test" type="Node3D" unique_id=1870585702]
 script = ExtResource("1_jmac2")
@@ -17,15 +17,14 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 7
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2, 0)
 current = true
 
-[node name="card" type="Node3D" parent="." unique_id=1336192372]
+[node name="Area3D" type="Area3D" parent="." unique_id=1294866642]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="card" unique_id=1963775420]
-mesh = SubResource("QuadMesh_jmac2")
-
-[node name="Area3D" type="Area3D" parent="card" unique_id=1294866642]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="card/Area3D" unique_id=940196231]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=940196231]
 shape = SubResource("BoxShape3D_jmac2")
 
-[connection signal="input_event" from="card/Area3D" to="." method="_on_area_3d_input_event"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D/CollisionShape3D" unique_id=1963775420]
+mesh = SubResource("QuadMesh_jmac2")
+skeleton = NodePath("")
+
+[connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]
