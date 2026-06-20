@@ -13,6 +13,9 @@ func _process(delta: float) -> void:
 var is_dragging := false
 
 func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
-	if event.button_index == MOUSE_BUTTON_LEFT and event.pressed == true:
-			print("pressed mouse")
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed == true:
+				print("pressed mouse")
+				var mouse_pos = get_viewport().get_mouse_position()
+				#position = 
 	pass # Replace with function body.
