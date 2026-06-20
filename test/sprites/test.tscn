@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://ct3k3syxdl8i2"]
+
+[ext_resource type="PackedScene" uid="uid://bcm6lrlep7uxx" path="res://test/sprites/draggable_sprite.tscn" id="1_wi7xp"]
+
+[node name="Test" type="Node2D" unique_id=1867917149]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=963575301]
+
+[node name="Sprite2D" parent="." unique_id=52418341 instance=ExtResource("1_wi7xp")]

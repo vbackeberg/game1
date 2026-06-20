@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bcm6lrlep7uxx"]
+
+[ext_resource type="Texture2D" uid="uid://csu2hj7gjxyg3" path="res://assets/characters/viking-6-6-8-8.png" id="1_720xc"]
+[ext_resource type="Script" uid="uid://bmg1ejsimvsv7" path="res://test/sprites/draggable_sprite.gd" id="2_ele7y"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=52418341]
+texture = ExtResource("1_720xc")
+script = ExtResource("2_ele7y")
