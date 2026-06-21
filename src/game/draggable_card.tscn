@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dj2u1mtxs5cfm"]
+
+[ext_resource type="Script" uid="uid://b2dgucatmjgf8" path="res://src/game/draggable_card.gd" id="1_k4eu3"]
+[ext_resource type="Texture2D" uid="uid://csu2hj7gjxyg3" path="res://assets/characters/viking-6-6-8-8.png" id="2_1adtm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k4eu3"]
+size = Vector2(100, 160)
+
+[node name="DraggableCard" type="Area2D" unique_id=526661538]
+script = ExtResource("1_k4eu3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=686086014]
+shape = SubResource("RectangleShape2D_k4eu3")
+
+[node name="Front" type="Sprite2D" parent="." unique_id=64564903]
+texture = ExtResource("2_1adtm")
+
+[node name="Back" type="Sprite2D" parent="." unique_id=363652504]
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
