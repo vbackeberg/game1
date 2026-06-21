@@ -1,28 +1,24 @@
 extends Sprite2D
 
-var isDragging := false
-var mouseOffset: Vector2
-const delay := 10
+var is_dragging := false
+var mouse_offset: Vector2
+const delay := 1
 
-func _physics_process(delta: float) -> void:
-	if isDragging == true:
-		var tween = get_tree().create_tween()
-		tween.tween_property(self, "position", get_global_mouse_position()-mouseOffset, delay * delta)
-		 
+func _physics_process(_delta: float) -> void:
+	if is_dragging:
+		global_position = get_global_mouse_position() - mouse_offset
+
 func _input(event: InputEvent) -> void:
-	
 	if event is InputEventMouseButton:
-		handleMouseButton(event)
+		handle_mouse_button(event)
 
-func handleMouseButton(event: InputEventMouseButton) -> void:
-	if event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed:
-			print("clicked on sprite")
-			// TODO: Does not currently evaluate true
-			if get_rect().has_point(to_local(event.position)):
-				print("clicked on sprite")
-				isDragging = true
-				mouseOffset = get_global_mouse_position()-global_position
-		else:
-			isDragging = false
-	
+func handle_mouse_button(event: InputEventMouseButton) -> void:
+	if event.button_index != MOUSE_BUTTON_LEFT:
+		return
+
+	if event.pressed:
+		if get_rect().has_point(to_local(event.position)):
+			is_dragging = true
+			mouse_offset = get_global_mouse_position() - global_position
+	else:
+		is_dragging = false
