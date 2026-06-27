@@ -8,3 +8,4 @@
 anchor_mode = 0
 
 [node name="Sprite2D" parent="." unique_id=52418341 instance=ExtResource("1_wi7xp")]
+centered = false
