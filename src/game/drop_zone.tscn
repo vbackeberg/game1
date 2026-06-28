@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://d1gnak8br65af"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_gspqs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gspqs"]
+size = Vector2(384, 128)
+
+[node name="DropZone" type="Area2D" unique_id=644037236]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=2040773308]
+scale = Vector2(384, 128)
+mesh = SubResource("QuadMesh_gspqs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=226915004]
+shape = SubResource("RectangleShape2D_gspqs")
