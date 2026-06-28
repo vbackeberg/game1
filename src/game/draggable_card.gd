@@ -3,7 +3,6 @@ extends Node2D
 var is_dragging := false
 var mouse_offset: Vector2
 const delay := 1
-var mouse_inside := false
 
 func _physics_process(delta: float) -> void:
 	if is_dragging:
@@ -19,15 +18,7 @@ func handle_mouse_button(event: InputEventMouseButton) -> void:
 		return
 
 	if event.pressed:
-			is_dragging = true
-			mouse_offset = get_global_mouse_position() - global_position
+		is_dragging = true
+		mouse_offset = get_global_mouse_position() - global_position
 	else:
 		is_dragging = false
-
-
-func _on_mouse_entered() -> void:
-	mouse_inside = true
-
-
-func _on_mouse_exited() -> void:
-	mouse_inside = false
