@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://drdu4hgc4rju7"]
+
+[ext_resource type="PackedScene" uid="uid://b4hyt5kunf2v1" path="res://src/game/characters/viking_6_6_8_8.tscn" id="1_6phhe"]
+
+[node name="Test" type="Node2D" unique_id=568953385]
+
+[node name="Viking6688" parent="." unique_id=1732179336 instance=ExtResource("1_6phhe")]
