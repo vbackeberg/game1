@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cdh3d8fcv2wot"]
 
-[ext_resource type="PackedScene" uid="uid://d1gnak8br65af" path="res://src/game/drop_zone.tscn" id="1_83w00"]
+[ext_resource type="PackedScene" path="res://src/game/drop_zone.tscn" id="1_83w00"]
 [ext_resource type="Script" uid="uid://blfmk3t40uyli" path="res://test/drop_zone/test.gd" id="1_pmdm4"]
-[ext_resource type="PackedScene" uid="uid://dj2u1mtxs5cfm" path="res://src/game/draggable_card.tscn" id="2_pmdm4"]
+[ext_resource type="PackedScene" path="res://src/game/draggable_card.tscn" id="2_pmdm4"]
 [ext_resource type="Texture2D" uid="uid://csu2hj7gjxyg3" path="res://assets/characters/viking-6-6-8-8.png" id="3_mobrc"]
 
 [node name="Test" type="Node2D" unique_id=1266324876]
