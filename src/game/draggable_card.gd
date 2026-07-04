@@ -12,7 +12,6 @@ const snap_delay := 10
 
 func _physics_process(delta: float) -> void:
 	if is_dragging:
-		is_snapping = false
 		var tween = get_tree().create_tween()
 		tween.tween_property(self, "position", get_global_mouse_position() - mouse_offset, delay * delta)
 	elif is_snapping:
@@ -32,6 +31,7 @@ func handle_mouse_button(event: InputEventMouseButton) -> void:
 
 	if event.pressed:
 		is_dragging = true
+		is_snapping = false
 		mouse_offset = get_global_mouse_position() - global_position
 	else:
 		is_dragging = false
