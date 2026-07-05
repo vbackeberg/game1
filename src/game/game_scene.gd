@@ -26,16 +26,6 @@ func start():
 		player.discard_finished.connect(_on_discard_finished.bind())
 
 
-func _input(event):
-	if event.is_action_pressed("ui_accept"): # Space bar
-		toggle_view()
-
-func toggle_view():
-	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
-	tween.set_parallel(true) # Run all animations simultaneously
-	tween.tween_property($Camera2D, "global_position", Vector2(0, 300), 0.5)
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass

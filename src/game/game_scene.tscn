@@ -78,12 +78,6 @@ layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 
-[node name="ToggleViewButton" type="Button" parent="MainOverlay" unique_id=550081648]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-text = "Toggle View"
-
 [node name="Canvas" type="Node2D" parent="." unique_id=1492304921]
 
 [node name="Camera2D" type="Camera2D" parent="Canvas" unique_id=340020315]
@@ -97,4 +91,3 @@ limit_bottom = 720
 [connection signal="pressed" from="MainOverlay/StopGameButton" to="." method="_on_stop_game_button_pressed"]
 [connection signal="pressed" from="MainOverlay/WinOverlay/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="MainOverlay/WinOverlay/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="MainOverlay/ToggleViewButton" to="." method="toggle_view"]
